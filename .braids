@@ -1,0 +1,10 @@
+--- 
+vendor/plugins/acts_as_authenticated: 
+  local_branch: braid/svn/vendor/plugins/acts-as-authenticated
+  type: svn
+  remote: http://svn.techno-weenie.net/projects/plugins/acts_as_authenticated
+vendor/plugins/source: 
+  local_branch: braid/remote/vendor/plugins/source
+  type: remote
+  branch: master
+  remote: script/plugin
