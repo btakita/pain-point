@@ -1,0 +1,6 @@
+[submodule "erector"]
+	path = erector
+	url = git://github.com/pat-maddox/erector.git
+[submodule "vendor/plugins/erector"]
+	path = vendor/plugins/erector
+	url = git://github.com/pat-maddox/erector.git
