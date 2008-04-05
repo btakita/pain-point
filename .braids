@@ -1,9 +1,5 @@
 --- 
-vendor/plugins/acts_as_authenticated: 
-  local_branch: braid/svn/vendor/plugins/acts-as-authenticated
-  type: svn
-  remote: http://svn.techno-weenie.net/projects/plugins/acts_as_authenticated
-vendor/plugins/restful_authentication: 
+endor/plugins/restful_authentication: 
   local_branch: braid/svn/vendor/plugins/restful-authentication
   type: svn
   remote: http://svn.techno-weenie.net/projects/plugins/restful_authentication
