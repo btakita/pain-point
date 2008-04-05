@@ -1,4 +1,8 @@
 --- 
+vendor/plugins/erector: 
+  local_branch: braid/svn/vendor/plugins/erector
+  type: svn
+  remote: svn://rubyforge.org/var/svn/erector/trunk
 endor/plugins/restful_authentication: 
   local_branch: braid/svn/vendor/plugins/restful-authentication
   type: svn
