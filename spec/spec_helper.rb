@@ -9,4 +9,6 @@ Spec::Runner.configure do |config|
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
   config.global_fixtures = :all
   config.mock_with :rr
+
+  config.include AuthenticatedTestHelper
 end
