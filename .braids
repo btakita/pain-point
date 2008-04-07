@@ -3,6 +3,10 @@ vendor/plugins/erector:
   local_branch: braid/svn/vendor/plugins/erector
   type: svn
   remote: svn://rubyforge.org/var/svn/erector/trunk
+vendor/plugins/acts_as_state_machine: 
+  local_branch: braid/svn/vendor/plugins/acts-as-state-machine
+  type: svn
+  remote: http://elitists.textdriven.com/svn/plugins/acts_as_state_machine/trunk
 endor/plugins/restful_authentication: 
   local_branch: braid/svn/vendor/plugins/restful-authentication
   type: svn
