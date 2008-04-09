@@ -12,3 +12,9 @@ Spec::Runner.configure do |config|
 
   config.include AuthenticatedTestHelper
 end
+
+class << Spec::Rails::Example::ControllerExampleGroup
+  def integrate_views?
+    true
+  end
+end
