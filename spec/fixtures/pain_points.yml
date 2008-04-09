@@ -1,0 +1,6 @@
+slow_tests:
+  name: Tests are slow
+  user: quentin
+software_complexity:
+  name: Software Complexity
+  user: aaron
