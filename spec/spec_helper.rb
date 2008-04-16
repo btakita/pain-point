@@ -1,8 +1,10 @@
 ENV["RAILS_ENV"] = "test"
-require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
+dir = File.dirname(__FILE__)
+require File.expand_path("#{dir}/../config/environment")
 require 'spec'
 require 'spec/rails'
 require 'hpricot'
+require "#{dir}/spec_helpers/indented_text_formatter"
 
 Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true

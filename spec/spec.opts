@@ -1,6 +1,6 @@
 --colour
 --format
-progress
+Spec::Runner::Formatter::IndentedTextFormatter
 --loadby
 mtime
 --reverse
