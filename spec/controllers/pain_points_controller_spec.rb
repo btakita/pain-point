@@ -76,7 +76,7 @@ describe PainPointsController do
             end
           end
         end
-        
+
         it "does not create a PainPoint using the passed in parameters" do
           lambda do
             post :create, :pain_point => @parameters
@@ -85,15 +85,87 @@ describe PainPointsController do
       end
     end
   end
-#
-#  describe "GET edit" do
-#    should_require_login do
-#      get :edit
-#    end
-#
-#    before do
-#      @parameters = {:name => nil}
-#      PainPoint.new(@parameters).should_not be_valid
-#    end
-#  end
+
+  describe "GET edit" do
+    attr_reader :pain_point
+    before do
+      @pain_point = pain_points(:slow_tests)
+    end
+
+    should_require_login do
+      get :edit, :id => pain_point.to_param
+    end
+
+    describe "when logged in" do
+      before do
+        login_as :quentin
+      end
+
+      it "renders a form for the PainPoint" do
+        get :edit, :id => pain_point.to_param
+        doc = Hpricot(response.body)
+        form = doc.at('form')
+        form.should_not be_nil
+        form[:action].should == pain_point_path(pain_point)
+        doc.at('input#pain_point_name')[:value].should == pain_point.name
+      end
+    end
+  end
+
+  describe "POST update" do
+    attr_reader :pain_point
+    before do
+      @pain_point = pain_points(:slow_tests)
+    end
+
+    should_require_login do
+      post :update, :id => pain_point.to_param, :pain_point => {}
+    end
+
+    describe "when logged in" do
+      before do
+        login_as :quentin
+      end
+
+      describe "and save is successful" do
+        before do
+          mock.proxy(PainPoint).find(pain_point.to_param) {pain_point}
+          mock.proxy(pain_point).save {true}
+        end
+
+        it "persists the PainPoint change to the database" do
+          new_name = "The new name"
+          pain_point.name.should_not == new_name
+
+          lambda do
+            post :update, :id => pain_point.to_param, :pain_point => {:name => new_name}
+          end.should change {pain_point.name}.to(new_name)
+        end
+
+        it "redirects to pain_points_path" do
+          new_name = "The new name"
+          pain_point.name.should_not == new_name
+
+          post :update, :id => pain_point.to_param, :pain_point => {:name => new_name}
+          response.should redirect_to(pain_points_path)
+        end
+      end
+
+      describe "when save is unsuccessful" do
+        before do
+          mock.proxy(PainPoint).find(pain_point.to_param) {pain_point}
+          mock.proxy(pain_point).save do
+            pain_point.errors.add(:name, "is wrong")
+            false
+          end
+        end
+
+        it "renders the edit form and notify the user about the errors" do
+          post :update, :id => pain_point.to_param, :pain_point => {:name => 'test'}
+
+          response.body.should include("Name is wrong")
+        end
+      end
+    end
+  end
 end

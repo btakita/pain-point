@@ -16,6 +16,10 @@ Spec::Runner.configure do |config|
   config.include AuthenticatedTestHelper
 end
 
+class << Spec::Example::ExampleGroup
+  include ActionController::UrlWriter
+end
+
 class << Spec::Rails::Example::ModelExampleGroup
   def should_validate_presence_of(klass, attr)
     describe attr do

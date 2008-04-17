@@ -1,0 +1,4 @@
+<% form_for @pain_point, :url => pain_point_path(@pain_point) do |f| %>
+  <%= f.text_field :name %>
+  <%= submit_tag 'Update' %>
+<% end %>

@@ -1,7 +1,7 @@
 <div>Existing Pain Points</div>
 <ul>
   <% PainPoint.find(:all).each do |pain_point| %>
-    <li><%= pain_point.name %></li>
+    <li><%= link_to pain_point.name, edit_pain_point_path(pain_point) %></li>
   <% end %>
 </ul>
 

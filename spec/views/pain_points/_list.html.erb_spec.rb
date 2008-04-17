@@ -20,4 +20,11 @@ describe "/pain_points/_list" do
     doc = Hpricot(response.body)
     doc.at("form[@action=#{pain_points_path}]").should_not be_nil
   end
+
+  it "links the PainPoint to edit_pain_point_path" do
+    doc = Hpricot(response.body)
+    pain_points.each do |pain_point|
+      doc.at("a[@href='#{edit_pain_point_path(pain_point)}']").should_not be_nil
+    end
+  end
 end
