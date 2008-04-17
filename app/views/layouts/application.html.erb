@@ -3,6 +3,8 @@
   <title>Pain Point</title>
 </head>
 <body>
+<div class="notice"><%= flash[:notice] %></div>
+<div class="error"><%= flash[:error] %></div>
 <%= yield %>
 </body>
 </html>
