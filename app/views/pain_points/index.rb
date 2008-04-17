@@ -1,9 +1,5 @@
 class Views::PainPoints::Index < Views::Layouts::Application
   def content
-    ul do
-      pain_points.each do |pain_point|
-        li pain_point.name
-      end
-    end
+    text raw(helpers.render(:partial => "list"))
   end
 end
