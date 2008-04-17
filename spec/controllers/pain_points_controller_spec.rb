@@ -85,4 +85,15 @@ describe PainPointsController do
       end
     end
   end
+#
+#  describe "GET edit" do
+#    should_require_login do
+#      get :edit
+#    end
+#
+#    before do
+#      @parameters = {:name => nil}
+#      PainPoint.new(@parameters).should_not be_valid
+#    end
+#  end
 end

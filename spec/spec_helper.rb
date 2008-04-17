@@ -48,3 +48,4 @@ class << Spec::Rails::Example::ControllerExampleGroup
     end
   end
 end
+Spec::Example::ExampleGroupFactory.register(:fixture_specs, Spec::Rails::Example::ModelExampleGroup)

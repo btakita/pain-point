@@ -17,4 +17,8 @@ class PainPointsController < ApplicationController
       render :template => 'pain_points/new'
     end
   end
+
+  def edit
+    
+  end
 end
