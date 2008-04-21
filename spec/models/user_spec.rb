@@ -1,6 +1,7 @@
 require File.expand_path("#{File.dirname(__FILE__)}/../spec_helper")
 
 describe User do
+  attr_reader :user
   describe "Validations" do
     it 'requires login' do
       lambda do
@@ -69,6 +70,21 @@ describe User do
         User.authenticate('quentin2', 'test').should == users(:quentin)
       end
     end    
+  end
+
+  describe "Associations" do
+    describe "#votes.pain_points" do
+      before do
+        @user = users(:quentin)
+        user.votes.should_not be_empty
+      end
+
+      it "returns the PainPoints of the Votes associated with the User" do
+        user.votes.pain_points.should == user.votes.map do |vote|
+          vote.pain_point
+        end
+      end
+    end
   end
 
   describe "#authenticate" do

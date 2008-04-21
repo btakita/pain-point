@@ -10,3 +10,4 @@ Rails::Initializer.run do |config|
   }
 end
 require 'digest/sha1'
+require 'has_finder'

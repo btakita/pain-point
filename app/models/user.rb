@@ -1,6 +1,12 @@
 class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password
+  has_many :votes do
+    def pain_points
+      proxy_owner.votes_pain_points
+    end
+  end
+  has_many :votes_pain_points, :through => :votes, :source => :pain_point
 
   validates_presence_of     :login, :email
   validates_presence_of     :password,                   :if => :password_required?
