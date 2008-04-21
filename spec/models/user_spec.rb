@@ -36,37 +36,39 @@ describe User do
     end
   end
 
-  describe 'being created' do
-    before do
-      @user = nil
-      @creating_user = lambda do
-        @user = create_user
-        violated "#{@user.errors.full_messages.to_sentence}" if @user.new_record?
+  describe "Life Cycle" do
+    describe 'being created' do
+      before do
+        @user = nil
+        @creating_user = lambda do
+          @user = create_user
+          violated "#{@user.errors.full_messages.to_sentence}" if @user.new_record?
+        end
+      end
+
+      it 'increments User#count' do
+        @creating_user.should change(User, :count).by(1)
+      end
+
+      it 'initializes #activation_code' do
+        @creating_user.call
+        @user.reload
+        @user.activation_code.should_not be_nil
+      end
+
+      it 'starts in pending state' do
+        @creating_user.call
+        @user.reload
+        @user.should be_pending
       end
     end
 
-    it 'increments User#count' do
-      @creating_user.should change(User, :count).by(1)
-    end
-
-    it 'initializes #activation_code' do
-      @creating_user.call
-      @user.reload
-      @user.activation_code.should_not be_nil
-    end
-
-    it 'starts in pending state' do
-      @creating_user.call
-      @user.reload
-      @user.should be_pending
-    end
-  end
-
-  describe "after_save" do
-    it 'does not rehash password' do
-      users(:quentin).update_attributes(:login => 'quentin2')
-      User.authenticate('quentin2', 'test').should == users(:quentin)
-    end
+    describe "after_save" do
+      it 'does not rehash password' do
+        users(:quentin).update_attributes(:login => 'quentin2')
+        User.authenticate('quentin2', 'test').should == users(:quentin)
+      end
+    end    
   end
 
   describe "#authenticate" do
@@ -134,7 +136,6 @@ describe User do
       users(:quentin).should be_suspended
     end
   end
-
 
   describe "#authenticate" do
     it 'does not authenticate suspended user' do
