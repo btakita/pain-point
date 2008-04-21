@@ -1,10 +1,10 @@
 <div>Existing Pain Points</div>
 <ul>
   <% PainPoint.find(:all).each do |pain_point| %>
-    <li id="pain_point_<%=pain_point.id%>">
-        <span>Up</span>
+    <li id="pain_point_<%=pain_point.id%>" class="pain_point">
+        <span class="up">Up</span>
         &nbsp;
-        <span>Down</span>
+        <span class="down">Down</span>
         &nbsp;
         <%= link_to pain_point.name, edit_pain_point_path(pain_point) %>
     </li>
