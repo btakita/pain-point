@@ -1,6 +1,4 @@
-class VoteSubmissionsController < ApplicationController
-  before_filter :login_required, :only => [:create]
-
+class VoteSubmissions::UpVoteSubmissionsController < VoteSubmissions::VoteSubmissionsController
   def create
     Vote.create!(
       :user_id => current_user.id,
