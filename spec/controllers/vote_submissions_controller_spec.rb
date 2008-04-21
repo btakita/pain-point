@@ -29,6 +29,12 @@ describe VoteSubmissionsController do
           user.reload
           user.votes.pain_points.should include(pain_point)
         end
+
+        it "responds with nothing" do
+          post :create, :pain_point_id => pain_point.id
+          response.should be_success
+          response.body.should be_blank
+        end
       end
     end
   end

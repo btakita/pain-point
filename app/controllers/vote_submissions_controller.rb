@@ -6,5 +6,6 @@ class VoteSubmissionsController < ApplicationController
       :user_id => current_user.id,
       :pain_point_id => params[:pain_point_id]
     )
+    head :ok
   end
 end
