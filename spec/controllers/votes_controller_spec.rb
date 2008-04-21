@@ -1,10 +1,15 @@
 require File.expand_path("#{File.dirname(__FILE__)}/../spec_helper")
 
 describe VotesController do
+  attr_reader :user
+
+  before do
+    @user = users(:quentin)
+  end
+
   describe "POST create" do
-    attr_reader :user, :pain_point
+    attr_reader :pain_point
     before do
-      @user = users(:quentin)
       @pain_point = pain_points(:software_complexity)
       user.votes.pain_points.should_not include(pain_point)
     end

@@ -1,8 +1,6 @@
 class VotesController < ApplicationController
   before_filter :login_required, :only => [:create]
-  def new
-  end
-  
+
   def create
     Vote.create!(
       :user_id => current_user.id,
