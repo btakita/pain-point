@@ -1,3 +1,4 @@
 quentin_slow_tests:
   user: quentin
   pain_point: slow_tests
+  state: neutral

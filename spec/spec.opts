@@ -1,6 +1,6 @@
 --colour
 --format
-Spec::Runner::Formatter::IndentedTextFormatter
+profile
 --loadby
 mtime
 --reverse

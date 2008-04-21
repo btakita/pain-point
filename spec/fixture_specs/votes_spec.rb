@@ -15,5 +15,9 @@ describe "votes.yml" do
     it "is associated with slow_tests" do
       vote.pain_point.should == pain_points(:slow_tests)
     end
+
+    it "is in the neutral state" do
+      vote.state.should == 'neutral'
+    end
   end
 end
