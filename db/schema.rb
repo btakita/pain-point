@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 3) do
   create_table "votes", :force => true do |t|
     t.integer  "user_id"
     t.integer  "pain_point_id"
+    t.string   "state",         :default => "neutral"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

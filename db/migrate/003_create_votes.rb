@@ -3,6 +3,7 @@ class CreateVotes < ActiveRecord::Migration
     create_table :votes do |t|
       t.integer :user_id
       t.integer :pain_point_id
+      t.column :state, :string, :null => :no, :default => 'neutral'
       t.timestamps
     end
   end
