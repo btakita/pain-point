@@ -4,7 +4,7 @@ class VoteSubmissionsController < ApplicationController
   def create
     Vote.create!(
       :user_id => current_user.id,
-      :pain_point_id => params[:vote][:pain_point_id]
+      :pain_point_id => params[:pain_point_id]
     )
   end
 end

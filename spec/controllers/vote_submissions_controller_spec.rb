@@ -15,7 +15,7 @@ describe VoteSubmissionsController do
     end
 
     should_require_login do
-      post :create, :vote => {:pain_point_id => pain_point.id}
+      post :create, :pain_point_id => pain_point.id
     end
 
     describe "when logged in" do
@@ -25,7 +25,7 @@ describe VoteSubmissionsController do
 
       describe "and passed valid data" do
         it "creates a Vote" do
-          post :create, :vote => {:pain_point_id => pain_point.id}
+          post :create, :pain_point_id => pain_point.id
           user.reload
           user.votes.pain_points.should include(pain_point)
         end
