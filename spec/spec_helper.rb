@@ -9,7 +9,7 @@ require "#{dir}/spec_helpers/indented_text_formatter"
 Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
-  config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+  config.fixture_path = "#{RAILS_ROOT}/spec/fixtures"
   config.global_fixtures = :all
   config.mock_with :rr
 
