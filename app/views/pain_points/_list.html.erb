@@ -1,7 +1,7 @@
 <div>Existing Pain Points</div>
 <ul>
   <% PainPoint.find(:all).each do |pain_point| %>
-    <li>
+    <li id="pain_point_<%=pain_point.id%>">
         <span>Up</span>
         &nbsp;
         <span>Down</span>

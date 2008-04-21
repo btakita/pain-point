@@ -9,7 +9,13 @@ describe "/pain_points/_list" do
   end
 
   it "renders PainPoint list" do
+    doc = Hpricot(response.body)
     pain_points.each do |pain_point|
+      element_id = "pain_point_#{pain_point.id}"
+      unless doc.at("##{element_id}")
+        raise "response should include an element with the id #{element_id}"
+      end
+
       unless response.body.include?(pain_point.name)
         raise "response.body should include #{pain_point.name}"
       end
