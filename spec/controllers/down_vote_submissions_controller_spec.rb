@@ -1,7 +1,7 @@
 require File.expand_path("#{File.dirname(__FILE__)}/../spec_helper")
 
 module VoteSubmissions
-  describe UpVoteSubmissionsController do
+  describe DownVoteSubmissionsController do
     attr_reader :user
 
     before do
@@ -78,10 +78,10 @@ module VoteSubmissions
               end.should_not change {Vote.count}
             end
 
-            it "sends an up_vote event to the existing Vote" do
-              mock.proxy(existing_vote).up_vote
+            it "sends an down_vote event to the existing Vote" do
+              mock.proxy(existing_vote).down_vote
               post :create, :pain_point_id => pain_point.id
-              existing_vote.reload.state.should == 'up'
+              existing_vote.reload.state.should == 'down'
             end
 
             it "responds with nothing" do

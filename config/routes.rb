@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :pain_points do |pain_points|
     pain_points.resources :up, :controller => "vote_submissions/up_vote_submissions", :prefix => "vote_submissions"
+    pain_points.resources :down, :controller => "vote_submissions/down_vote_submissions", :prefix => "vote_submissions"
   end
   map.resource :session
   map.resources :users
