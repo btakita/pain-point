@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :pain_points
   map.resource :session
   map.resources :users
-  map.resources :votes
+  map.resources :vote_submissions
 
   map.lobby '/', :controller => 'lobby', :action => 'show'
   map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate', :activation_code => nil

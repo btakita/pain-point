@@ -1,4 +1,4 @@
-class VotesController < ApplicationController
+class VoteSubmissionsController < ApplicationController
   before_filter :login_required, :only => [:create]
 
   def create
