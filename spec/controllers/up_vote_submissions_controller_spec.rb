@@ -53,11 +53,11 @@ module VoteSubmissions
             it "responds with PainPoint" do
               post :create, :pain_point_id => pain_point.id
               response.should be_success
-              response.body.should include(Views::PainPoints::Show.new(
+              response.body.should == Views::PainPoints::Show.new(
                 response.template,
                 :user => user,
                 :pain_point => pain_point
-              ).to_s)
+              ).to_s
             end
           end
 
@@ -91,11 +91,11 @@ module VoteSubmissions
             it "responds with nothing" do
               post :create, :pain_point_id => pain_point.id
               response.should be_success
-              response.body.should include(Views::PainPoints::Show.new(
+              response.body.should == Views::PainPoints::Show.new(
                 response.template,
                 :user => user,
                 :pain_point => pain_point
-              ).to_s)
+              ).to_s
             end
           end
         end
