@@ -153,7 +153,7 @@ describe User do
     end
   end
 
-  describe "being unsuspended" do
+  describe "#unsuspend!" do
     fixtures :users
 
     before do
