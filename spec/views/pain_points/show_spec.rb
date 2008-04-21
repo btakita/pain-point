@@ -1,12 +1,12 @@
 require File.expand_path("#{File.dirname(__FILE__)}/../../spec_helper")
 
-describe Views::PainPoints::PainPoint do
+describe Views::PainPoints::Show do
   attr_reader :pain_point, :user, :html, :doc
 
   describe "when there is no passed in User" do
     before do
       @pain_point = pain_points(:software_complexity)
-      @html = Views::PainPoints::PainPoint.new(
+      @html = Views::PainPoints::Show.new(
         template,
         :pain_point => pain_point
       ).to_s
@@ -25,7 +25,7 @@ describe Views::PainPoints::PainPoint do
       @user = users(:quentin)
       user.votes.pain_points.should_not include(pain_point)
       
-      @html = Views::PainPoints::PainPoint.new(
+      @html = Views::PainPoints::Show.new(
         template,
         :user => user,
         :pain_point => pain_point
@@ -51,7 +51,7 @@ describe Views::PainPoints::PainPoint do
       before(:each) do
         vote.up_vote
         vote.state.should == 'up'
-        @html = Views::PainPoints::PainPoint.new(
+        @html = Views::PainPoints::Show.new(
           template,
           :user => user,
           :pain_point => pain_point
@@ -69,7 +69,7 @@ describe Views::PainPoints::PainPoint do
       before(:each) do
         vote.down_vote
         vote.state.should == 'down'
-        @html = Views::PainPoints::PainPoint.new(
+        @html = Views::PainPoints::Show.new(
           template,
           :user => user,
           :pain_point => pain_point
