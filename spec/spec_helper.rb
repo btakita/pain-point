@@ -4,7 +4,9 @@ require File.expand_path("#{dir}/../config/environment")
 require 'spec'
 require 'spec/rails'
 require 'hpricot'
-require "#{dir}/spec_helpers/indented_text_formatter"
+Dir["#{dir}/spec_helpers/**/*.rb"].each do |file|
+  require file
+end
 
 Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
@@ -16,7 +18,7 @@ Spec::Runner.configure do |config|
   config.include AuthenticatedTestHelper
 end
 
-class << Spec::Example::ExampleGroup
+module Spec::Example::ExampleMethods
   include ActionController::UrlWriter
 end
 

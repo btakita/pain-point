@@ -11,13 +11,18 @@ class Views::PainPoints::Show < Erector::Widget
 
   protected
   def vote_link(state)
-    css_class = state
+    css_class = state.dup
     if @user
       vote = user.votes.find_by_pain_point_id(pain_point.id)
       if vote && vote.state == state
         css_class << " selected"
       end
     end
-    a state.capitalize, :class => css_class
+    link_to(
+      state.capitalize,
+      send("pain_point_#{state}_vote_index_path", :pain_point_id => pain_point.id),
+      :method => :post,
+      :class => css_class
+    )
   end
 end
