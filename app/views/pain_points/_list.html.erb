@@ -1,7 +1,7 @@
 <div>Existing Pain Points</div>
 <ul>
   <% PainPoint.find(:all).each do |pain_point| %>
-    <%= Views::PainPoints::Show.new(self, :pain_point => pain_point).to_s %>
+    <%= Views::PainPoints::Show.new(self, :user => current_user, :pain_point => pain_point).to_s %>
   <% end %>
 </ul>
 

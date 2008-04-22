@@ -55,3 +55,11 @@ class << Spec::Rails::Example::ControllerExampleGroup
   end
 end
 Spec::Example::ExampleGroupFactory.register(:fixture_specs, Spec::Rails::Example::ModelExampleGroup)
+
+class Spec::Rails::Example::ViewExampleGroup
+  def login_as(user_id)
+    user = users(user_id)
+    stub(@controller).current_user {user}
+    user
+  end
+end

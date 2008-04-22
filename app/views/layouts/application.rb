@@ -3,6 +3,7 @@ class Views::Layouts::Application < Erector::Widget
     html do
       head do
         title "Pain Point"
+        stylesheet_link_tag 'typography', :cache => true
       end
 
       body do
