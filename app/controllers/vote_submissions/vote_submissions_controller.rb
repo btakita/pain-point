@@ -8,6 +8,6 @@ class VoteSubmissions::VoteSubmissionsController < ApplicationController
     vote.save!
     @user = current_user
     @pain_point = vote.pain_point
-    render :template => "pain_points/show", :layout => false
+    redirect_to lobby_path
   end
 end

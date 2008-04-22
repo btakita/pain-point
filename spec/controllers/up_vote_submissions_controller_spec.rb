@@ -50,14 +50,9 @@ module VoteSubmissions
               user.votes.pain_points.should include(pain_point)
             end
 
-            it "responds with PainPoint" do
+            it "redirects to the lobby" do
               post :create, :pain_point_id => pain_point.id
-              response.should be_success
-              response.body.should == Views::PainPoints::Show.new(
-                response.template,
-                :user => user,
-                :pain_point => pain_point
-              ).to_s
+              response.should redirect_to(lobby_path)
             end
           end
 
@@ -88,14 +83,9 @@ module VoteSubmissions
               existing_vote.reload.state.should == 'up'
             end
 
-            it "responds with nothing" do
+            it "redirects to the lobby" do
               post :create, :pain_point_id => pain_point.id
-              response.should be_success
-              response.body.should == Views::PainPoints::Show.new(
-                response.template,
-                :user => user,
-                :pain_point => pain_point
-              ).to_s
+              response.should redirect_to(lobby_path)
             end
           end
         end
