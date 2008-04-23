@@ -1,10 +1,11 @@
-var XmlBuilder = function(params) {
-  var that = this;
-  var doc = [];
+(function(window) {
+  window.XmlBuilder = function(params) {
+    if(!params) params = {};
+    this.binding = params.binding || this;
+    this._doc = [];
+  }
 
-  if(!params) params = {};
-  this.binding = params.binding || this;
-  this.tag = function() {
+  XmlBuilder.prototype.tag = function() {
     if(arguments.length > 3) {
       throw("XmlBulider#tag does not accept more than three arguments");
     }
@@ -26,16 +27,16 @@ var XmlBuilder = function(params) {
       }
     };
 
-    doc.push(new XmlBuilder.OpenTag(tagName, attributes));
+    this._doc.push(new XmlBuilder.OpenTag(tagName, attributes));
     if(typeof value == 'function') {
-      value.call(that.binding, that);
+      value.call(this.binding, this);
     } else if(typeof value == 'string') {
-      doc.push(new XmlBuilder.Text(value));
+      this._doc.push(new XmlBuilder.Text(value));
     }
-    doc.push(new XmlBuilder.CloseTag(tagName));
+    this._doc.push(new XmlBuilder.CloseTag(tagName));
   }
 
-  this.tagWithArrayArgs = function(tag, args) {
+  XmlBuilder.prototype.tagWithArrayArgs = function(tag, args) {
     if(!args) return this.tag(tag);
 
     var newArguments = [tag];
@@ -45,34 +46,30 @@ var XmlBuilder = function(params) {
     return this.tag.apply(this, newArguments);
   }
 
-  this.text = function(value) {
-    doc.push(new XmlBuilder.Text(value));
+  XmlBuilder.prototype.text = function(value) {
+    this._doc.push(new XmlBuilder.Text(value));
   }
 
-  this.textNode = function(value) {
+  XmlBuilder.prototype.textNode = function(value) {
     var html = this.escapeHtml(value);
-    doc.push(new XmlBuilder.Text(html));
+    this._doc.push(new XmlBuilder.Text(html));
   }
 
-  this.escapeHtml = function(html) {
+  XmlBuilder.prototype.escapeHtml = function(html) {
     return html.split("&").join("&amp;").split("<").join("&lt;").split(">").join("&gt;")
   }
 
-  this.toString = function() {
+  XmlBuilder.prototype.toString = function() {
     var output = "";
-    for(var i=0; i < doc.length; i++) {
-      var element = doc[i];
+    for(var i=0; i < this._doc.length; i++) {
+      var element = this._doc[i];
       output += element.toString();
     }
     return output;
   }
-}
 
-XmlBuilder.initialize = function() {
-  var that = this;
-
-  this.registerTag = function(tagName) {
-    that.prototype[tagName] = function() {
+  XmlBuilder.registerTag = function(tagName) {
+    this.prototype[tagName] = function() {
       return this.tagWithArrayArgs(tagName, arguments);
     };
   }
@@ -88,43 +85,39 @@ XmlBuilder.initialize = function() {
   ];
   for(var i=0; i < supportedTags.length; i++) {
     var tag = supportedTags[i];
-    this.registerTag(tag);
+    XmlBuilder.registerTag(tag);
   }
-}
-XmlBuilder.initialize.call(XmlBuilder);
 
-XmlBuilder.OpenTag = function(tagName, attributes) {
-  var that = this;
-  this.tagName = tagName;
-  this.attributes = attributes;
+  XmlBuilder.OpenTag = function(tagName, attributes) {
+    this.tagName = tagName;
+    this.attributes = attributes;
+  }
 
-  this.toString = function() {
+  XmlBuilder.OpenTag.prototype.toString = function() {
     var serializedAttributes = [];
-    for(var attributeName in attributes) {
-      serializedAttributes.push(attributeName + '="' + attributes[attributeName] + '"');
+    for(var attributeName in this.attributes) {
+      serializedAttributes.push(attributeName + '="' + this.attributes[attributeName] + '"');
     }
     if(serializedAttributes.length > 0) {
-      return "<" + that.tagName + " " + serializedAttributes.join(" ") + ">";
+      return "<" + this.tagName + " " + serializedAttributes.join(" ") + ">";
     } else {
-      return "<" + that.tagName + ">";
+      return "<" + this.tagName + ">";
     }
   }
-}
 
-XmlBuilder.Text = function(value) {
-  var that = this;
-  this.value = value;
-
-  this.toString = function() {
-    return that.value;
+  XmlBuilder.Text = function(value) {
+    this.value = value;
   }
-}
 
-XmlBuilder.CloseTag = function(tagName) {
-  var that = this;
-  this.tagName = tagName;
-
-  this.toString = function() {
-    return "</" + that.tagName + ">";
+  XmlBuilder.Text.prototype.toString = function() {
+    return this.value;
   }
-}
+
+  XmlBuilder.CloseTag = function(tagName) {
+    this.tagName = tagName;
+  }
+
+  XmlBuilder.CloseTag.prototype.toString = function() {
+    return "</" + this.tagName + ">";
+  }
+})(this);
