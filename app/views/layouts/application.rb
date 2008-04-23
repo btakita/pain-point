@@ -6,6 +6,7 @@ class Views::Layouts::Application < Erector::Widget
         js_files = [
           "jquery-1.2.3.js",
           "xmlbuilder",
+          "json2",
           "models/pain_point",
           "views/pain_points_view"
         ]
