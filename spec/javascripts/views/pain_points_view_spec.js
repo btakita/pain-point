@@ -9,7 +9,7 @@ PainPointsViewSpec['before each'] = function() {
     new PainPoint({id: 2, name: "Pain Point 2", vote_state: "up"}),
     new PainPoint({id: 3, name: "Pain Point 3", vote_state: "down"})
   ];
-  PainPointsViewSpec.view = new PainPointsView();
+  PainPointsViewSpec.view = PainPointsView.create();
 }
 
 PainPointsViewSpec['after each'] = function() {
@@ -18,12 +18,12 @@ PainPointsViewSpec['after each'] = function() {
 
 PainPointsViewSpec.describe("#render", {
   "renders a ul with a PainPointView for each PainPoint": function() {
-    var output = PainPointsViewSpec.view.render();
+    var view = PainPointsViewSpec.view;
 
-    value_of(output.attr('tagName').toLowerCase()).should_be('ul');
+    value_of(view.attr('tagName').toLowerCase()).should_be('ul');
 
-    var pain_point_1_html = new PainPointView(PainPoint.instances[0]).render().html();
+    var pain_point_1_html = PainPointView.create(PainPoint.instances[0]).html();
     value_of(pain_point_1_html).should_not_be("");
-    value_of(output.html()).should_match(pain_point_1_html);
+    value_of(view.html()).should_match(pain_point_1_html);
   }
 });
