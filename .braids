@@ -11,6 +11,10 @@ endor/plugins/restful_authentication:
   local_branch: braid/svn/vendor/plugins/restful-authentication
   type: svn
   remote: http://svn.techno-weenie.net/projects/plugins/restful_authentication
+vendor/plugins/xmlbuilder: 
+  local_branch: braid/svn/vendor/plugins/xmlbuilder
+  type: svn
+  remote: svn://rubyforge.org/var/svn/pivotalrb/xmlbuilder/trunk
 vendor/plugins/js_spec: 
   local_branch: braid/svn/vendor/plugins/js-spec
   type: svn
