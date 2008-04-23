@@ -25,3 +25,13 @@ PainPointSpec.describe(".sync", {
     ]);
   }
 });
+
+PainPointSpec.describe("#url", {
+  "before each": function() {
+    PainPointSpec.pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral"});
+  },
+
+  "returns the url of the PainPoint (/pain_points/:pain_point_id)": function() {
+    value_of(PainPointSpec.pain_point.url()).should_be("/pain_points/1");
+  }
+});

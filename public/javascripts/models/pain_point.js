@@ -4,6 +4,10 @@
     this.name = attributes.name;
     this.vote_state = attributes.vote_state;
   };
+  
+  PainPoint.prototype.url = function() {
+    return "/pain_points/" + this.id;
+  }
 
   PainPoint.instances = [];
   PainPoint.sync = function(data) {

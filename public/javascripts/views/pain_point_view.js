@@ -12,7 +12,7 @@
         text(" ");
         vote_link("down");
         text(" ");
-        a(pain_point.name, {'href': "/pain_points/" + pain_point.id + "/edit"});
+        a(pain_point.name, {'href': pain_point.url() + "/edit"});
       });
       return toString();
     }
@@ -28,7 +28,14 @@
 
   window.PainPointView = {
     'create': function(pain_point) {
-      return $(new PainPointViewBuilder(pain_point).render());
+      var view = $(new PainPointViewBuilder(pain_point).render());
+      view.find("a.up").click(function() {
+        $.post(pain_point.url() + "/up_vote");
+      });
+      view.find("a.down").click(function() {
+        $.post(pain_point.url() + "/down_vote");
+      });
+      return view;
     }
   }
 })(this);
