@@ -8,6 +8,7 @@ class Views::Layouts::Application < Erector::Widget
           "xmlbuilder",
           "json2",
           "models/pain_point",
+          "views/pain_point_view",
           "views/pain_points_view"
         ]
         javascript_include_tag(*js_files)

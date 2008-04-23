@@ -23,7 +23,7 @@
     if(this.pain_point.vote_state == direction) {
       css_class += " selected";
     }
-    this.a({'class': css_class, 'href': "#"});
+    this.a(direction, {'class': css_class, 'href': "#"});
   }
 
   window.PainPointView = {

@@ -1,9 +1,9 @@
 <div>Existing Pain Points</div>
-<ul>
-  <% PainPoint.find(:all).each do |pain_point| %>
-    <%= Views::PainPoints::Show.new(self, :user => current_user, :pain_point => pain_point).to_s %>
-  <% end %>
-</ul>
+<ul id="pain_points"></ul>
+<script type="text/javascript">
+  PainPoint.sync(<%= PainPoint.all_user_data(current_user).to_json %>);
+  $("#pain_points").replaceWith(PainPointsView.create());
+</script>
 
 <p>Create a new pain point</p>
 
