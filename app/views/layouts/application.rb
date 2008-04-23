@@ -5,7 +5,9 @@ class Views::Layouts::Application < Erector::Widget
         title "Pain Point"
         js_files = [
           "jquery-1.2.3.js",
-          "xmlbuilder"
+          "xmlbuilder",
+          "models/pain_point",
+          "views/pain_points_view"
         ]
         javascript_include_tag(*js_files)
 
