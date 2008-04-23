@@ -1,5 +1,7 @@
-require("/implementations/jquery/jquery-1.2.3");
+require("/implementations/jquery-1.2.3");
+require("/implementations/xmlbuilder");
 require("/implementations/models/pain_point");
+require("/implementations/views/pain_point_view");
 require("/implementations/views/pain_points_view");
 // stylesheet('/stylesheets/your_css_file');
 

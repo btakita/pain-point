@@ -1,9 +1,15 @@
 (function(window) {
-  window.PainPointView = function PainPointView(pain_points) {
-    
+  window.PainPointsView = function PainPointsView() {
   }
 
-  PainPointView.prototype.render = function() {
-    
+  PainPointsView.prototype.render = function() {
+    var b = new XmlBuilder({binding: this});
+    b.ul();
+    var content = $(b.toString());
+
+    for(var i=0; i < PainPoint.instances.length; i++) {
+      content.append(new PainPointView(PainPoint.instances[i]).render());
+    }
+    return content;
   }
 })(this);
