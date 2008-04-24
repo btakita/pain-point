@@ -38,14 +38,16 @@ PainPointSpec.describe("#url", {
 
 PainPointSpec.describe("#up_vote", {
   "before each": function() {
+    window._token = "foobar";
     PainPointSpec.pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral"});
   },
 
-  "sends a POST to /pain_points/:pain_point_id/up_vote": function() {
+  "sends a POST to /pain_points/:pain_point_id/up_vote with the authenticity_token": function() {
     PainPointSpec.pain_point.up_vote();
     value_of(ActiveAjaxRequests).should_have(1, 'length');
     var request = ActiveAjaxRequests[0];
     value_of(request.type).should_be('POST');
+    value_of(request.data).should_be({authenticity_token: window._token});
     value_of(request.url).should_be('/pain_points/1/up_vote');
   },
 
@@ -63,14 +65,16 @@ PainPointSpec.describe("#up_vote", {
 
 PainPointSpec.describe("#down_vote", {
   "before each": function() {
+    window._token = "foobar";
     PainPointSpec.pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral"});
   },
 
-  "sends a POST to /pain_points/:pain_point_id/down_vote": function() {
+  "sends a POST to /pain_points/:pain_point_id/down_vote with the authenticity_token": function() {
     PainPointSpec.pain_point.down_vote();
     value_of(ActiveAjaxRequests).should_have(1, 'length');
     var request = ActiveAjaxRequests[0];
     value_of(request.type).should_be('POST');
+    value_of(request.data).should_be({authenticity_token: window._token});
     value_of(request.url).should_be('/pain_points/1/down_vote');
   },
 

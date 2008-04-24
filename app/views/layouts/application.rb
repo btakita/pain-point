@@ -13,6 +13,10 @@ class Views::Layouts::Application < Erector::Widget
         ]
         javascript_include_tag(*js_files)
 
+        if ActionController::Base.allow_forgery_protection
+          javascript "window._token = '#{helpers.form_authenticity_token}';"
+        end
+
         stylesheet_link_tag 'typography', :cache => true
       end
 

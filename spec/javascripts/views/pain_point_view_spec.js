@@ -75,29 +75,36 @@ PainPointsViewSpec.describe("#up_vote.click", {
     value_of(request.url).should_be('/pain_points/1/up_vote');
   },
 
-  "when the server responds with a vote_state of up, it adds the 'selected' up vote link css class": function() {
+  "when the server responds with a vote_state of up, it adds the 'selected' up vote link css class and removes 'selected' from the down vote link css class": function() {
     var output = PainPointViewSpec.output;
 
+    output.find("a.down").addClass("selected");
     value_of(output.find("a.up.selected")).should_be_empty();
+    value_of(output.find("a.down.selected")).should_not_be_empty();
     output.find("a.up").click();
     ActiveAjaxRequests[0].success(
       JSON.stringify({id: 1, name: "Pain Point 1", vote_state: "up"})
     );
 
     value_of(output.find("a.up.selected")).should_not_be_empty();
+    value_of(output.find("a.down.selected")).should_be_empty();
   },
 
-  "when the server responds with a vote_state of neutral, it removes the 'selected' up vote link css class": function() {
+  "when the server responds with a vote_state of neutral, it removes the 'selected' up vote link and down vote link css classes": function() {
     var output = PainPointViewSpec.output;
 
     output.find("a.up").addClass("selected");
     value_of(output.find("a.up.selected")).should_not_be_empty();
+    output.find("a.down").addClass("selected");
+    value_of(output.find("a.down.selected")).should_not_be_empty();
+
     output.find("a.up").click();
     ActiveAjaxRequests[0].success(
       JSON.stringify({id: 1, name: "Pain Point 1", vote_state: "neutral"})
     );
 
     value_of(output.find("a.up.selected")).should_be_empty();
+    value_of(output.find("a.down.selected")).should_be_empty();
   }
 })
 
@@ -116,28 +123,34 @@ PainPointsViewSpec.describe("#down_vote.click", {
     value_of(request.url).should_be('/pain_points/1/down_vote');
   },
 
-  "when the server responds with a vote_state of down, it adds the 'selected' down vote link css class": function() {
+  "when the server responds with a vote_state of down, it adds the 'selected' down vote link css class and removes the 'selected' up vote link css class": function() {
     var output = PainPointViewSpec.output;
 
+    output.find("a.up").addClass('selected');
+    value_of(output.find("a.up.selected")).should_not_be_empty();
     value_of(output.find("a.down.selected")).should_be_empty();
     output.find("a.down").click();
     ActiveAjaxRequests[0].success(
       JSON.stringify({id: 1, name: "Pain Point 1", vote_state: "down"})
     );
 
+    value_of(output.find("a.up.selected")).should_be_empty();
     value_of(output.find("a.down.selected")).should_not_be_empty();
   },
 
-  "when the server responds with a vote_state of neutral, it removes the 'selected' down vote link css class": function() {
+  "when the server responds with a vote_state of neutral, it removes the 'selected' down vote and up vote link css class": function() {
     var output = PainPointViewSpec.output;
 
+    output.find("a.up").addClass("selected");
     output.find("a.down").addClass("selected");
+    value_of(output.find("a.up.selected")).should_not_be_empty();
     value_of(output.find("a.down.selected")).should_not_be_empty();
     output.find("a.down").click();
     ActiveAjaxRequests[0].success(
       JSON.stringify({id: 1, name: "Pain Point 1", vote_state: "neutral"})
     );
 
+    value_of(output.find("a.up.selected")).should_be_empty();
     value_of(output.find("a.down.selected")).should_be_empty();
   }
 })

@@ -10,4 +10,5 @@ require("/specs/fake_jQuery_ajax");
 Spec.reset = function() {
   document.getElementById('js_spec_content').innerHTML = "";
   ActiveAjaxRequests.length = 0;
+  delete window._token;
 }

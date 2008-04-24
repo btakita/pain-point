@@ -11,7 +11,7 @@
 
   PainPoint.prototype.up_vote = function(callback) {
     var self = this;
-    $.post(this.url() + "/up_vote", {}, function(response) {
+    $.post(this.url() + "/up_vote", {authenticity_token: window._token}, function(response) {
       var data = JSON.parse(response);
       self.name = data.name;
       self.vote_state = data.vote_state;
@@ -23,7 +23,7 @@
 
   PainPoint.prototype.down_vote = function(callback) {
     var self = this;
-    $.post(this.url() + "/down_vote", {}, function(response) {
+    $.post(this.url() + "/down_vote", {authenticity_token: window._token}, function(response) {
       var data = JSON.parse(response);
       self.name = data.name;
       self.vote_state = data.vote_state;

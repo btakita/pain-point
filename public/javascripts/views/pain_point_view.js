@@ -36,10 +36,12 @@
           } else {
             view.find("a.up").removeClass("selected");
           }
+          view.find("a.down").removeClass("selected");
         });
       });
       view.find("a.down").click(function() {
         pain_point.down_vote(function(data) {
+          view.find("a.up").removeClass("selected");
           if(data.vote_state == "down") {
             view.find("a.down").addClass("selected");
           } else {
