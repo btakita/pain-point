@@ -3,13 +3,6 @@ require("/specs/spec_helper");
 function PainPointViewSpec() {}
 Spec.register(PainPointViewSpec);
 
-PainPointViewSpec['before each'] = function() {
-}
-
-PainPointViewSpec['after each'] = function() {
-  PainPoint.instances = [];
-}
-
 PainPointViewSpec.describe("#render", {
   "before each": function() {
     PainPointViewSpec.pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral"});

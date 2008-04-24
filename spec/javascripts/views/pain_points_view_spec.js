@@ -12,10 +12,6 @@ PainPointsViewSpec['before each'] = function() {
   PainPointsViewSpec.view = PainPointsView.create();
 }
 
-PainPointsViewSpec['after each'] = function() {
-  PainPoint.instances = [];
-}
-
 PainPointsViewSpec.describe("#render", {
   "renders a ul with a PainPointView for each PainPoint": function() {
     var view = PainPointsViewSpec.view;

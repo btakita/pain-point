@@ -7,7 +7,6 @@ PainPointSpec['before each'] = function() {
 }
 
 PainPointSpec['after each'] = function() {
-  PainPoint.instances = [];
 }
 
 PainPointSpec.describe(".sync", {
