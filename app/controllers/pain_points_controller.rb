@@ -1,5 +1,5 @@
 class PainPointsController < ApplicationController
-  before_filter :login_required, :only => [:new, :create]
+  before_filter :login_required, :only => [:new, :create, :edit, :update]
 
   def index
     @pain_points = PainPoint.find(:all)
@@ -15,6 +15,20 @@ class PainPointsController < ApplicationController
       redirect_to pain_points_path
     else
       render :template => 'pain_points/new'
+    end
+  end
+
+  def edit
+    @pain_point = PainPoint.find(params[:id])
+  end
+
+  def update
+    @pain_point = PainPoint.find(params[:id])
+    if @pain_point.update_attributes(params[:pain_point])
+      redirect_to pain_points_path
+    else
+      flash[:error] = @pain_point.errors.full_messages.join("<br>")
+      render :template => 'pain_points/edit'
     end
   end
 end

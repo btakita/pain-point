@@ -1,17 +1,25 @@
 ENV["RAILS_ENV"] = "test"
-require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
+dir = File.dirname(__FILE__)
+require File.expand_path("#{dir}/../config/environment")
 require 'spec'
 require 'spec/rails'
 require 'hpricot'
+Dir["#{dir}/spec_helpers/**/*.rb"].each do |file|
+  require file
+end
 
 Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
-  config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+  config.fixture_path = "#{RAILS_ROOT}/spec/fixtures"
   config.global_fixtures = :all
   config.mock_with :rr
 
   config.include AuthenticatedTestHelper
+end
+
+module Spec::Example::ExampleMethods
+  include ActionController::UrlWriter
 end
 
 class << Spec::Rails::Example::ModelExampleGroup
@@ -44,5 +52,14 @@ class << Spec::Rails::Example::ControllerExampleGroup
         response.should redirect_to(new_session_path)
       end
     end
+  end
+end
+Spec::Example::ExampleGroupFactory.register(:fixture_specs, Spec::Rails::Example::ModelExampleGroup)
+
+class Spec::Rails::Example::ViewExampleGroup
+  def login_as(user_id)
+    user = users(user_id)
+    stub(@controller).current_user {user}
+    user
   end
 end

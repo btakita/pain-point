@@ -1,0 +1,13 @@
+<div>Existing Pain Points</div>
+<ul id="pain_points"></ul>
+<script type="text/javascript">
+  PainPoint.sync(<%= PainPoint.all_user_data(current_user).to_json %>);
+  $("#pain_points").replaceWith(PainPointsView.create());
+</script>
+
+<p>Create a new pain point</p>
+
+<% form_for PainPoint.new, :url => pain_points_path do |f| %>
+  <%= f.text_field :name %>
+  <%= submit_tag 'Create' %>
+<% end %>

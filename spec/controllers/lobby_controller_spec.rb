@@ -3,9 +3,16 @@ require File.expand_path("#{File.dirname(__FILE__)}/../spec_helper")
 describe LobbyController do
   describe "GET show" do
     it "renders the lobby" do
-      get 'show'
+      get :show
       response.should be_success
-      response.body.should include("Lobby")
+      response.body.should include("Welcome to Pain Point")
+    end
+
+    it "renders PainPoint list" do
+      get :show
+      response.body.should include(
+        response.template.render(:partial => "pain_points/list")
+      )
     end
   end
 
