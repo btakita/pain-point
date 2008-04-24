@@ -8,6 +8,6 @@ class VoteSubmissions::VoteSubmissionsController < ApplicationController
     vote.save!
     @user = current_user
     @pain_point = vote.pain_point
-    redirect_to lobby_path
+    render :text => @pain_point.user_data(@user).to_json
   end
 end

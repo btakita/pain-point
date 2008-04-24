@@ -50,9 +50,9 @@ module VoteSubmissions
               user.votes.pain_points.should include(pain_point)
             end
 
-            it "redirects to the lobby" do
+            it "responds with json representation of the User data of the PainPoint" do
               post :create, :pain_point_id => pain_point.id
-              response.should redirect_to(lobby_path)
+              JSON.parse(response.body).should == pain_point.user_data(user)
             end
           end
 
@@ -83,9 +83,9 @@ module VoteSubmissions
               existing_vote.reload.state.should == 'up'
             end
 
-            it "redirects to the lobby" do
+            it "responds with json representation of the User data of the PainPoint" do
               post :create, :pain_point_id => pain_point.id
-              response.should redirect_to(lobby_path)
+              JSON.parse(response.body).should == pain_point.user_data(user)
             end
           end
         end
