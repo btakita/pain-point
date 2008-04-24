@@ -30,8 +30,7 @@
     'create': function(pain_point) {
       var view = $(new PainPointViewBuilder(pain_point).render());
       view.find("a.up").click(function() {
-        $.post(pain_point.url() + "/up_vote", {}, function(response) {
-          var data = JSON.parse(response);
+        pain_point.up_vote(function(data) {
           if(data.vote_state == "up") {
             view.find("a.up").addClass("selected");
           } else {
@@ -40,8 +39,7 @@
         });
       });
       view.find("a.down").click(function() {
-        $.post(pain_point.url() + "/down_vote", {}, function(response) {
-          var data = JSON.parse(response);
+        pain_point.down_vote(function(data) {
           if(data.vote_state == "down") {
             view.find("a.down").addClass("selected");
           } else {
