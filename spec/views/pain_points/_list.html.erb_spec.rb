@@ -45,6 +45,7 @@ describe "/pain_points/_list" do
 
     it "renders PainPoint list with the User's Vote data" do
       doc = Hpricot(response.body)
+      PainPoint.all_user_data(current_user).should_not == PainPoint.all_user_data(nil)
 
       script = doc.at("script")
       script.inner_html.should include("PainPoint.sync(#{PainPoint.all_user_data(current_user).to_json});")
