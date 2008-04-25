@@ -52,4 +52,4 @@
     });
     return view;
   };
-})(this);
+})(window);

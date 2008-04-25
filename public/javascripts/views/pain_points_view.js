@@ -11,4 +11,4 @@
       return content;
     }
   };
-})(this);
+})(window);

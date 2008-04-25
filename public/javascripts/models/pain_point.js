@@ -39,4 +39,4 @@
       this.instances.push(new PainPoint(data[i]));
     }
   };
-})(this);
+})(window);
