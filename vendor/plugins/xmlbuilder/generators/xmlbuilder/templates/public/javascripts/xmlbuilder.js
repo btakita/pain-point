@@ -120,4 +120,4 @@
   XmlBuilder.CloseTag.prototype.toString = function() {
     return "</" + this.tagName + ">";
   }
-})(this);
+})(window);
