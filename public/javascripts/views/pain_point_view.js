@@ -31,11 +31,11 @@
     var view = $(new PainPointViewBuilder(pain_point).render());
     view.pain_point = pain_point;
 
-    view.refresh_links = function() {
-      if(view.pain_point.vote_state == "up") {
+    view.refresh_links = function(pain_point) {
+      if(pain_point.vote_state == "up") {
         view.find("a.up").addClass("selected");
         view.find("a.down").removeClass("selected");
-      } else if(view.pain_point.vote_state == "down") {
+      } else if(pain_point.vote_state == "down") {
         view.find("a.down").addClass("selected");
         view.find("a.up").removeClass("selected");
       } else {
