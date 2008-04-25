@@ -26,33 +26,29 @@
     this.a(direction, {'class': css_class, 'href': "#"});
   }
 
-  window.PainPointView = new Object();
+  window.PainPointView = {};
   PainPointView.create = function(pain_point) {
     var view = $(new PainPointViewBuilder(pain_point).render());
     view.pain_point = pain_point;
 
-    view.refresh_links = function(data) {
-      if(this.pain_point.vote_state == "up") {
-        this.find("a.up").addClass("selected");
-        this.find("a.down").removeClass("selected");
-      } else if(this.pain_point.vote_state == "down") {
-        this.find("a.down").addClass("selected");
-        this.find("a.up").removeClass("selected");
+    view.refresh_links = function() {
+      if(view.pain_point.vote_state == "up") {
+        view.find("a.up").addClass("selected");
+        view.find("a.down").removeClass("selected");
+      } else if(view.pain_point.vote_state == "down") {
+        view.find("a.down").addClass("selected");
+        view.find("a.up").removeClass("selected");
       } else {
-        this.find("a.up").removeClass("selected");
-        this.find("a.down").removeClass("selected");
+        view.find("a.up").removeClass("selected");
+        view.find("a.down").removeClass("selected");
       }
     }
 
     view.find("a.up").click(function() {
-      pain_point.up_vote(function(pain_point) {
-        view.refresh_links(pain_point);
-      });
+      pain_point.up_vote(view.refresh_links);
     });
     view.find("a.down").click(function() {
-      pain_point.down_vote(function(data) {
-        view.refresh_links(pain_point);
-      });
+      pain_point.down_vote(view.refresh_links);
     });
     return view;
   };
