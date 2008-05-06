@@ -74,7 +74,7 @@ Screw.Unit(function() {
           expect(output.find("a.down.selected")).to_not(be_empty);
           output.find("a.up").click();
           ActiveAjaxRequests[0].success(
-            JSON.stringify({id: 1, name: "Pain Point 1", vote_state: "up"})
+            {id: 1, name: "Pain Point 1", vote_state: "up"}
           );
 
           expect(output.find("a.up.selected")).to_not(be_empty);
@@ -91,7 +91,7 @@ Screw.Unit(function() {
 
           output.find("a.up").click();
           ActiveAjaxRequests[0].success(
-            JSON.stringify({id: 1, name: "Pain Point 1", vote_state: "neutral"})
+            {id: 1, name: "Pain Point 1", vote_state: "neutral"}
           );
 
           expect(output.find("a.up.selected")).to(be_empty);
@@ -122,7 +122,7 @@ Screw.Unit(function() {
           expect(output.find("a.down.selected")).to(be_empty);
           output.find("a.down").click();
           ActiveAjaxRequests[0].success(
-          JSON.stringify({id: 1, name: "Pain Point 1", vote_state: "down"})
+            {id: 1, name: "Pain Point 1", vote_state: "down"}
           );
 
           expect(output.find("a.up.selected")).to(be_empty);
@@ -138,7 +138,7 @@ Screw.Unit(function() {
           expect(output.find("a.down.selected")).to_not(be_empty);
           output.find("a.down").click();
           ActiveAjaxRequests[0].success(
-          JSON.stringify({id: 1, name: "Pain Point 1", vote_state: "neutral"})
+            {id: 1, name: "Pain Point 1", vote_state: "neutral"}
           );
 
           expect(output.find("a.up.selected")).to(be_empty);

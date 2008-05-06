@@ -25,9 +25,9 @@ class Views::Layouts::Application < Erector::Widget
           if current_user
             text "Logged in as #{current_user.login}"
             text " | "
-            link_to "Logout", logins_path, :method => :delete
+            link_to "Logout", logout_path, :method => :delete
           else
-            link_to "Login", logins_path
+            link_to "Login", login_path
           end
         end
         div flash[:notice], :class => "notice"

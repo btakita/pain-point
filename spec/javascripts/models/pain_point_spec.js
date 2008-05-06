@@ -35,22 +35,23 @@ Screw.Unit(function() {
         pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral"});
       });
 
-      it("sends a POST to /pain_points/:pain_point_id/up_vote with the authenticity_token", function() {
+      it("sends a POST to /pain_points/:pain_point_id/up_vote with the authenticity_token that expects json", function() {
         pain_point.up_vote();
         expect(ActiveAjaxRequests.length).to(equal, 1);
         var request = ActiveAjaxRequests[0];
         expect(request.type).to(equal, 'POST');
-        expect(request.data).to(equal, {authenticity_token: window._token});
+        expect(JSON.parse(request.data)).to(equal, {authenticity_token: window._token});
         expect(request.url).to(equal, '/pain_points/1/up_vote');
+        expect(request.content_type).to(equal, "application/json");
       });
 
       it("sets PainPoint attributes to the data returned by the server", function() {
         expect(pain_point.name).to_not(equal, 'another name');
         expect(pain_point.vote_state).to(equal, 'neutral');
         pain_point.up_vote();
-        ActiveAjaxRequests[0].success(JSON.stringify(
+        ActiveAjaxRequests[0].success(
           {id: pain_point.id, name: 'another name', vote_state: 'up'}
-        ));
+        );
         expect(pain_point.name).to(equal, 'another name');
         expect(pain_point.vote_state).to(equal, 'up');
       });
@@ -62,22 +63,23 @@ Screw.Unit(function() {
         pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral"});
       });
 
-      it("sends a POST to /pain_points/:pain_point_id/down_vote with the authenticity_token", function() {
+      it("sends a POST to /pain_points/:pain_point_id/down_vote with the authenticity_token that expects json", function() {
         pain_point.down_vote();
         expect(ActiveAjaxRequests.length).to(equal, 1);
         var request = ActiveAjaxRequests[0];
         expect(request.type).to(equal, 'POST');
-        expect(request.data).to(equal, {authenticity_token: window._token});
+        expect(JSON.parse(request.data)).to(equal, {authenticity_token: window._token});
         expect(request.url).to(equal, '/pain_points/1/down_vote');
+        expect(request.content_type).to(equal, "application/json");
       });
 
       it("sets PainPoint attributes to the data returned by the server", function() {
         expect(pain_point.name).to_not(equal, 'another name');
         expect(pain_point.vote_state).to(equal, 'neutral');
         pain_point.down_vote();
-        ActiveAjaxRequests[0].success(JSON.stringify(
+        ActiveAjaxRequests[0].success(
           {id: pain_point.id, name: 'another name', vote_state: 'down'}
-        ));
+        );
         expect(pain_point.name).to(equal, 'another name');
         expect(pain_point.vote_state).to(equal, 'down');
       });

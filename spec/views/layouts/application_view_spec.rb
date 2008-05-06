@@ -17,8 +17,8 @@ describe Views::Layouts::Application do
 
       it "renders logout link" do
         doc = Hpricot(html)
-        doc.should_not have_link(logins_path, :method => :get)
-        doc.should have_link(logins_path, :method => :delete)
+        doc.should_not have_link(login_path)
+        doc.should have_link(logout_path)
       end
     end
 
@@ -30,8 +30,8 @@ describe Views::Layouts::Application do
 
       it "renders login link" do
         doc = Hpricot(html)
-        doc.should_not have_link(logins_path, :method => :get)
-        doc.should_not have_link(logins_path, :method => :delete)
+        doc.should have_link(login_path)
+        doc.should_not have_link(logout_path)
       end
     end
   end
