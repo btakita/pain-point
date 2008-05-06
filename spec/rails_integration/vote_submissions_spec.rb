@@ -1,4 +1,4 @@
-require File.expand_path("#{File.dirname(__FILE__)}/../integration_spec_helper")
+require File.expand_path("#{File.dirname(__FILE__)}/../rails_integration_spec_helper")
 
 describe "A User noon the home page" do
   before do

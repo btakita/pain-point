@@ -11,5 +11,5 @@ module ActionController::Rescue
 end
 
 class Spec::Rails::Example::IntegrationExampleGroup < ActionController::IntegrationTest
-  Spec::Example::ExampleGroupFactory.register(:integration, self)
+  Spec::Example::ExampleGroupFactory.register(:rails_integration, self)
 end
