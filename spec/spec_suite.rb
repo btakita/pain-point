@@ -1,6 +1,3 @@
 dir = File.dirname(__FILE__)
-ARGV.push('--require', "#{dir}/spec_helpers/indented_text_formatter", '--options', "#{dir}/spec.opts")
-
-Dir["#{dir}/**/*_spec.rb"].each do |file|
-  require file
-end
+system("ruby #{dir}/unit_spec_suite.rb") || raise("Unit Spec Suite Failed")
+system("ruby #{dir}/integration_spec_suite.rb") || raise("Integration Spec Suite Failed")
