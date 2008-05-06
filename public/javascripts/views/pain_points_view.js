@@ -1,4 +1,4 @@
-(function(window) {
+(function() {
   window.PainPointsView = {
     'create': function() {
       var b = new XmlBuilder({binding: this});
@@ -11,4 +11,4 @@
       return content;
     }
   };
-})(window);
+})();

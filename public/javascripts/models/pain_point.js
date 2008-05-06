@@ -1,4 +1,4 @@
-(function(window) {
+(function() {
   window.PainPoint = function PainPoint(attributes) {
     this.id = attributes.id;
     this.name = attributes.name;
@@ -9,11 +9,11 @@
     return "/pain_points/" + this.id;
   }
 
-  PainPoint.prototype.up_vote = function(callback) {
+  function send_vote(direction, callback) {
     var self = this;
     $.ajax({
       type: "POST",
-      url: this.url() + "/up_vote",
+      url: self.url() + "/" + direction,
       data: JSON.stringify({authenticity_token: window._token}),
       contentType: "application/json",
       dataType: "json",
@@ -27,22 +27,12 @@
     });
   }
 
+  PainPoint.prototype.up_vote = function(callback) {
+    send_vote.call(this, "up_vote", callback);
+  }
+
   PainPoint.prototype.down_vote = function(callback) {
-    var self = this;
-    $.ajax({
-      type: "POST",
-      url: this.url() + "/down_vote",
-      data: JSON.stringify({authenticity_token: window._token}),
-      contentType: "application/json",
-      dataType: "json",
-      success: function(data) {
-        self.name = data.name;
-        self.vote_state = data.vote_state;
-        if(callback) {
-          callback(self);
-        }
-      }
-    });
+    send_vote.call(this, "down_vote", callback);
   }
 
   PainPoint.instances = [];
@@ -51,4 +41,4 @@
       this.instances.push(new PainPoint(data[i]));
     }
   };
-})(window);
+})();
