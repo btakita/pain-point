@@ -1,6 +1,6 @@
 require File.expand_path("#{File.dirname(__FILE__)}/../rails_integration_spec_helper")
 
-describe "A User noon the home page" do
+describe "A User on the home page" do
   before do
     visits "/"
   end

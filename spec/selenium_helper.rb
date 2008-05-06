@@ -11,6 +11,10 @@ config.browser = "firefox"
 config.keep_browser_open_on_failure = false
 
 class SeleniumExampleGroup < Polonium::TestCase
+  after do
+    open logout_path
+  end
+
   Spec::Example::ExampleGroupFactory.register(:selenium, self)
 end
 

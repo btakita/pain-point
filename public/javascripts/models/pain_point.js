@@ -22,8 +22,8 @@
         if(data.type == "Redirect") {
           self.location.href = data.attributes.href;
         } else {
-          self.name = data.name;
-          self.vote_state = data.vote_state;
+          self.name = data.attributes.name;
+          self.vote_state = data.attributes.vote_state;
           if(callback) {
             callback(self);
           }

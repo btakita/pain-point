@@ -62,7 +62,7 @@ Screw.Unit(function() {
         expect(pain_point.vote_state).to(equal, 'neutral');
         pain_point.up_vote();
         ActiveAjaxRequests[0].success(
-          {id: pain_point.id, name: 'another name', vote_state: 'up'}
+          {'type': "PainPoint", 'attributes': {id: pain_point.id, name: 'another name', vote_state: 'up'}}
         );
         expect(pain_point.name).to(equal, 'another name');
         expect(pain_point.vote_state).to(equal, 'up');
@@ -103,7 +103,7 @@ Screw.Unit(function() {
         expect(pain_point.vote_state).to(equal, 'neutral');
         pain_point.down_vote();
         ActiveAjaxRequests[0].success(
-          {id: pain_point.id, name: 'another name', vote_state: 'down'}
+          {'type': "PainPoint", 'attributes': {id: pain_point.id, name: 'another name', vote_state: 'down'}}
         );
         expect(pain_point.name).to(equal, 'another name');
         expect(pain_point.vote_state).to(equal, 'down');
