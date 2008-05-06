@@ -21,6 +21,15 @@ class Views::Layouts::Application < Erector::Widget
       end
 
       body do
+        div do
+          if current_user
+            text "Logged in as #{current_user.login}"
+            text " | "
+            link_to "Logout", logins_path, :method => :delete
+          else
+            link_to "Login", logins_path
+          end
+        end
         div flash[:notice], :class => "notice"
         div flash[:error], :class => "error"
         content
@@ -32,5 +41,10 @@ class Views::Layouts::Application < Erector::Widget
     if @block
       instance_eval &block
     end
+  end
+
+  protected
+  def current_user
+    helpers.current_user
   end
 end
