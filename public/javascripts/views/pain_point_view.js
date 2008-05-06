@@ -1,4 +1,4 @@
-(function(window) {
+(function() {
   var PainPointViewBuilder = function PainPointViewBuilder(pain_point) {
     this.pain_point = pain_point;
     XmlBuilder.apply(this);
@@ -46,10 +46,12 @@
 
     view.find("a.up").click(function() {
       pain_point.up_vote(view.refresh_links);
+      return false;
     });
     view.find("a.down").click(function() {
       pain_point.down_vote(view.refresh_links);
+      return false;
     });
     return view;
   };
-})(window);
+})();
