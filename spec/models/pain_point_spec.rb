@@ -10,7 +10,7 @@ describe PainPoint do
     before do
       @user = users(:quentin)
     end
-    
+
     it "returns an Array of Hashes representing all of the PainPoints in the database with their vote states for the pased in User" do
       pain_point_data = PainPoint.all_user_data(user)
       pain_point_data.length.should == PainPoint.count
@@ -29,9 +29,12 @@ describe PainPoint do
 
       it "returns a Hash with a vote_state of neutral" do
         pain_point.user_data(nil).should == {
-          "id" => pain_point.id,
-          "name" => pain_point.name,
-          "vote_state" => 'neutral'
+          "type" => "PainPoint",
+          "attributes" => {
+            "id" => pain_point.id,
+            "name" => pain_point.name,
+            "vote_state" => 'neutral'
+          }
         }
       end
     end
@@ -46,9 +49,12 @@ describe PainPoint do
 
       it "returns a Hash of the PainPoint with the vote_state being neutral" do
         pain_point.user_data(user).should == {
-          "id" => pain_point.id,
-          "name" => pain_point.name,
-          "vote_state" => 'neutral'
+          "type" => "PainPoint",
+          "attributes" => {
+            "id" => pain_point.id,
+            "name" => pain_point.name,
+            "vote_state" => 'neutral'
+          }
         }
       end
     end
@@ -64,9 +70,12 @@ describe PainPoint do
 
       it "returns a Hash of the PainPoint with the vote_state for the passed in User" do
         pain_point.user_data(user).should == {
-          "id" => pain_point.id,
-          "name" => pain_point.name,
-          "vote_state" => vote.state
+          "type" => "PainPoint",
+          "attributes" => {
+            "id" => pain_point.id,
+            "name" => pain_point.name,
+            "vote_state" => vote.state
+          }
         }
       end
     end

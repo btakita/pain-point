@@ -13,9 +13,12 @@ class PainPoint < ActiveRecord::Base
   def user_data(user)
     vote = user ? user.votes.find_by_pain_point_id(id) : nil
     {
-      'id' => id,
-      'name' => name,
-      'vote_state' => vote ? vote.state : 'neutral'
+      "type" => self.class.to_s,
+      "attributes" => {
+        'id' => id,
+        'name' => name,
+        'vote_state' => vote ? vote.state : 'neutral'
+      }
     }
   end
 end

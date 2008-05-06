@@ -18,7 +18,7 @@ describe "A User noon the home page" do
           "Cookie" => "bc_test=true; _pain-point_session=BAh7CDoOcmV0dXJuX3RvMCIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6%250ARmxhc2g6OkZsYXNoSGFzaHsABjoKQHVzZWR7ADoMY3NyZl9pZCIlNWM2NmJm%250AOWM3Nzc0MzIxMDdmYzczOWJkNDNiODNhZmY%253D--dedbb152c476b5b0189f65e5491a17dce6190a08"
         )
         status.should == 200
-        JSON.parse(@response.body).should == {"redirect" => new_session_path}
+        JSON.parse(@response.body).should == {'type' => 'Redirect', 'attributes' => {'href' => new_session_path}}
       end
     end
   end

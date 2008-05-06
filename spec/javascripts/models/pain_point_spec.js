@@ -6,16 +6,28 @@ Screw.Unit(function() {
     describe(".sync", function() {
       it("sets instances with newly instantiated PainPoint objects with the passed in values", function() {
         var data = [
-          {id: 1, name: "Pain Point 1", vote_state: "neutral"},
-          {id: 2, name: "Pain Point 2", vote_state: "up"},
-          {id: 3, name: "Pain Point 3", vote_state: "down"}
+          {type: "PainPoint", attributes: {id: 1, name: "Pain Point 1", vote_state: "neutral"}},
+          {type: "PainPoint", attributes: {id: 2, name: "Pain Point 2", vote_state: "up"}},
+          {type: "PainPoint", attributes: {id: 3, name: "Pain Point 3", vote_state: "down"}}
         ];
         PainPoint.sync(data);
         expect(PainPoint.instances).to(equal, [
-          new PainPoint(data[0]),
-          new PainPoint(data[1]),
-          new PainPoint(data[2])
+          new PainPoint(data[0].attributes),
+          new PainPoint(data[1].attributes),
+          new PainPoint(data[2].attributes)
         ]);
+      });
+    });
+
+    describe("#window", function() {
+      before(function() {
+        pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral"});
+      });
+
+      it("equals the document.window", function() {
+        expect(window.location).to_not(equal, undefined);
+        expect(window.location).to_not(equal, null);
+        expect(pain_point.location).to(equal, window.location);
       });
     });
 
@@ -55,6 +67,19 @@ Screw.Unit(function() {
         expect(pain_point.name).to(equal, 'another name');
         expect(pain_point.vote_state).to(equal, 'up');
       });
+
+      describe("when the server responds with a Redirect", function() {
+        it("sets the window.href to value of the location", function() {
+          var location = {};
+          pain_point.location = location;
+          pain_point.up_vote();
+
+          ActiveAjaxRequests[0].success(
+            {"type": "Redirect", "attributes": {"href": "/sessions/new"}}
+          );
+          expect(location.href).to(equal, "/sessions/new");
+        });
+      });
     });
 
     describe("#down_vote", function() {
@@ -82,6 +107,19 @@ Screw.Unit(function() {
         );
         expect(pain_point.name).to(equal, 'another name');
         expect(pain_point.vote_state).to(equal, 'down');
+      });
+
+      describe("when the server responds with a Redirect", function() {
+        it("sets the window.href to value of the location", function() {
+          var location = {};
+          pain_point.location = location;
+          pain_point.down_vote();
+
+          ActiveAjaxRequests[0].success(
+            {"type": "Redirect", "attributes": {"href": "/sessions/new"}}
+          );
+          expect(location.href).to(equal, "/sessions/new");
+        });
       });
     });
   });

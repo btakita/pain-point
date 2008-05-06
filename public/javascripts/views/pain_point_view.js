@@ -7,7 +7,7 @@
 
   PainPointViewBuilder.prototype.render = function() {
     with(this) {
-      li(function() {
+      li({"id": "vote_" + this.pain_point.id, "class": "vote"}, function() {
         vote_link("up");
         text(" ");
         vote_link("down");
@@ -19,7 +19,7 @@
   }
 
   PainPointViewBuilder.prototype.vote_link = function(direction) {
-    var css_class = direction;
+    var css_class = "vote " + direction;
     if(this.pain_point.vote_state == direction) {
       css_class += " selected";
     }

@@ -3,13 +3,14 @@
     this.id = attributes.id;
     this.name = attributes.name;
     this.vote_state = attributes.vote_state;
+    this.location = window.location;
   };
 
   PainPoint.prototype.url = function() {
     return "/pain_points/" + this.id;
   }
 
-  function send_vote(direction, callback) {
+  function vote(direction, callback) {
     var self = this;
     $.ajax({
       type: "POST",
@@ -18,27 +19,31 @@
       contentType: "application/json",
       dataType: "json",
       success: function(data) {
-        self.name = data.name;
-        self.vote_state = data.vote_state;
-        if(callback) {
-          callback(self);
+        if(data.type == "Redirect") {
+          self.location.href = data.attributes.href;
+        } else {
+          self.name = data.name;
+          self.vote_state = data.vote_state;
+          if(callback) {
+            callback(self);
+          }
         }
       }
     });
   }
 
   PainPoint.prototype.up_vote = function(callback) {
-    send_vote.call(this, "up_vote", callback);
+    vote.call(this, "up_vote", callback);
   }
 
   PainPoint.prototype.down_vote = function(callback) {
-    send_vote.call(this, "down_vote", callback);
+    vote.call(this, "down_vote", callback);
   }
 
   PainPoint.instances = [];
   PainPoint.sync = function(data) {
     for(var i=0; i < data.length; i++) {
-      this.instances.push(new PainPoint(data[i]));
+      this.instances.push(new PainPoint(data[i].attributes));
     }
   };
 })();
