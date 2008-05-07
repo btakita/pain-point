@@ -4,3 +4,6 @@ slow_tests:
 software_complexity:
   name: Software Complexity
   user: aaron
+unclear_domain:
+  name: Unclear Domain
+  user: aaron

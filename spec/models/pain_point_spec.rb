@@ -1,12 +1,13 @@
 require File.expand_path("#{File.dirname(__FILE__)}/../spec_helper")
 
 describe PainPoint do
+  attr_reader :pain_point
   describe "Validations" do
     should_validate_presence_of PainPoint, :name
   end
 
   describe ".all_user_data" do
-    attr_reader :vote, :user, :pain_point
+    attr_reader :vote, :user
     before do
       @user = users(:quentin)
     end
@@ -20,9 +21,41 @@ describe PainPoint do
     end
   end
 
+  describe "#score" do
+    describe "when more users vote up than down" do
+      before do
+        @pain_point = pain_points(:unclear_domain)
+        pain_point.votes.count.should == 0
+        users(:quentin).votes.create!(:pain_point_id => pain_point.id).up_vote
+        users(:suzy).votes.create!(:pain_point_id => pain_point.id).up_vote
+        users(:betty).votes.create!(:pain_point_id => pain_point.id).up_vote
+        users(:mike).votes.create!(:pain_point_id => pain_point.id).down_vote
+        pain_point.votes.count.should == 4
+      end
+
+      it "returns a positive value" do
+        pain_point.score.should == 2
+      end
+    end
+
+    describe "when more users vote down than up" do
+      before do
+        @pain_point = pain_points(:unclear_domain)
+        pain_point.votes.count.should == 0
+        users(:quentin).votes.create!(:pain_point_id => pain_point.id).down_vote
+        users(:suzy).votes.create!(:pain_point_id => pain_point.id).down_vote
+        users(:betty).votes.create!(:pain_point_id => pain_point.id).down_vote
+        users(:mike).votes.create!(:pain_point_id => pain_point.id).up_vote
+      end
+
+      it "returns a positive value" do
+        pain_point.score.should == -2
+      end
+    end
+  end
+
   describe "#user_data" do
     describe "when the User is nil" do
-      attr_reader :pain_point
       before do
         @pain_point = pain_points(:slow_tests)
       end
@@ -40,7 +73,7 @@ describe PainPoint do
     end
 
     describe "when the User does not have a Vote for the PainPoint" do
-      attr_reader :user, :pain_point
+      attr_reader :user
       before do
         @user = users(:quentin)
         @pain_point = pain_points(:software_complexity)
@@ -60,7 +93,7 @@ describe PainPoint do
     end
 
     describe "when the User has a Vote for the PainPoint" do
-      attr_reader :vote, :user, :pain_point
+      attr_reader :vote, :user
       before do
         @vote = votes(:quentin_slow_tests)
         vote.up_vote

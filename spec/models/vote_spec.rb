@@ -1,6 +1,42 @@
 require File.expand_path("#{File.dirname(__FILE__)}/../spec_helper")
 
 describe Vote do
+  describe "Associations" do
+    describe ".up" do
+      it "returns Votes that have a vote_state of up" do
+        up_votes = Vote.up
+        up_votes.should_not be_empty
+        up_votes.each do |up_vote|
+          unless up_vote.state == 'up'
+            raise "Vote state for #{up_vote.inspect} should be up"
+          end
+        end
+        (Vote.find(:all) - up_votes).each do |not_up_vote|
+          if not_up_vote.state == 'up'
+            raise "Vote state for #{not_up_vote.inspect} should be not be up"
+          end
+        end
+      end
+    end
+
+    describe ".down" do
+      it "returns Votes that have a vote_state of down" do
+        down_votes = Vote.down
+        down_votes.should_not be_empty
+        down_votes.each do |down_vote|
+          unless down_vote.state == 'down'
+            raise "Vote state for #{down_vote.inspect} should be down"
+          end
+        end
+        (Vote.find(:all) - down_votes).each do |not_down_vote|
+          if not_down_vote.state == 'down'
+            raise "Vote state for #{not_down_vote.inspect} should be not be down"
+          end
+        end
+      end
+    end
+  end
+  
   describe "Validations" do
     describe "#user_id" do
       it "must not be blank" do

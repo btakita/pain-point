@@ -2,6 +2,9 @@ class Vote < ActiveRecord::Base
   belongs_to :user
   belongs_to :pain_point
 
+  has_finder :up, :conditions => ["state=?", "up"]
+  has_finder :down, :conditions => ["state=?", "down"]
+
   validates_presence_of :user_id
   validates_presence_of :pain_point_id
   validates_uniqueness_of :user_id, :scope => [:pain_point_id]

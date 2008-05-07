@@ -9,6 +9,11 @@ class PainPoint < ActiveRecord::Base
 
   belongs_to :user
   validates_presence_of :name
+  has_many :votes
+
+  def score
+    votes.up.count - votes.down.count
+  end
 
   def user_data(user)
     vote = user ? user.votes.find_by_pain_point_id(id) : nil

@@ -2,3 +2,11 @@ quentin_slow_tests:
   user: quentin
   pain_point: slow_tests
   state: neutral
+suzy_software_complexity:
+  user: suzy
+  pain_point: software_complexity
+  state: down
+mike_software_complexity:
+  user: mike
+  pain_point: software_complexity
+  state: up

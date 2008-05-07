@@ -22,4 +22,34 @@ describe "users.yml" do
       user.should_not be_active
     end
   end
+
+  describe "suzy" do
+    before do
+      @user = users(:suzy)
+    end
+
+    it "is active" do
+      user.should be_active
+    end
+  end
+
+  describe "betty" do
+    before do
+      @user = users(:betty)
+    end
+
+    it "is active" do
+      user.should be_active
+    end
+  end
+
+  describe "mike" do
+    before do
+      @user = users(:mike)
+    end
+
+    it "is active" do
+      user.should be_active
+    end
+  end
 end
