@@ -1,5 +1,5 @@
-class Views::PainPoints::Index < Views::Layouts::Application
-  def content
+class Views::PainPoints::Index < Erector::Widget
+  def render
     text raw(helpers.render(:partial => "list"))
   end
 end

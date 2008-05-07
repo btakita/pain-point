@@ -2,6 +2,10 @@ require File.expand_path("#{File.dirname(__FILE__)}/../spec_helper")
 
 describe PainPointsController do
   describe "GET index" do
+    before do
+      login_as :quentin
+    end
+
     it "renders a list of the PaintPoints" do
       get :index
       response.body.should include(PainPoint.find(:first).name)
