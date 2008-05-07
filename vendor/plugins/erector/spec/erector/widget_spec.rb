@@ -268,6 +268,18 @@ if (x < y && x > z) alert("don't stop");
 </script>
 EXPECTED
       end
+      
+      it "renders the raw content inside script tags when given text" do
+        Erector::Widget.new do
+          javascript('alert("&<>\'hello");')
+        end.to_s.should == <<EXPECTED
+<script type="text/javascript">
+// <![CDATA[
+alert("&<>'hello");
+// ]]>
+</script>
+EXPECTED
+      end
 
       it "when receiving a params hash; renders a source file" do
         html = Erector::Widget.new do
@@ -303,6 +315,14 @@ EXPECTED
         end.to_s.should == "<script type=\"text/javascript\">if (x < y || x > z) onEnterGetTo('/search?a=b&c=d')</script>"
       end
 
+    end
+    
+    describe "#css" do
+      it "makes a link when passed a string" do
+        Erector::Widget.new do
+          css "erector.css"
+        end.to_s.should == "<link href=\"erector.css\" rel=\"stylesheet\" type=\"text/css\" />"
+      end
     end
 
     describe '#capture' do
@@ -373,6 +393,49 @@ EXPECTED
       it "renders nested widgets in the correct order" do
         Parent.new.to_s.should == '123'
       end
+    end
+    
+    describe '#render_to' do
+      class A < Erector::Widget
+        def render
+          p "A"
+        end
+      end
+
+      it "renders to a doc" do
+        class B < Erector::Widget
+          def render
+            text "B"
+            A.new.render_to(@doc)
+            text "B"
+          end
+        end
+        b = B.new
+        b.to_s.should == "B<p>A</p>B"
+        b.doc.size.should == 5  # B, <p>, A, </p>, B
+      end
+      
+      it "renders to a widget's doc" do
+        class B < Erector::Widget
+          def render
+            text "B"
+            A.new.render_to(self)
+            text "B"
+          end
+        end
+        b = B.new
+        b.to_s.should == "B<p>A</p>B"
+        b.doc.size.should == 5  # B, <p>, A, </p>, B
+      end
+      
+      it "passing a widget to text method renders it" do
+        Erector::Widget.new() do
+          text "B"
+          text A.new()
+          text "B"
+        end.to_s.should == "B<p>A</p>B"
+      end
+
     end
   end
 end

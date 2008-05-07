@@ -1,0 +1,8 @@
+--- 
+format: 1
+handler: 
+  piston:remote-revision: 94
+  piston:uuid: 4b8798b9-51f2-4387-91b1-b04f834b421f
+repository_url: http://erector.rubyforge.org/svn/trunk
+lock: false
+repository_class: Piston::Svn::Repository

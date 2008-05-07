@@ -1,0 +1,8 @@
+--- 
+format: 1
+handler: 
+  piston:remote-revision: 66
+  piston:uuid: a9f67fa3-8408-0410-ad84-b6cefbfd10ac
+repository_url: http://elitists.textdriven.com/svn/plugins/acts_as_state_machine/trunk
+lock: false
+repository_class: Piston::Svn::Repository
