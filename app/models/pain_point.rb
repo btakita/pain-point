@@ -22,7 +22,8 @@ class PainPoint < ActiveRecord::Base
       "attributes" => {
         'id' => id,
         'name' => name,
-        'vote_state' => vote ? vote.state : 'neutral'
+        'vote_state' => vote ? vote.state : 'neutral',
+        'score' => score
       }
     }
   end

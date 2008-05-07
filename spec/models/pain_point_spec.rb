@@ -60,13 +60,14 @@ describe PainPoint do
         @pain_point = pain_points(:slow_tests)
       end
 
-      it "returns a Hash with a vote_state of neutral" do
+      it "returns a Hash with a vote_state of neutral and the score" do
         pain_point.user_data(nil).should == {
           "type" => "PainPoint",
           "attributes" => {
             "id" => pain_point.id,
             "name" => pain_point.name,
-            "vote_state" => 'neutral'
+            "vote_state" => 'neutral',
+            "score" => pain_point.score
           }
         }
       end
@@ -86,7 +87,8 @@ describe PainPoint do
           "attributes" => {
             "id" => pain_point.id,
             "name" => pain_point.name,
-            "vote_state" => 'neutral'
+            "vote_state" => 'neutral',
+            "score" => pain_point.score
           }
         }
       end
@@ -107,7 +109,8 @@ describe PainPoint do
           "attributes" => {
             "id" => pain_point.id,
             "name" => pain_point.name,
-            "vote_state" => vote.state
+            "vote_state" => vote.state,
+            "score" => pain_point.score
           }
         }
       end
