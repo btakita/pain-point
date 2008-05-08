@@ -80,7 +80,6 @@ Screw.Unit(function() {
         it("renders the score", function() {
           pain_point.score = 0;
           output.refresh(pain_point);
-          console.debug(output.find(".score")[0].innerHTML);
           expect(output.find(".score").html()).to(equal, "0");
         })
       });
