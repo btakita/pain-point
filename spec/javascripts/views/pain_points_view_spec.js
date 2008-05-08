@@ -5,9 +5,9 @@ Screw.Unit(function() {
     var view;
     before(function() {
       PainPoint.instances = [
-        new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral"}),
-        new PainPoint({id: 2, name: "Pain Point 2", vote_state: "up"}),
-        new PainPoint({id: 3, name: "Pain Point 3", vote_state: "down"})
+        new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral", score: 0}),
+        new PainPoint({id: 2, name: "Pain Point 2", vote_state: "up", score: 1}),
+        new PainPoint({id: 3, name: "Pain Point 3", vote_state: "down", score: -1})
       ];
       view = PainPointsView.create();
     });

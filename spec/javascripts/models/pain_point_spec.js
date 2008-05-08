@@ -67,29 +67,33 @@ Screw.Unit(function() {
         expect(request.content_type).to(equal, "application/json");
       });
 
-      it("sets PainPoint attributes to the data returned by the server", function() {
-        expect(pain_point.name).to_not(equal, 'another name');
-        expect(pain_point.vote_state).to(equal, 'neutral');
-        pain_point.up_vote();
-        ActiveAjaxRequests[0].success(
-          {'type': "PainPoint", 'attributes': {id: pain_point.id, name: 'another name', vote_state: 'up'}}
-        );
-        expect(pain_point.name).to(equal, 'another name');
-        expect(pain_point.vote_state).to(equal, 'up');
-      });
-
-      describe("when the server responds with a Redirect", function() {
-        it("sets the window.href to value of the location", function() {
-          var location = {};
-          pain_point.location = location;
+      describe("server response", function() {
+        it("sets PainPoint attributes to the data returned by the server", function() {
+          expect(pain_point.name).to_not(equal, 'another name');
+          expect(pain_point.vote_state).to(equal, 'neutral');
           pain_point.up_vote();
-
           ActiveAjaxRequests[0].success(
-            {"type": "Redirect", "attributes": {"href": "/sessions/new"}}
+            {'type': "PainPoint", 'attributes': {id: pain_point.id, name: 'another name', vote_state: 'up', score: 5}}
           );
-          expect(location.href).to(equal, "/sessions/new");
+          expect(pain_point.name).to(equal, 'another name');
+          expect(pain_point.vote_state).to(equal, 'up');
+          expect(pain_point.score).to(equal, 5);
+        });
+
+        describe("when the server responds with a Redirect", function() {
+          it("sets the window.href to value of the location", function() {
+            var location = {};
+            pain_point.location = location;
+            pain_point.up_vote();
+
+            ActiveAjaxRequests[0].success(
+              {"type": "Redirect", "attributes": {"href": "/sessions/new"}}
+            );
+            expect(location.href).to(equal, "/sessions/new");
+          });
         });
       });
+
     });
 
     describe("#down_vote", function() {

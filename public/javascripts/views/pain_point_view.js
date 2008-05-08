@@ -8,7 +8,7 @@
   PainPointViewBuilder.prototype.render = function() {
     with(this) {
       li({"id": "vote_" + this.pain_point.id, "class": "vote"}, function() {
-        text(this.pain_point.score + " ");
+        span({"class": "score"});
         vote_link("up");
         text(" ");
         vote_link("down");
@@ -32,7 +32,8 @@
     var view = $(new PainPointViewBuilder(pain_point).render());
     view.pain_point = pain_point;
 
-    view.refresh_links = function(pain_point) {
+    view.refresh = function(pain_point) {
+      view.find('.score').html(pain_point.score.toString());
       if(pain_point.vote_state == "up") {
         view.find("a.up").addClass("selected");
         view.find("a.down").removeClass("selected");
@@ -44,13 +45,14 @@
         view.find("a.down").removeClass("selected");
       }
     }
+    view.refresh(pain_point);
 
     view.find("a.up").click(function() {
-      pain_point.up_vote(view.refresh_links);
+      pain_point.up_vote(view.refresh);
       return false;
     });
     view.find("a.down").click(function() {
-      pain_point.down_vote(view.refresh_links);
+      pain_point.down_vote(view.refresh);
       return false;
     });
     return view;
