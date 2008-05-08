@@ -6,9 +6,9 @@ Screw.Unit(function() {
     describe(".sync", function() {
       it("sets instances with newly instantiated PainPoint objects with the passed in values", function() {
         var data = [
-          {type: "PainPoint", attributes: {id: 1, name: "Pain Point 1", vote_state: "neutral"}},
-          {type: "PainPoint", attributes: {id: 2, name: "Pain Point 2", vote_state: "up"}},
-          {type: "PainPoint", attributes: {id: 3, name: "Pain Point 3", vote_state: "down"}}
+          {type: "PainPoint", attributes: {id: 1, name: "Pain Point 1", vote_state: "neutral", score: 0}},
+          {type: "PainPoint", attributes: {id: 2, name: "Pain Point 2", vote_state: "up", score: 5}},
+          {type: "PainPoint", attributes: {id: 3, name: "Pain Point 3", vote_state: "down", score: -5}}
         ];
         PainPoint.sync(data);
         expect(PainPoint.instances).to(equal, [
@@ -16,6 +16,16 @@ Screw.Unit(function() {
           new PainPoint(data[1].attributes),
           new PainPoint(data[2].attributes)
         ]);
+      });
+    });
+
+    describe("constructor", function() {
+      it("sets the passed in attributes", function() {
+        pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral", score: 9});
+        expect(pain_point.id).to(equal, 1);
+        expect(pain_point.name).to(equal, "Pain Point 1");
+        expect(pain_point.vote_state).to(equal, "neutral");
+        expect(pain_point.score).to(equal, 9);
       });
     });
 

@@ -3,6 +3,7 @@
     this.id = attributes.id;
     this.name = attributes.name;
     this.vote_state = attributes.vote_state;
+    this.score = attributes.score;
     this.location = window.location;
   };
 
