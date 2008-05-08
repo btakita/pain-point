@@ -8,6 +8,7 @@
   PainPointViewBuilder.prototype.render = function() {
     with(this) {
       li({"id": "vote_" + this.pain_point.id, "class": "vote"}, function() {
+        text(this.pain_point.score + " ");
         vote_link("up");
         text(" ");
         vote_link("down");

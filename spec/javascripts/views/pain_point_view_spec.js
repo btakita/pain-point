@@ -5,7 +5,7 @@ Screw.Unit(function() {
     var pain_point;
     describe("#render", function() {
       before(function() {
-        pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral"});
+        pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral", score: 55});
       })
 
       it("renders a li element with an up vote, down vote, and an edit link", function() {
@@ -15,47 +15,57 @@ Screw.Unit(function() {
         expect(output.find("a[@href='/pain_points/1/edit']")).to_not(be_empty);
       });
 
-      describe("when the PainPoint#vote_state is neutral", function() {
-        before(function() {
-          pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral"});
-        });
-
-        it("renders neither the up vote or down vote link as selected", function() {
+      describe("PainPoint#score", function() {
+        it("renders the score", function() {
           var output = PainPointView.create(pain_point);
-          expect(output.find("a.up.selected")).to(be_empty);
-          expect(output.find("a.down.selected")).to(be_empty);
+          expect(output.html()).to(match, pain_point.score.toString());
         });
       });
 
-      describe("when the PainPoint#vote_state is up", function() {
-        before(function() {
-          pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "up"});
+      describe("PainPoint#vote_state", function() {
+        describe("when neutral", function() {
+          before(function() {
+            pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral", score: 0});
+          });
+
+          it("renders neither the up vote or down vote link as selected", function() {
+            var output = PainPointView.create(pain_point);
+            expect(output.find("a.up.selected")).to(be_empty);
+            expect(output.find("a.down.selected")).to(be_empty);
+          });
         });
 
-        it("renders the up vote link as selected", function() {
-          var output = PainPointView.create(pain_point);
-          expect(output.find("a.up.selected")).to_not(be_empty);
-          expect(output.find("a.down.selected")).to(be_empty);
+        describe("when up", function() {
+          before(function() {
+            pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "up", score: 1});
+          });
+
+          it("renders the up vote link as selected", function() {
+            var output = PainPointView.create(pain_point);
+            expect(output.find("a.up.selected")).to_not(be_empty);
+            expect(output.find("a.down.selected")).to(be_empty);
+          });
+        });
+
+        describe("when down", function() {
+          before(function() {
+            pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "down", score: -1});
+          });
+
+          it("renders the down vote link as selected", function() {
+            var output = PainPointView.create(pain_point);
+            expect(output.find("a.up.selected")).to(be_empty);
+            expect(output.find("a.down.selected")).to_not(be_empty);
+          });
         });
       });
 
-      describe("when the PainPoint#vote_state is down", function() {
-        before(function() {
-          pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "down"});
-        });
-
-        it("renders the down vote link as selected", function() {
-          var output = PainPointView.create(pain_point);
-          expect(output.find("a.up.selected")).to(be_empty);
-          expect(output.find("a.down.selected")).to_not(be_empty);
-        });
-      });
     });
 
     describe("#up_vote.click", function() {
       var output;
       before(function() {
-        pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral"});
+        pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral", score: 0});
         output = PainPointView.create(pain_point);
       });
 
@@ -103,7 +113,7 @@ Screw.Unit(function() {
     describe("#down_vote.click", function() {
       var output;
       before(function() {
-        pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral"});
+        pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral", score: 0});
         output = PainPointView.create(pain_point);
       });
 
