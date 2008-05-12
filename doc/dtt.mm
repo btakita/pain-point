@@ -4,18 +4,26 @@
 <font NAME="SansSerif" SIZE="12"/>
 <node TEXT="Introduction 5:00" POSITION="right">
 <node TEXT="Who uses rspec?"/>
+<node TEXT="Who uses the Story Runner?"/>
 <node TEXT="Who uses Test::Unit?"/>
+<node TEXT="Who uses test/spec?"/>
 <node TEXT="Who uses Shoulda?"/>
 <node TEXT="Most of my examples will be in Rspec"/>
 </node>
-<node TEXT="Test Types 10:00" POSITION="right">
+<node TEXT="Test Types 5:00" POSITION="right">
 <node TEXT="Method">
-<node TEXT="Automated"/>
-<node TEXT="Manual"/>
+<node TEXT="Automated">
+<node TEXT="xunit"/>
+<node TEXT="rspec"/>
+</node>
+<node TEXT="Manual">
+<node TEXT="Traditional QA"/>
+<node TEXT="Exploratory Testing"/>
+</node>
 </node>
 <node TEXT="Audience">
 <node TEXT="Developer"/>
-<node TEXT="Customer"/>
+<node TEXT="Customer (Customer Acceptance)"/>
 </node>
 <node TEXT="Scope">
 <node TEXT="Unit"/>
@@ -75,5 +83,31 @@
 </node>
 <node COLOR="#990000" TEXT="Refactor using Shared Describes"/>
 </node>
+<node TEXT="View Specs Example 10:00" POSITION="right">
+<node TEXT="erb view spec"/>
+<node TEXT="Introduce Erector"/>
+<node TEXT="Erector view spec"/>
+</node>
+<node TEXT="Test Double Example" POSITION="right">
+<node TEXT="Introduce RR"/>
+<node TEXT="Mocks"/>
+<node TEXT="Stubs"/>
+<node TEXT="Mock Proxy"/>
+<node TEXT="Stub Proxy"/>
+</node>
+<node TEXT="Audience participation 30:00" POSITION="right">
+<node TEXT="Introduce Git"/>
+<node TEXT="Instruct audience to jump to a certain branch"/>
+</node>
+<node TEXT="Extracting up and down links into JS example 15:00" POSITION="right">
+<node TEXT="Client/Server architecture">
+<node TEXT="Advantages"/>
+<node TEXT="Disadvantages"/>
+<node TEXT="Why its more testable"/>
+</node>
+<node TEXT="screw unit + server"/>
+</node>
+<node TEXT="Selenium Testing 10:00" POSITION="right"/>
+<node COLOR="#990000" TEXT="Comet server" POSITION="right"/>
 </node>
 </map>
