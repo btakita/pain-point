@@ -110,7 +110,6 @@
 <node TEXT="Selenium Testing 10:00" POSITION="right"/>
 <node COLOR="#990000" TEXT="Comet server 20:00" POSITION="right"/>
 <node TEXT="Audience participation 30:00" POSITION="right"/>
-<node TEXT="use geminstaller" POSITION="left"/>
 <node TEXT="send instructions to participants" POSITION="left">
 <node TEXT="notify that this is a preliminary outline, it will change the following week"/>
 <node TEXT="git clone pain-point"/>
