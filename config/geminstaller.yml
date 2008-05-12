@@ -24,5 +24,7 @@ gems:
   version: 1.0.2
 - name: sqlite3-ruby
   version: 1.2.1
+- name: thin
+  version: 0.8.1
 - name: uuid
   version: 1.0.4
