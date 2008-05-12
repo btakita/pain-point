@@ -108,6 +108,6 @@
 <node TEXT="screw unit + server"/>
 </node>
 <node TEXT="Selenium Testing 10:00" POSITION="right"/>
-<node COLOR="#990000" TEXT="Comet server" POSITION="right"/>
+<node COLOR="#990000" TEXT="Comet server 20:00" POSITION="right"/>
 </node>
 </map>
