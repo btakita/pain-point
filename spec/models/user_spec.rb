@@ -93,28 +93,11 @@ describe User do
     end
   end
 
-  describe "#remember_token" do
+  describe "#remember_me" do
     it 'sets remember token' do
       users(:quentin).remember_me
       users(:quentin).remember_token.should_not be_nil
       users(:quentin).remember_token_expires_at.should_not be_nil
-    end
-
-    it 'remembers me for one week' do
-      before = 1.week.from_now.utc
-      users(:quentin).remember_me_for 1.week
-      after = 1.week.from_now.utc
-      users(:quentin).remember_token.should_not be_nil
-      users(:quentin).remember_token_expires_at.should_not be_nil
-      users(:quentin).remember_token_expires_at.between?(before, after).should be_true
-    end
-
-    it 'remembers me until one week' do
-      time = 1.week.from_now.utc
-      users(:quentin).remember_me_until time
-      users(:quentin).remember_token.should_not be_nil
-      users(:quentin).remember_token_expires_at.should_not be_nil
-      users(:quentin).remember_token_expires_at.should == time
     end
 
     it 'remembers me default two weeks' do
@@ -124,6 +107,27 @@ describe User do
       users(:quentin).remember_token.should_not be_nil
       users(:quentin).remember_token_expires_at.should_not be_nil
       users(:quentin).remember_token_expires_at.between?(before, after).should be_true
+    end
+  end
+
+  describe "#remember_me_for" do
+    it 'remembers me for one week' do
+      before = 1.week.from_now.utc
+      users(:quentin).remember_me_for 1.week
+      after = 1.week.from_now.utc
+      users(:quentin).remember_token.should_not be_nil
+      users(:quentin).remember_token_expires_at.should_not be_nil
+      users(:quentin).remember_token_expires_at.between?(before, after).should be_true
+    end
+  end
+
+  describe "#remember_me_until" do
+    it 'remembers me until one week' do
+      time = 1.week.from_now.utc
+      users(:quentin).remember_me_until time
+      users(:quentin).remember_token.should_not be_nil
+      users(:quentin).remember_token_expires_at.should_not be_nil
+      users(:quentin).remember_token_expires_at.should == time
     end
   end
 
