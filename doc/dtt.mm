@@ -2,7 +2,7 @@
 <node TEXT="Developer Testing Tricks">
 <edge WIDTH="thin"/>
 <font NAME="SansSerif" SIZE="12"/>
-<node TEXT="Introduction 5:00" POSITION="right">
+<node TEXT="Introduction 2:30" POSITION="right">
 <node TEXT="Who uses rspec?"/>
 <node TEXT="Who uses the Story Runner?"/>
 <node TEXT="Who uses Test::Unit?"/>
@@ -15,6 +15,8 @@
 <node TEXT="Automated">
 <node TEXT="xunit"/>
 <node TEXT="rspec"/>
+<node TEXT="fit"/>
+<node TEXT="custom test scripts"/>
 </node>
 <node TEXT="Manual">
 <node TEXT="Traditional QA"/>
@@ -22,8 +24,14 @@
 </node>
 </node>
 <node TEXT="Audience">
-<node TEXT="Developer"/>
-<node TEXT="Customer (Customer Acceptance)"/>
+<node TEXT="Developer">
+<node TEXT="Rspec"/>
+<node TEXT="Test::Unit"/>
+</node>
+<node TEXT="Customer (Customer Acceptance)">
+<node TEXT="Story Runner"/>
+<node TEXT="Fit"/>
+</node>
 </node>
 <node TEXT="Scope">
 <node TEXT="Unit"/>
