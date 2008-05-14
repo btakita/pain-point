@@ -75,6 +75,10 @@ describe Vote do
       @vote = votes(:quentin_slow_tests)
     end
 
+    it "has an initial state of neutral" do
+      Vote.new.state.should == 'neutral'
+    end
+
     describe "#up_vote" do
       describe "when in neutral state" do
         before do
