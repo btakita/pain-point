@@ -76,6 +76,7 @@
 <node TEXT=".up"/>
 <node TEXT=".down"/>
 </node>
+<node TEXT="Fixture specs"/>
 </node>
 <node TEXT="VoteSubmissionsController Examples 10:00" POSITION="right">
 <node TEXT="UpVoteSubmissionsController"/>
