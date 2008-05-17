@@ -14,7 +14,7 @@ There a number of interesting technologies in Pain Point including:
 * RR double framework (http://github.com/btakita/rr & http://pivots.pivotallabs.com/users/brian/blog/articles/352-introducing-rr)
 * Selenium (http://openqa.org)
 * Polonium (http://github.com/pivotal/polonium)
-* Fitnesse
+* Fitnesse (http://en.wikipedia.org/wiki/FitNesse)
 * Client server programming using advanced Javascript
 * And more...
 
@@ -24,5 +24,9 @@ Pain Point may use several gems that you don't currently have on your machine. T
   sudo gem install geminstaller
   sudo geminstaller
 
+Please click the follow link at http://github.com/btakita/pain-point to receive updates to the application.
+
 If you have problems running geminstaller, you can look inside geminstaller.yml to see what the gem dependencies are.
 http://github.com/btakita/pain-point/tree/master/config/geminstaller.yml
+
+I have also enclosed my notes when coming up with the talk. Its mainly reference material that you may find useful during or after the tutorial.

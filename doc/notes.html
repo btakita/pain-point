@@ -1,0 +1,1758 @@
+<h1 id="developer-testing-tricks-notes"
+>Developer Testing Tricks Notes</h1
+><p
+>These notes are mainly a distillation of testing knowledge in preparation for the DTT talk and are by no means comprehensive on the topic of testing.</p
+><p
+>The examples will use rspec and focus on testing strategies in different situations. The concepts are applicable to rspec and test/unit or derivative technologies.</p
+><p
+><strong
+  >Note:</strong
+  > ExampleGroup == TestCase class and Example == TestCase instance</p
+><h2 id="reasons-to-test"
+>Reasons to test</h2
+><ul
+><li
+  >Creates an executable specification and example usage, with documentation that stays in sync<ul
+    ><li
+      >Domain Driven Design / Impedance Matching (The language of the developers and customer should be as close as possible)</li
+      ></ul
+    ></li
+  ><li
+  >Helps you separate requirements from implementation</li
+  ><li
+  >To support experimentation and refactoring<ul
+    ><li
+      >Empirical software development</li
+      ></ul
+    ></li
+  ><li
+  >To keep your code safe from other developers</li
+  ><li
+  >To keep your code safe from yourself</li
+  ></ul
+><h2 id="test-types"
+>Test Types</h2
+><ul
+><li
+  >Method<ul
+    ><li
+      >Manual</li
+      ><li
+      >Automated</li
+      ></ul
+    ></li
+  ><li
+  >Audience<ul
+    ><li
+      >Customer</li
+      ><li
+      >Developer</li
+      ></ul
+    ></li
+  ><li
+  >Scope<ul
+    ><li
+      >Unit</li
+      ><li
+      >Functional</li
+      ><li
+      >Integration</li
+      ></ul
+    ></li
+  ></ul
+><h3 id="method-of-test"
+>Method of test</h3
+><p
+>Automated &amp; Manual</p
+><h4 id="manual-testing"
+>Manual Testing</h4
+><ul
+><li
+  >QA</li
+  ><li
+  >Exploratory testing</li
+  ><li
+  >Using script/console &amp; irb (Manual Unit testing)</li
+  ><li
+  >Using the debugger</li
+  ></ul
+><h5 id="traditional-qa"
+>Traditional QA</h5
+><p
+>A tester runs through a test script and verify the app is working correctly.</p
+><h5 id="exploratory-testing"
+>Exploratory testing</h5
+><ul
+><li
+  ><a href="http://www.testobsessed.com/2007/02/19/test-heuristics-cheat-sheet/"
+    >http://www.testobsessed.com/2007/02/19/test-heuristics-cheat-sheet/</a
+    ></li
+  ><li
+  >Explore the software</li
+  ><li
+  >Designing and Execute tests<ul
+    ><li
+      >Use feedback from the last test to inform the next test</li
+      ></ul
+    ></li
+  ><li
+  >Helps find surprises that nobody considered</li
+  ><li
+  >Helps find misunderstandings about the software</li
+  ></ul
+><h5 id="advantages"
+>Advantages</h5
+><ul
+><li
+  >Low overhead (does not require a large initial investment)</li
+  ><li
+  >Flexible</li
+  ><li
+  >Humans are very smart<ul
+    ><li
+      >We can rely on experience</li
+      ></ul
+    ></li
+  ><li
+  >Humans can easily evaluate soft criteria<ul
+    ><li
+      >For example, does site looks good?</li
+      ></ul
+    ></li
+  ></ul
+><h5 id="disadvantages"
+>Disadvantages</h5
+><ul
+><li
+  >Expensive to repeat<ul
+    ><li
+      >Run less often</li
+      ></ul
+    ></li
+  ><li
+  >Manual testing requires a human's time and focus.</li
+  ></ul
+><h4 id="automated-testing"
+>Automated Testing</h4
+><ul
+><li
+  >Script that runs a test suite.<ul
+    ><li
+      >xUnit</li
+      ><li
+      >rspec</li
+      ><li
+      >Story Runner</li
+      ><li
+      >FIT</li
+      ><li
+      >Load test program</li
+      ></ul
+    ></li
+  ></ul
+><h5 id="advantages-1"
+>Advantages</h5
+><ul
+><li
+  >The tests are automated so it is inexpensive to run the test once written.<ul
+    ><li
+      >Tests are run more frequently</li
+      ></ul
+    ></li
+  ><li
+  >TDD</li
+  ><li
+  >Less bugs</li
+  ><li
+  >Bugs are easier isolate</li
+  ><li
+  >See Reasons to Test section</li
+  ></ul
+><h5 id="disadvantages-1"
+>Disadvantages</h5
+><ul
+><li
+  >Requires an investment to set up and maintain</li
+  ><li
+  >Requires more skill<ul
+    ><li
+      >Require judgement on what level to specify the software</li
+      ></ul
+    ></li
+  ></ul
+><h3 id="audience-of-test"
+>Audience of test</h3
+><p
+>Customer Acceptance &amp; Developer</p
+><h4 id="customer-acceptance-test"
+>Customer Acceptance Test</h4
+><ul
+><li
+  >FIT - <a href="http://fit.c2.com/"
+    >http://fit.c2.com/</a
+    ><ul
+    ><li
+      >RubyFIT - <a href="http://fit.rubyforge.org/"
+	>http://fit.rubyforge.org/</a
+	></li
+      ><li
+      ><p
+	>From <a href="http://www.xprogramming.com/xpmag/RubyFitnesse.htm"
+	  >http://www.xprogramming.com/xpmag/RubyFitnesse.htm</a
+	  ></p
+	><pre
+	><code
+	  >!|Fitnesse1.Division|
+|numerator|denominator| quotient()|
+|2|1|2|
+|60|30|2|
+</code
+	  ></pre
+	></li
+      ></ul
+    ></li
+  ><li
+  >Story Runner - <a href="http://rspec.info"
+    >http://rspec.info</a
+    ><ul
+    ><li
+      ><p
+	>From <a href="http://blog.davidchelimsky.net/articles/2007/10/21/story-runner-in-plain-english"
+	  >http://blog.davidchelimsky.net/articles/2007/10/21/story-runner-in-plain-english</a
+	  ></p
+	><pre
+	><code
+	  >Story: transfer to cash account
+  As a savings account holder
+  I want to transfer money from my savings account
+  So that I can get cash easily from an ATM
+
+  Scenario: savings account is in credit
+    Given my savings account balance is 100
+    And my cash account balance is 10
+    When I transfer 20
+    Then my savings account balance should be 80
+    And my cash account balance should be 30
+
+  Scenario: savings account is overdrawn
+    Given my savings account balance is -20
+    And my cash account balance is 10
+    When I transfer 20
+    Then my savings account balance should be -20
+    And my cash account balance should be 10
+</code
+	  ></pre
+	></li
+      ></ul
+    ></li
+  ><li
+  >Does the application do the right things?</li
+  ><li
+  >The Examples are worded in terms that the customer understands.<ul
+    ><li
+      >The language of the tests should match the problem domain.</li
+      ></ul
+    ></li
+  ><li
+  >Best when written with the customer.</li
+  ><li
+  >Sophisticated customers may be able to write acceptance tests.</li
+  ><li
+  >Sit with the customer. Get the customer excited to use Acceptance tests.</li
+  ><li
+  >Encourages Developers and Customers to have a solid understanding of the domain.</li
+  ><li
+  ><p
+    >Better when there are distinct scenarios that the customer can verify.</p
+    ></li
+  ></ul
+><h5 id="advantages-2"
+>Advantages</h5
+><ul
+><li
+  >A Customer test suite shows the list of the application's features</li
+  ><li
+  >Helps the customer and developer have a stronger grasp on the feature set</li
+  ><li
+  >Helps the developer focus on the problem first, rather than the solution</li
+  ><li
+  >These tests tend to be less affected by refactorings</li
+  ><li
+  >Abstracted from the test implementation and ultimately the implementation of the software<ul
+    ><li
+      >You can change implementations and still use the stories</li
+      ></ul
+    ></li
+  ></ul
+><h5 id="disadvantages-2"
+>Disadvantages</h5
+><ul
+><li
+  >Requires more framework investment<ul
+    ><li
+      >FIT fixtures</li
+      ><li
+      >Story Runner Steps</li
+      ></ul
+    ></li
+  ><li
+  >More overhead in writing and maintaining tests than developer centric tests</li
+  ><li
+  >Disconnect between the test code and its implementation (tests are a black box)</li
+  ></ul
+><h4 id="developer-test"
+>Developer Test</h4
+><ul
+><li
+  >xUnit</li
+  ><li
+  >rspec</li
+  ><li
+  >Is your software doing the right thing correctly?</li
+  ></ul
+><h5 id="advantages-3"
+>Advantages</h5
+><ul
+><li
+  >Tests are structured by the software implementation</li
+  ><li
+  >Provides greater isolation into the workings of your software</li
+  ><li
+  >Less overhead to use when developing software</li
+  ></ul
+><h5 id="disadvantages-3"
+>Disadvantages</h5
+><ul
+><li
+  >Customer cannot &quot;understand&quot; these tests</li
+  ><li
+  >No unified list of features</li
+  ><li
+  >More affected by refactorings</li
+  ></ul
+><h3 id="scope-of-test"
+>Scope of test</h3
+><p
+>Unit, Functional, &amp; Integration</p
+><p
+><img src="test_scope_triangle.png" alt="Scope of Test"
+   /></p
+><h4 id="unit-test"
+>Unit Test</h4
+><ul
+><li
+  >&quot;Does the application do things correctly?&quot;</li
+  ><li
+  >The level of testing is relative. Usually your application's unit tests are the lowest level of your software system.<ul
+    ><li
+      >Java unit tests (tend not to not use the database)</li
+      ><li
+      >Rails unit tests (tend to use the database)</li
+      ></ul
+    ></li
+  ><li
+  >Unit tests in a particular level are usually grouped together.</li
+  ><li
+  >A small unit of conceptual behavior. This means multiple objects and architectural layers can be crossed. In the case of Rails, a unit test typically touches the database. This may not be the case in other db patterns, such as the repository pattern.</li
+  ></ul
+><h5 id="advantages-4"
+>Advantages</h5
+><ul
+><li
+  >Avoids combinatorial explosion</li
+  ><li
+  >Superior defect isolation</li
+  ><li
+  >Encourages decoupling of software</li
+  ><li
+  >Fast</li
+  ></ul
+><h5 id="disadvantages-4"
+>Disadvantages</h5
+><ul
+><li
+  >Does not cover integration of software</li
+  ><li
+  >Does not protect you from testing the wrong thing<ul
+    ><li
+      >&quot;Can lose the forest through the trees.&quot;</li
+      ></ul
+    ></li
+  ><li
+  >Assumptions must be made to keep the tests fast</li
+  ></ul
+><h4 id="functional-test"
+>Functional Test</h4
+><ul
+><li
+  >Covers public functionality</li
+  ><li
+  >Ensures that the software is doing the right thing<ul
+    ><li
+      >Does the software fulfill this piece of functionality?</li
+      ></ul
+    ></li
+  ><li
+  >There should be full functional coverage over your application</li
+  ></ul
+><h5 id="advantages-5"
+>Advantages</h5
+><ul
+><li
+  >Covers functionality of the application.</li
+  ><li
+  >End to end coverage of the public api</li
+  ><li
+  >If software is simple enough, functional tests may be sufficient</li
+  ></ul
+><h5 id="disadvantages-5"
+>Disadvantages</h5
+><ul
+><li
+  >Combinatorial explosion</li
+  ><li
+  >Slower</li
+  ><li
+  >Not as focused as Unit Tests</li
+  ></ul
+><h4 id="integration-test"
+>Integration Test</h4
+><ul
+><li
+  >Test that exercises multiple layers of the system<ul
+    ><li
+      >Rails Integration tests exercise all levels of the Rails stack</li
+      ><li
+      >Selenium/Watir tests exercise the Rails stack and client side logic</li
+      ></ul
+    ></li
+  ></ul
+><h5 id="advantages-6"
+>Advantages</h5
+><ul
+><li
+  >Tests parts and interactions that other tests miss</li
+  ></ul
+><h5 id="disadvantages-6"
+>Disadvantages</h5
+><ul
+><li
+  >Slow</li
+  ><li
+  >Difficult to isolate defects</li
+  ><li
+  >Combinatorial Explosion</li
+  ></ul
+><h4 id="examples"
+>Examples</h4
+><h5 id="enemy-unit-test"
+>Enemy Unit Test</h5
+><ul
+><li
+  ><a href="http://groboutils.sourceforge.net/testing-junit/art_eut.html"
+    >http://groboutils.sourceforge.net/testing-junit/art_eut.html</a
+    ></li
+  ><li
+  >Unit level test that verify your library integrates well with multiple versions of a third party library</li
+  ><li
+  >Experiment with the 3rd party api</li
+  ></ul
+><blockquote
+><blockquote
+  ><p
+    ><em
+      >Consider mentioning &quot;Enemy Unit Tests&quot; ( <a href="http://groboutils.sourceforge.net/testing-junit/art_eut.html"
+	>http://groboutils.sourceforge.net/testing-junit/art_eut.html</a
+	> ). These are tests to ensure that you understand how an external/third-party API behaves, and that future releases of the API do not change with respect to your expected behavior. There is a related mock/testing pattern (originating from jMock article or tdd mailing list, can't remember) where you create a &quot;proxy&quot; object around third-party API classes. This proxy only exposes the API methods which you actually use. It also provides an isolated place to react to API changes in future releases of the third-party library. For a real-world example of this, see GemInstaller::GemRunnerProxy#create_gem_runner (<a href="http://geminstaller.rubyforge.org/svn/trunk/lib/geminstaller/gem_runner_proxy.rb"
+	>http://geminstaller.rubyforge.org/svn/trunk/lib/geminstaller/gem_runner_proxy.rb</a
+	>). These approaches can also help with test speed and performance, because you can be more aggressive with mocking third-party API calls, since you know the third party API and proxy are working correctly. The proxy classes also provide an easy and centralized place to do the mocking (although this is less of a concern with the easy of class-method mocking in Ruby vs. Java). - ChadWoolley</em
+      ></p
+    ></blockquote
+  ></blockquote
+><h2 id="the-structure-of-a-test"
+>The structure of a test</h2
+><ul
+><li
+  >Setup</li
+  ><li
+  >Preconditions</li
+  ><li
+  >Execution</li
+  ><li
+  >Postconditions</li
+  ><li
+  ><p
+    >Teardown</p
+    ><p
+    >describe Car do fixtures :cars describe &quot;#start&quot; do attr_reader :car before do @car = cars(:corolla) end</p
+    ><pre
+    ><code
+      >describe &quot;when the engine is off&quot; do
+  before do
+    car.should_not be_running
+  end
+
+  it &quot;turns on the Engine&quot; do
+    car.start
+
+    car.should be_running
+  end
+end
+
+describe &quot;when the engine is on&quot; do
+  before do
+    car.start
+    car.should be_running
+  end
+
+  it &quot;raises an StarterGrindError&quot; do
+    lambda {car.start}.should raise_error(StarterGrindError)
+  end
+end
+</code
+      ></pre
+    ><p
+    >end end</p
+    ></li
+  ></ul
+><h3 id="preconditions"
+>Preconditions</h3
+><ul
+><li
+  >Set the context of your test</li
+  ><li
+  >Communicate the constraints of the test</li
+  ><li
+  >Guard against false negatives<ul
+    ><li
+      >The empty collection problem</li
+      ><li
+      >Nil expected value</li
+      ></ul
+    ></li
+  ></ul
+><h3 id="execution"
+>Execution</h3
+><ul
+><li
+  >Execute your SUT (System Under Test)</li
+  ><li
+  >Make it clear where you are executing the SUT<ul
+    ><li
+      >I tend to separate the preconditions, execution, and postconditions with a new line</li
+      ></ul
+    ></li
+  ></ul
+><h3 id="postconditions"
+>Postconditions</h3
+><blockquote
+><p
+  >Verification that your SUT altered state correctly and/or interacted with its collaborators correctly.</p
+  ></blockquote
+><h2 id="code-coverage"
+>Code Coverage</h2
+><ul
+><li
+  >Do your tests cover all of your features of your app?</li
+  ><li
+  ><a href="http://www.bullseye.com/coverage.html"
+    >http://www.bullseye.com/coverage.html</a
+    ></li
+  ></ul
+><h3 id="statement-coverage"
+>Statement Coverage</h3
+><ul
+><li
+  >What percentage of your code is exercised by your tests?</li
+  ><li
+  >Rcov - <a href="http://eigenclass.org/hiki.rb?rcov"
+    >http://eigenclass.org/hiki.rb?rcov</a
+    ></li
+  ></ul
+><h5 id="advantages-7"
+>Advantages</h5
+><ul
+><li
+  >Easy to set up</li
+  ><li
+  >Clear and easy to understand metric</li
+  ></ul
+><h5 id="disadvantages-7"
+>Disadvantages</h5
+><ul
+><li
+  >Does not measure coverage of boolean statements</li
+  ><li
+  >Does not measure coverage of invalid data</li
+  ><li
+  >Easy to game the metric</li
+  ></ul
+><h3 id="logical-coverage"
+>Logical Coverage</h3
+><ul
+><li
+  >Is your feature fully covered?</li
+  ><li
+  >Mutation Testing<ul
+    ><li
+      >Heckle - <a href="http://glu.ttono.us/articles/2006/12/19/tormenting-your-tests-with-heckle"
+	>http://glu.ttono.us/articles/2006/12/19/tormenting-your-tests-with-heckle</a
+	></li
+      ></ul
+    ></li
+  ></ul
+><h5 id="advantages-8"
+>Advantages</h5
+><ul
+><li
+  >Verifies your tests have full logical coverage</li
+  ></ul
+><h5 id="disadvantages-8"
+>Disadvantages</h5
+><ul
+><li
+  >Slow</li
+  ></ul
+><h3 id="happy-path-testing"
+>Happy Path Testing</h3
+><ul
+><li
+  ><p
+    >Tests the piece of functionality in a &quot;normal&quot; situation.</p
+    ><p
+    >class UsersController def create @user = User.new(params[:user]) if @user.save redirect_to users_path(@user) else render :template =&gt; &#8220;new&#8221; end end end</p
+    ><p
+    >describe &#8220;A visitor joining the site&#8221; do it &#8220;creates a User account&#8220; do open &#8220;/&#8221;</p
+    ><pre
+    ><code
+      >click &#8220;link=Signup&#8221;
+type &#8220;user[name]&#8221;, &#8220;Bob&#8221;
+type &#8220;user[password]&#8221;, &#8220;password&#8221;
+type &#8220;user[confirmation]&#8221;, &#8220;password&#8221;
+click &#8220;submit&#8221;
+
+assert_text_present &#8220;Welcome Bob&#8221;
+</code
+      ></pre
+    ><p
+    >end end</p
+    ></li
+  ></ul
+><h3 id="edge-case-testing"
+>Edge Case Testing</h3
+><ul
+><li
+  >Tests the edge cases of the piece of functionality.<ul
+    ><li
+      >Invalid Data</li
+      ><li
+      >Invalid fixture state</li
+      ><li
+      >Ensures full code coverage</li
+      ></ul
+    ><p
+    >class UsersController def create @user = User.new(params[:user]) if @user.save redirect_to users_path(@user) else render :template =&gt; &#8220;new&#8221; end end end</p
+    ><p
+    >describe UsersController do describe &#8220;#create&#8221; do describe &#8220;with valid data&#8221; do it &#8220;creates a User and redirects to the User's page&#8221; end describe &#8220;with invalid data&#8221; do it &#8220;renders users/new with errors&#8221; end end end</p
+    ></li
+  ></ul
+><h2 id="lifecycle"
+>Lifecycle</h2
+><ul
+><li
+  >The lifecycle of a test and how testing strategies/refactorings change over the life of the test<ul
+    ><li
+      >TDD (tests to drive the design of the software)</li
+      ><li
+      >Regression Testing (tests to ensure that your software still works when you make changes)</li
+      ><li
+      >Retirement of a Test</li
+      ></ul
+    ></li
+  ></ul
+><h3 id="tdd"
+>TDD</h3
+><ul
+><li
+  >These tests drive design</li
+  ><li
+  >Tests should be refactored</li
+  ><li
+  >You can manually test drive your design, its just alot slower and you dont get to keep the tests</li
+  ></ul
+><h4 id="goals-of-tdd"
+>Goals of TDD</h4
+><ul
+><li
+  >Specification, not validation</li
+  ><li
+  >Feedback<ul
+    ><li
+      >Developer makes smaller steps</li
+      ><li
+      >Developer knows when the code is finished</li
+      ><li
+      >Developer has an example of using the implementation code</li
+      ><li
+      >Developer maintains focus on the objective</li
+      ></ul
+    ></li
+  ><li
+  >Iterative</li
+  ><li
+  >Developer rhythm</li
+  ><li
+  >Confidence</li
+  ><li
+  >Simplicity</li
+  ><li
+  >YAGNI</li
+  ><li
+  >Make a regression test</li
+  ></ul
+><h4 id="test-your-tests"
+>Test your tests</h4
+><ul
+><li
+  >Red then Green</li
+  ><li
+  >Its easy to make a test that does not test anything.<ul
+    ><li
+      >For example, testing the elements within an empty collection</li
+      ><li
+      >Use Preconditions to set the context of your test</li
+      ></ul
+    ></li
+  ></ul
+><h4 id="granularity-of-tests"
+>Granularity of tests</h4
+><ul
+><li
+  >Confidence &amp; familiarity with a particular technology determines how granular your unit tests tend to be<ul
+    ><li
+      >e.g. I'm not familiar with AR proxy objects, so I will be very granular when using them.</li
+      ></ul
+    ></li
+  ><li
+  >Project maturity (and to a lesser degree, confidence &amp; familiarity) affects whether to work top down (Integration tests first) or bottom up (Unit tests first).<ul
+    ><li
+      >When starting out, it makes more sense to start with higher level tests.</li
+      ><li
+      >As you gain more domain infrastructure, it becomes easier to start with unit tests.</li
+      ></ul
+    ></li
+  ></ul
+><h3 id="regression-test"
+>Regression Test</h3
+><ul
+><li
+  >After the TDD phase, your tests serve to make sure your software still works.</li
+  ><li
+  >Tests live longer than the code (the implementation often changes).</li
+  ></ul
+><h4 id="regression-test-goals"
+>Regression Test Goals</h4
+><ul
+><li
+  >Verify your software does not break due to changes in implementation or state</li
+  ><li
+  >Courage<ul
+    ><li
+      >Support Experimentation &amp; Refactoring</li
+      ></ul
+    ></li
+  ><li
+  >Documentation</li
+  ><li
+  >Clarity</li
+  ><li
+  >Fail in the right places<ul
+    ><li
+      >Avoid crying wolf due to unnecessary brittleness</li
+      ><li
+      >Keep tests predictable</li
+      ></ul
+    ></li
+  ></ul
+><h4 id="tests-as-documentation"
+>Tests as documentation</h4
+><ul
+><li
+  >Tests should clearly document your system<ul
+    ><li
+      >Refactor the test if it is not clear</li
+      ><li
+      >Nested ExampleGroups? are very helpful in showing contextual logic</li
+      ></ul
+    ></li
+  ><li
+  >Tests should match the logical layout of your software</li
+  ></ul
+><h4 id="monitoring-your-tests"
+>Monitoring your tests</h4
+><ul
+><li
+  >Are you getting good coverage?<ul
+    ><li
+      >Rcov</li
+      ></ul
+    ></li
+  ><li
+  >Are these tests still relevant?<ul
+    ><li
+      >Heckle</li
+      ></ul
+    ></li
+  ><li
+  >How often do these tests fail?</li
+  ><li
+  >How long does your suite take to run?</li
+  ><li
+  >Are your tests easy to run or do they get in the way?</li
+  ><li
+  >If the tests are not run, they decay.<ul
+    ><li
+      >The tests need to be run regularly. Before checkin, Autotest, and/or CI.</li
+      ></ul
+    ></li
+  ></ul
+><h3 id="testing-untested-software"
+>Testing untested software</h3
+><ul
+><li
+  >Working Effectively with Legacy Code - Michael Feathers</li
+  ><li
+  >Seams<ul
+    ><li
+      >Places where you can alter behavior without editing the code</li
+      ></ul
+    ></li
+  ><li
+  >Dont forget to manually test your tests</li
+  ><li
+  >Rails legacy testing tends to be easier than Java legacy because there is a natural MVC separation.</li
+  ></ul
+><h4 id="retroactive-tdd"
+>Retroactive TDD</h4
+><ul
+><li
+  >Comment out the implementation you want to test</li
+  ><li
+  >Write the tests</li
+  ><li
+  >Watch them fail for expected reasons</li
+  ><li
+  >Uncomment the implementation</li
+  ><li
+  >Watch the tests pass</li
+  ><li
+  >Refactor</li
+  ></ul
+><h3 id="retirement-of-a-test"
+>Retirement of a Test</h3
+><blockquote
+><p
+  ><em
+    >[[ESH: I talk about &quot;retiring&quot; tests. Slightly less violent :-) ]]</em
+    > If the test no longer contributes to logical coverage in its particular level (unit, functional, integration, etc), then retire it.</p
+  ></blockquote
+><h4 id="obsolete-tests"
+>Obsolete Tests</h4
+><ul
+><li
+  >They add clutter and make your test suite harder to read<ul
+    ><li
+      >They reduce productivity by making it more difficult to reason about your software</li
+      ></ul
+    ></li
+  ><li
+  >They take time to run</li
+  ><li
+  >They take space</li
+  ></ul
+><h3 id="consequences-of-refactoring"
+>Consequences of Refactoring</h3
+><p
+>Extract class or module refactoring can be supported by existing tests. You may or may not need to test drive the extracted module. It depends on your situation. If you are unsure, error on the side of writing tests.</p
+><h4 id="why-test-drive-your-refactorings"
+>Why Test Drive your refactorings</h4
+><ul
+><li
+  >You can get defect localization</li
+  ><li
+  >The tests help the design of your extracted module</li
+  ></ul
+><h4 id="why-not-test-drive-your-refactorings"
+>Why Not Test Drive your refactorings</h4
+><ul
+><li
+  >TDD may disrupt your &quot;refactoring flow&quot;</li
+  ><li
+  >You may want your refactoring to be a spike to quickly experiment on an idea</li
+  ><li
+  >You can always retroactively TDD your changes</li
+  ><li
+  >You already have test coverage</li
+  ></ul
+><h4 id="when-finished-with-the-refactoring"
+>When finished with the refactoring</h4
+><ul
+><li
+  >Refactor your tests<ul
+    ><li
+      >Move the tests into the correct places</li
+      ><li
+      >Use mock proxy technique to verify your refactored functionality is still being covered</li
+      ></ul
+    ></li
+  ></ul
+><h2 id="test-organization-tools"
+>Test organization tools</h2
+><h3 id="examplegroup-organization"
+>ExampleGroup organization</h3
+><ul
+><li
+  >The description of the ExampleGroup should clearly state the preconditions of the Example</li
+  ></ul
+><h4 id="before-and-after-callbacks"
+>before and after callbacks</h4
+><ul
+><li
+  >Sets up preconditions and postconditions.</li
+  ><li
+  >Set up and clean up fixtures</li
+  ><li
+  >Sets up the contextual situation of the ExampleGroup</li
+  ></ul
+><h4 id="single-level-examplegroup"
+>Single level ExampleGroup</h4
+><p
+>One ExampleGroup per implementation class and/or context. Each Example has the pre-conditions and post-conditions in its name.</p
+><pre
+><code
+  >describe User, &#8220;#enter when the User is not in the Room&#8221; do
+  attr_reader :user, :room
+  before do
+    @user = users(:joe)
+    @room = rooms(:basement)
+    room.occupants.should_not include(user)
+  end
+
+  it &#8220;causes the User to enter the passed in Room&#8221; do
+    user.enter(room)
+
+    room.occupants.should include(user)
+  end
+end
+
+describe User, &#8220;#enter when the User is in the Room&#8221; do
+  attr_reader :user, :room
+  before do
+    @user = users(:anne)
+    @room = rooms(:basement)
+    room.occupants.should include(user)
+  end
+
+  it &#8220;raises an Error&#8221; do
+    proc {user.enter(room)}.should raise_error
+  end
+end
+</code
+  ></pre
+><h5 id="advantages-9"
+>Advantages</h5
+><ul
+><li
+  >Often times the simplest thing that could possibly work.</li
+  ><li
+  >Easy to add individual Examples.</li
+  ><li
+  >Easy to find individual Examples.</li
+  ></ul
+><h5 id="disadvantages-9"
+>Disadvantages</h5
+><ul
+><li
+  >Not well balanced Example organization when conditions get complicated and there is more than one level of edge cases.</li
+  ></ul
+><h4 id="nested-examplegroup"
+>Nested ExampleGroup</h4
+><p
+>Nested ExampleGroup</p
+><pre
+><code
+  >describe User do
+  describe &#8220;#enter&#8221; do
+    attr_reader :user, :room
+    describe &#8220;when the User is not in the Room&#8221; do
+      before do
+        @user = users(:joe)
+        @room = rooms(:basement)
+        room.occupants.should_not include(user)
+      end
+
+      it &#8220;causes the User to enter the passed in Room&#8221; do
+        user.enter(room)
+
+        room.occupants.should include(user)
+      end
+    end
+
+    describe &#8220;when the User is in the Room&#8221; do
+      before do
+        user = users(:anne)
+        room = rooms(:basement)
+        room.occupants.should include(user)
+      end
+
+      it &#8220;raises an Error&#8221; do
+        proc {user.enter(room)}.should raise_error
+      end
+    end
+  end
+end
+</code
+  ></pre
+><h5 id="advantages-10"
+>Advantages</h5
+><ul
+><li
+  >Easily show multiple levels of situational edge cases</li
+  ><li
+  >DRY</li
+  ><li
+  >Composable</li
+  ></ul
+><h5 id="disadvantages-10"
+>Disadvantages</h5
+><ul
+><li
+  >More complicated than Single level ExampleGroup</li
+  ></ul
+><h4 id="examplegroup-methods"
+>ExampleGroup methods</h4
+><p
+>Use class methods to define ExampleGroups and Examples. (Shoulda makes heavy use of this technique.)</p
+><pre
+><code
+  >describe &quot;GET new&quot; do
+should_require_login do
+  get :new
+end
+</code
+  ></pre
+><h5 id="advantages-11"
+>Advantages</h5
+><ul
+><li
+  >DRY.</li
+  ><li
+  >Concisely creates common Examples.<ul
+    ><li
+      >Makes common cases take less space</li
+      ><li
+      >More attention is given to more interesting functionality</li
+      ></ul
+    ></li
+  ></ul
+><h5 id="disadvantages-11"
+>Disadvantages</h5
+><ul
+><li
+  >Removed from the implementation of the test</li
+  ><li
+  >Temptation to overgeneralize<ul
+    ><li
+      >Tests become less malleable</li
+      ></ul
+    ></li
+  ></ul
+><h4 id="mulitple-preconditions--execution--postconditions"
+>Mulitple preconditions / execution / postconditions</h4
+><p
+>Mainly used for scenarios and higher level testing</p
+><h3 id="example-organization-within-an-examplegroup"
+>Example organization within an ExampleGroup</h3
+><ul
+><li
+  >Each Example should be cohesive</li
+  ><li
+  >The description should simply state the behavior</li
+  ><li
+  >If the test cannot be stated clearly, then there is a problem</li
+  ></ul
+><h3 id="bundling-assertions-in-each-example"
+>Bundling assertions in each Example</h3
+><ul
+><li
+  >The most common way to write Examples</li
+  ><li
+  >Best when the assertions are grouped logically</li
+  ></ul
+><h5 id="advantages-12"
+>Advantages</h5
+><ul
+><li
+  >Easy and low effort to implement</li
+  ><li
+  >Lower barrier to entry</li
+  ><li
+  >Easy to start test driving</li
+  ></ul
+><h5 id="disadvantages-12"
+>Disadvantages</h5
+><ul
+><li
+  >Examples can lose cohesion and be confusing if too many diverse assertions are added.</li
+  ><li
+  >Its more difficult to manage tests when performing an extract functionality refactoring</li
+  ></ul
+><h3 id="one-assertion-per-example"
+>One assertion per Example</h3
+><ul
+><li
+  ><a href="http://www.artima.com/weblogs/viewpost.jsp?thread=35578"
+    >http://www.artima.com/weblogs/viewpost.jsp?thread=35578</a
+    ></li
+  ><li
+  >Extract groups of assertions into an assertion method.</li
+  ></ul
+><h5 id="advantages-13"
+>Advantages</h5
+><ul
+><li
+  >Loose coupling and high cohesion of tests</li
+  ></ul
+><h5 id="disadvantages-13"
+>Disadvantages</h5
+><ul
+><li
+  >More up front effort required</li
+  ></ul
+><h3 id="one-example-several-variables-for-each-set-of-preconditions"
+>One Example, several variables for each set of preconditions</h3
+><p
+>One Example has the same assertions called on several instance of the SUT, each having different preconditions.</p
+><ul
+><li
+  >Instead of ExampleGroup &gt; Example hierarchy, its Example &gt; Variable.</li
+  ><li
+  ><p
+    >More than 1 Execution (each with preconditions and/or postconditions) in a single Example describe Stack do describe &quot;#pop&quot; do attr_reader :no_item_stack, :one_item_stack, :multiple_item_stack before do @no_item_stack = Stack.new @one_item_stack = Stack.new(1) @multiple_item_stack = Stack.new(1, 2) end</p
+    ><pre
+    ><code
+      >    it &quot;removes and returns the last item when one exists&quot; do
+      no_item_stack.pop.should be_nil
+      no_item_stack.should be_empty
+
+      one_item_stack.pop.should == 1
+      one_item_stack.should be_empty
+
+      multiple_item_stack.pop.should == 2
+      multiple_item_stack.should_not be_empty
+    end
+  end
+end
+</code
+      ></pre
+    ></li
+  ></ul
+><h5 id="advantages-14"
+>Advantages</h5
+><ul
+><li
+  >Elegant way to avoid combinatorial explosion</li
+  ><li
+  >Best when describing a scenario or progression of state<ul
+    ><li
+      >The logical unit is the progression in this case</li
+      ></ul
+    ></li
+  ></ul
+><h5 id="disadvantages-14"
+>Disadvantages</h5
+><ul
+><li
+  >Cannot make an individual Example with description for each set of preconditions</li
+  ><li
+  >This can lead to large and unfocused Examples</li
+  ></ul
+><h2 id="test-fixture"
+>Test Fixture</h2
+><p
+>The state of your world.</p
+><h3 id="rails-fixtures"
+>Rails Fixtures</h3
+><blockquote
+><p
+  >Rails fixtures are the state of your database. The default implementation is a global dataset.</p
+  ></blockquote
+><ul
+><li
+  >Keep your fixtures as organized and simple as possible.</li
+  ><li
+  >Beware of combinatorial explosion.<ul
+    ><li
+      >There are parallels to functional testing combinatorial explosion.</li
+      ></ul
+    ></li
+  ><li
+  >In your tests, use preconditions. Dont make assumptions about your fixture values because fixtures change.</li
+  ></ul
+><h4 id="transactional-fixtures"
+>Transactional fixtures</h4
+><p
+>Begins a database transaction when the test begins and rolls back the tranaction after the test finishes.</p
+><h5 id="advantages-15"
+>Advantages</h5
+><ul
+><li
+  >Fast</li
+  ></ul
+><h5 id="disadvantages-15"
+>Disadvantages</h5
+><ul
+><li
+  >Cannot be used to test database transactions</li
+  ><li
+  >Cannot be used to test code across processes</li
+  ></ul
+><h4 id="instantiated-fixtures"
+>Instantiated fixtures</h4
+><p
+>Clears the table(s) and inserts the fixture records.</p
+><h5 id="advantages-16"
+>Advantages</h5
+><ul
+><li
+  >Can be used to test database transactions</li
+  ><li
+  >Can be used to test code across processes</li
+  ></ul
+><h5 id="disadvantages-16"
+>Disadvantages</h5
+><ul
+><li
+  >Slow</li
+  ></ul
+><h3 id="test-driving-your-fixtures"
+>Test Driving your fixtures</h3
+><ul
+><li
+  >Verify your fixtures are in a valid state.</li
+  ><li
+  >Test drive a change to your DB schema by making a fixture test.</li
+  ><li
+  >Verifies that your fixtures reflect reality</li
+  ><li
+  >Keeps your fixtures maintainable</li
+  ><li
+  ><p
+    >Discourages your fixtures from getting large describe &quot;users.yml&quot; do attr_reader :user</p
+    ><pre
+    ><code
+      >  describe &quot;bob&quot; do
+    before do
+      @user = users(:bob)
+    end
+
+    specify &quot;was in the green and red room&quot; do
+      user.rooms.should include(rooms(:green))
+      user.rooms.should include(rooms(:red))
+    end
+  end
+end
+</code
+      ></pre
+    ></li
+  ></ul
+><h3 id="fixture-scenarios"
+>Fixture Scenarios</h3
+><ul
+><li
+  >Keeps each scenario small and focused.</li
+  ></ul
+><h3 id="object-mother"
+>Object Mother</h3
+><p
+>Programmatically set up object state.</p
+><ul
+><li
+  >Keeps each scenario small and focused.</li
+  ></ul
+><h2 id="state-and-interaction-testing"
+>State and Interaction Testing</h2
+><h3 id="state-testing"
+>State testing</h3
+><ul
+><li
+  >The most common form of testing.</li
+  ><li
+  >More straightforward and easier to understand in state based situations.</li
+  ><li
+  >Cannot be used when you are testing behavior that does not involve state.</li
+  ><li
+  >Can cause large amounts of setup in certain situations.</li
+  ></ul
+><h5 id="advantages-17"
+>Advantages</h5
+><ul
+><li
+  >Often times the simplest way to set up state.</li
+  ><li
+  >If state is difficult to set up, sometimes abstracting setup methods and objects can alleviate the pain.</li
+  ><li
+  >Often produces more realistic and integrated scenarios than interaction testing.</li
+  ><li
+  >Independent of implemnetation.</li
+  ></ul
+><h5 id="disadvantages-17"
+>Disadvantages</h5
+><ul
+><li
+  >Sometimes its more difficult to set up the preconditions.</li
+  ><li
+  >You cannot unit test logic that communicates with external processes with state based tests</li
+  ><li
+  >When used exclusively, can obfuscate the focus of a test.</li
+  ></ul
+><h3 id="interaction-testing"
+>Interaction testing</h3
+><ul
+><li
+  >Certain types of tests can only be tested through the SUT's interaction.</li
+  ><li
+  >Often simpler in situations where message passing is emphasized.</li
+  ><li
+  >Often simpler when you want to test unit behavior that requires plenty of code to set up</li
+  ><li
+  >Often more complicated in situations where state is heavily used.</li
+  ></ul
+><h5 id="advantages-18"
+>Advantages</h5
+><ul
+><li
+  >The only way to unit test certain situations (i.e. external processes)</li
+  ><li
+  >Can be used in conjunction with state based testing to clarify focus of the test.</li
+  ></ul
+><h5 id="disadvantages-18"
+>Disadvantages</h5
+><ul
+><li
+  >Takes more work to set up that state based tests.</li
+  ><li
+  >Test code can look exactly like the implementation code.</li
+  ></ul
+><h4 id="test-double-interaction-testing"
+>Test Double (Interaction Testing)</h4
+><p
+>Using test doubles can make hard tests simple and impossible tests possible. However, like any tool, it can be overused and create overly complicated tests. State based tests are usually preferable when they are easy to set up and are comprible in speed because they are usually simpler.</p
+><ul
+><li
+  ><a href="http://www.martinfowler.com/articles/mocksArentStubs.html"
+    >http://www.martinfowler.com/articles/mocksArentStubs.html</a
+    ></li
+  ><li
+  ><a href="http://xunitpatterns.com/Test%20Double.html"
+    >http://xunitpatterns.com/Test%20Double.html</a
+    ></li
+  ><li
+  ><a href="http://pivots.pivotallabs.com/users/brian/blog/articles/352-introducing-rr"
+    >http://pivots.pivotallabs.com/users/brian/blog/articles/352-introducing-rr</a
+    ></li
+  ><li
+  ><a href="http://mocha.rubyforge.org"
+    >http://mocha.rubyforge.org</a
+    ></li
+  ><li
+  ><a href="http://rspec.info/documentation/mocks"
+    >http://rspec.info/documentation/mocks</a
+    ></li
+  ><li
+  ><a href="http://onestepback.org/software/flexmock"
+    >http://onestepback.org/software/flexmock</a
+    ></li
+  ></ul
+><h5 id="mocks"
+>Mocks</h5
+><p
+>Objects pre-programmed with expectations which form a specification of the calls they are expected to receive <em
+  >(From Mocks arent Stubs)</em
+  ></p
+><h6 id="advantages-19"
+>Advantages</h6
+><p
+><em
+  >mock-based testing in conjunction with TDD/BDD can drive a better architecture, with Loose Coupling and High Cohesion ( <a href="http://www.c2.com/cgi/wiki?CouplingAndCohesion"
+    >http://www.c2.com/cgi/wiki?CouplingAndCohesion</a
+    > ). Example: Identify a piece of functionality you want, and start test-driving it in a new Class. When you come to a piece of logic that is UNRELATED to your current class (not cohesive), MOCK it out as a Collaborating Class, and continue implementing the (cohesive) functionality of the Current Class. When you are done with the Current Class, look at how you have used Mock Objects. The functionality and Collaborating Classes you are mocking serves as the blueprint for the actual implementation of the Collaborating Classes. Pick one of the non-existent Collaborating Classes, and start test-driving it into existence to fulfill the API which you discovered via the mocks in the original class. Repeat until your entire app functionality is complete, and create Functional/Integration tests as you evolve cohesive groups of classes/functionality with higher-level APIs or external interfaces. This approach results in High Cohesion (classes do only one thing, and do it well), and Loose Coupling (narrow, well-defined, flexible APIs for public class methods). This approach works better with Green Field, non-web apps; and is less useful on in apps which rely on a well-defined, highly coupled, and pervasive framework/API (such as Rails apps). It also works particularly well with projects that use a Dependency Injection approach, where you can fully realize the benefits of loose coupling (<a href="http://geminstaller.rubyforge.org/svn/trunk/lib/geminstaller/dependency_injector.rb"
+    >http://geminstaller.rubyforge.org/svn/trunk/lib/geminstaller/dependency_injector.rb</a
+    >) - ChadWoolley</em
+  ></p
+><h6 id="disadvantages-19"
+>Disadvantages</h6
+><h6 id="some-questions-to-ask"
+>Some questions to ask</h6
+><ul
+><li
+  >Do mocks make your test simpler or more complicated?</li
+  ><li
+  >When are mock the only reliable way to test something?</li
+  ><li
+  >When do they make more sense to use than state based testing?</li
+  ><li
+  >When do they not make more sense to use than state based testing?</li
+  ></ul
+><h6 id="other-usages-of-mocks"
+>Other usages of mocks</h6
+><ul
+><li
+  >Using mocks to clarify the test (even state based tests)</li
+  ><li
+  >Using the mock proxy pattern to get mock validations while calling the real method</li
+  ></ul
+><h5 id="example"
+>Example</h5
+><p
+>Show TDD using a mock that causes the test to pass but is a bug because the mocked method is not implemented.</p
+><h5 id="stubs"
+>Stubs</h5
+><p
+>Provide canned answers to calls made during the test, usually not responding at all to anything outside what's programmed in for the test. Stubs may also record information about calls, such as an email gateway stub that remembers the messages it 'sent', or maybe only how many messages it 'sent' <em
+  >(From Mocks arent Stubs)</em
+  ></p
+><h5 id="spies"
+>Spies</h5
+><p
+>Message buckets that you can verify. Every message passed to the object is stored. Useful for testing concurrency (threads &amp; external processes).</p
+><h5 id="dummies"
+>Dummies</h5
+><p
+>Objects that are passed around but never actually used. Usually they are just used to fill parameter lists <em
+  >(From Mocks arent Stubs)</em
+  ></p
+><h5 id="fakes"
+>Fakes</h5
+><p
+>Fake objects actually have working implementations, but usually take some shortcut which makes them not suitable for production (an in memory database is a good example). <em
+  >(From Mocks arent Stubs)</em
+  > Fakes are often a more formalized form of a mock. When you find yourself repeating a mock, refactor to a fake. Fakes provide a logical object your SUT can interact with.</p
+><h2 id="testing-tool-implementations"
+>Testing Tool Implementations</h2
+><h3 id="model-testing"
+>Model Testing</h3
+><h3 id="controller-testing"
+>Controller Testing</h3
+><h3 id="view-testing"
+>View Testing</h3
+><ul
+><li
+  >Test aspects important to the functionality of your site.</li
+  ><li
+  >Dont overspecify your software.</li
+  ><li
+  >If changing a &lt;div&gt; to a &lt;p&gt; breaks your test, then something is wrong.</li
+  ></ul
+><h3 id="rails-integration-testing"
+>Rails Integration Testing</h3
+><h3 id="webrat-testing-httpunit-webunit"
+>Webrat Testing, HttpUnit, WebUnit</h3
+><ul
+><li
+  >Does not work with javascript.</li
+  ><li
+  >Faster than browser integration testing (Selenium, Watir)</li
+  ></ul
+><h3 id="javascript-testing"
+>Javascript Testing</h3
+><ul
+><li
+  >JsUnit - <a href="http://jsunit.org"
+    >http://jsunit.org</a
+    ></li
+  ><li
+  >Screw Unit - <a href="http://github.com/nkallen/screw-unit"
+    >http://github.com/nkallen/screw-unit</a
+    ></li
+  ><li
+  >Jsspec - <a href="http://code.google.com/p/js-spec"
+    >http://code.google.com/p/js-spec</a
+    ></li
+  ><li
+  >Js autotest - <a href="http://drnicwilliams.com/2008/01/04/autotesting-javascript-in-rails"
+    >http://drnicwilliams.com/2008/01/04/autotesting-javascript-in-rails</a
+    ></li
+  ><li
+  >Js Test - <a href="http://drnicwilliams.com/2008/02/19/one-stop-javascript-unit-testing-for-rails2"
+    >http://drnicwilliams.com/2008/02/19/one-stop-javascript-unit-testing-for-rails2</a
+    ></li
+  ><li
+  >Testing rjs</li
+  ></ul
+><h3 id="clientserver-testing"
+>Client/Server testing</h3
+><ul
+><li
+  >Concurrency Testing</li
+  ><li
+  >Two mongrel processes</li
+  ><li
+  >One external state and queue process</li
+  ><li
+  >Browser object</li
+  ></ul
+><h4 id="selenium-testing"
+>Selenium Testing</h4
+><ul
+><li
+  >An automated human.</li
+  ><li
+  >Tests take longer. User Scenario based Examples that simulate a human. Longer and less frequent Examples.</li
+  ><li
+  >Dont check every possibly edge case, because the suite will be very long.</li
+  ><li
+  >Check the happy path with a couple of common edge cases.</li
+  ><li
+  >Exercise and validate as much client/server interaction as possible.</li
+  ></ul
+><h5 id="polonium"
+>Polonium</h5
+><ul
+><li
+  >Make your Selenium tests easy to write and read using a DSL</li
+  ><li
+  >Using wait_for to handle Selenium's concurrency</li
+  ><li
+  >Selenium also uses the Browser object</li
+  ></ul
+><h2 id="using-your-tools-productively"
+>Using your tools productively</h2
+><h3 id="tdd-rhythm"
+>TDD Rhythm</h3
+><ul
+><li
+  >Red/Green/Refactor<ul
+    ><li
+      >When implementing a feature, run the test. The test should go red. Make the test green.</li
+      ><li
+      >When refactoring, make a change and then run the suite. If there is a failure, there is a problem with the refactoring.</li
+      ></ul
+    ></li
+  ><li
+  >Very fast feedback loop.<ul
+    ><li
+      >Compare with manual testing.<ul
+	><li
+	  >i.e. implement, refresh the browser, type in the fields again, and verify.</li
+	  ></ul
+	></li
+      ></ul
+    ></li
+  ><li
+  >Learn how to effectively use your Editor<ul
+    ><li
+      >Get to the point where you do not have to think about the mechanics of using your editor<ul
+	><li
+	  >This allows you to think at a higher level while quickly manipulating code</li
+	  ></ul
+	></li
+      ><li
+      >Avoid the mouse if you can</li
+      ><li
+      >Be able to move quickly in your editor. Speed helps you think more clearly.</li
+      ></ul
+    ></li
+  ></ul
+><h4 id="tools"
+>Tools</h4
+><ul
+><li
+  >Autotest</li
+  ></ul
+><h3 id="frequent-checkins"
+>Frequent checkins</h3
+><ul
+><li
+  >A good TDD rhythm enables frequent checkins</li
+  ><li
+  >Frequent checkins leads to better source integration with the rest of your team</li
+  ><li
+  >Implement changes in smaller increments. Less risk that what you are working on is broken.</li
+  ><li
+  >Changes are more cohesive and focused.</li
+  ><li
+  >Easier to track.</li
+  ><li
+  >Better rhythm.</li
+  ><li
+  >Faster development.</li
+  ><li
+  >Reverting</li
+  ></ul
+><p
+><em
+  >Small checkins let you be more aggressive. If you go down a rathole, you can always revert everything, and not worry about losing anything you wanted to keep - ChadWoolley</em
+  ></p
+><h4 id="usages-and-tips-for-frequent-checkins"
+>Usages and Tips for Frequent Checkins</h4
+><ul
+><li
+  >I get nervous when not checking in for a while.<ul
+    ><li
+      >Why have I not checked in?</li
+      ><li
+      >Am I going down a rat hole?</li
+      ><li
+      >Do I need to revert?</li
+      ></ul
+    ></li
+  ><li
+  >When planning a new feature or refactoring, think about the smallest possible chunk you can start with that will get you to a green test suite and checkin. Do it, check in, then think about the next smallest chunk. This helps avoid huge multi-day commit sets, and the related integration problems - ChadWoolley*</li
+  ><li
+  >Frequent checkins allow you to rely on Continuous Integration to catch unrelated regressions early, especially ones that are only caught by slow-running Integration Tests that you don't want to run manually - ChadWoolley*</li
+  ></ul
+><h3 id="better-design-leads-to-more-productivity"
+>Better Design leads to more productivity</h3
+><ul
+><li
+  >Objects and methods should be made so you can see it and instantly know what its purpose is.<ul
+    ><li
+      >If the method is large, it takes time to scan the method and figure it out. This gets developers thinking about the mechanics of the implementation rather than thinking at a higher level.</li
+      ></ul
+    ></li
+  ><li
+  >Less big objects that do everything.</li
+  ><li
+  >Prefer good method naming to comments.</li
+  ><li
+  >Cohesion should happen both in your tests and in your implementation.</li
+  ></ul
+><h4 id="design-your-software-to-be-testable"
+>Design your software to be testable</h4
+><ul
+><li
+  >Often times, easily testable software is better design.</li
+  ></ul
+><h4 id="sometimes-designing-software-to-be-testable-makes-the-design-worse"
+>Sometimes designing software to be testable makes the design worse</h4
+><ul
+><li
+  >Why?</li
+  ><li
+  >Maybe a functional test is sufficient.</li
+  ><li
+  >Find a good compromise between implementation and test design.</li
+  ><li
+  >Maybe its not worth automating the testing in that case.</li
+  ></ul
+><h3 id="ping-pong-pairing"
+>Ping pong pairing</h3
+><ul
+><li
+  >It involves both people in both roles (driver &amp; thinker).</li
+  ><li
+  >An effective way to get around the laptop distraction.</li
+  ></ul
+><h3 id="test-execution-time"
+>Test Execution Time</h3
+><ul
+><li
+  >If tests take a long time to run, they get run less often.</li
+  ><li
+  >The longer the period between the defect introduction and the discovery, the longer it takes to fix.<ul
+    ><li
+      >This affects developer flow.</li
+      ></ul
+    ></li
+  ><li
+  >&quot;Fast&quot; is ~&lt; 2 seconds for 1000+ tests.<ul
+    ><li
+      >There is a threshold of productivity reached for suites that run less than 5 seconds.</li
+      ></ul
+    ></li
+  ></ul
+><p
+><img src="slacking_off_small.png" alt="Slacking Off"
+   /></p
+><h5 id="advantages-20"
+>Advantages</h5
+><ul
+><li
+  >Payoff savings in test run time and frequency.</li
+  ><li
+  >There is also savings from recognizing defects earlier.</li
+  ><li
+  >Long suites break work flow.</li
+  ><li
+  >Long suites add up.<ul
+    ><li
+      >&quot;I'm running tests now, time to get coffee.&quot;</li
+      ></ul
+    ></li
+  ><li
+  >Slow tests are mainly a long term issue that slowly saps developer productivity.</li
+  ></ul
+><h5 id="disadvantages-20"
+>Disadvantages</h5
+><ul
+><li
+  >Large investment to keep suite fast.</li
+  ><li
+  >Slow suites do not matter as much for short term projects.</li
+  ></ul
+><h4 id="test-run-ordering"
+>Test Run Ordering</h4
+><ul
+><li
+  >Prefer to run the tests that involve the pieces you are working on first.</li
+  ><li
+  >Prefer to run the unit suites first, then the functional and integration suites.<ul
+    ><li
+      >Early tests should isolate issues as much as possible.</li
+      ></ul
+    ></li
+  ></ul
+><h4 id="tools-and-techniques-that-improve-execution-time"
+>Tools and techniques that improve execution time</h4
+><ul
+><li
+  >Removing dead weight</li
+  ><li
+  >Mocks</li
+  ><li
+  >Combining tests<ul
+    ><li
+      >If a set of tests don't fail often, it may be useful to combine them into a single test.</li
+      ></ul
+    ></li
+  ><li
+  >Make a new Test Suite<ul
+    ><li
+      >Move tests that are slower into a separate suite</li
+      ></ul
+    ></li
+  ><li
+  >Pre-checkin suite<ul
+    ><li
+      >Fast tests can be run before checking in</li
+      ></ul
+    ></li
+  ><li
+  >CI<ul
+    ><li
+      >Can be responsible for running slower tests</li
+      ></ul
+    ></li
+  ><li
+  >Split out different suites. Make your suites progressively slower.</li
+  ><li
+  >Track and compare suite time runs from month to month.</li
+  ><li
+  >Discipline to keep the suite short.</li
+  ></ul
+><h4 id="tools-and-techniques-that-relevance"
+>Tools and techniques that relevance</h4
+><p
+>Move tests that more relevant (fail frequently for good reason) into the pre-checkin suite.</p
+>
