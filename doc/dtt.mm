@@ -124,5 +124,11 @@
 <node TEXT="git clone pain-point"/>
 <node TEXT="sudo geminstaller"/>
 </node>
+<node TEXT="Information Radiators (Use posters with sticky backs)" POSITION="left">
+<node TEXT="Red, Green, Refactor"/>
+<node TEXT="Nested Describes (Class, Method, Context)"/>
+<node TEXT="Scope - Functional, Unit, Integration"/>
+<node TEXT="Audience - Developer, Customer"/>
+</node>
 </node>
 </map>
