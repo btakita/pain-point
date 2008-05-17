@@ -14,11 +14,8 @@ There a number of interesting technologies in Pain Point including:
 * Selenium (http://openqa.org)
 * Polonium (http://github.com/pivotal/polonium)
 * Fitnesse
-* Erector view framework (http://erector.rubyforge.org)
 * Client server programming using advanced Javascript
-* Comet (http://en.wikipedia.org/wiki/Comet_(programming) & http://ajaxian.com/archives/comet-a-new-approach-to-ajax-applications)
-
-Even though technology changes, the basic goals of TDD and other forms of testing remain the same. It is one of the major goals of this tutorial to show commonality of testing techniques across different techonology.
+* And more...
 
 Pain Point may use several gems that you don't currently have on your machine. To install then run:
   git clone git://github.com/btakita/pain-point.git
