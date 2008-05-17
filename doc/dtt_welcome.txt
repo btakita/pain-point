@@ -1,5 +1,6 @@
-Thank you for signing up for the Developer Testing Tricks talk. This talk is going to be highly interactive. This means, you will be pair programming with your fellow attendees.
-To make this possible at least 1/2 of you will need to bring your laptop. I recommend you bringing your laptop, just in case. :)
+Thank you for signing up for the Developer Testing Tricks talk. This talk is going to be highly interactive. There will be an hour worth of pair programming with your fellow attendees.
+
+To make this possible at least 1/2 of you will need to bring your laptop. I highly recommend you bringing your laptop, with the correct software loaded. Please do this from home, as the internet bandwidth at the conference may not be very good.
 
 The application that will be used in the talk is named Pain Point. It's a simple application that allows its users to write what their pain points are and to vote on other members' pain points.
 

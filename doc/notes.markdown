@@ -1,3 +1,5 @@
+# Developer Testing Tricks Notes
+
 Most of the examples will use rspec (and some using test/unit) and
 focus on testing strategies in different situations. The concepts
 are applicable to rspec and test/unit or derivative technologies.
@@ -5,7 +7,7 @@ are applicable to rspec and test/unit or derivative technologies.
 **Note:** ExampleGroup == TestCase? class and Example == TestCase?
 instance
 
-# Reasons to test
+## Reasons to test
 
 -   Creates an executable specification and example usage, with
     documentation that stays in sync
@@ -19,7 +21,7 @@ instance
 -   To keep your code safe from other developers
 -   To keep your code safe from yourself
 
-# Test Types
+## Test Types
 
 -   Method
     -   Manual
@@ -35,23 +37,23 @@ instance
     -   Integration
 
 
-## Method of test
+### Method of test
 
 > Automated vs Manual
 
-### Manual Testing
+#### Manual Testing
 
 -   QA
 -   Exploratory testing
 -   Using script/console &amp; irb (Manual Unit testing)
 -   Using the debugger
 
-#### Traditional QA
+##### Traditional QA
 
 > > A tester runs through a test script and verify the app is working
 > > correctly.
 
-#### Exploratory testing
+##### Exploratory testing
 
 -   [http://www.testobsessed.com/2007/02/19/test-heuristics-cheat-sheet/](http://www.testobsessed.com/2007/02/19/test-heuristics-cheat-sheet/)
 -   Explore the software
@@ -61,7 +63,7 @@ instance
 -   Helps find surprises that nobody considered
 -   Helps find misunderstandings about the software
 
-#### Advantages
+##### Advantages
 
 -   Low overhead (does not require a large initial investment)
 -   Flexible
@@ -72,14 +74,14 @@ instance
     -   For example, does site looks good?
 
 
-#### Disadvantages
+##### Disadvantages
 
 -   Expensive to repeat
     -   Run less often
 
 -   Manual testing requires a human's time and focus.
 
-### Automated Testing
+#### Automated Testing
 
 -   Script that runs a test suite.
     -   xUnit
@@ -89,7 +91,7 @@ instance
     -   Load test program
 
 
-#### Advantages
+##### Advantages
 
 -   The tests are automated so it is inexpensive to run the test
     once written.
@@ -100,18 +102,18 @@ instance
 -   Bugs are easier isolate
 -   See Reasons to Test section
 
-#### Disadvantages
+##### Disadvantages
 
 -   Requires an investment to set up and maintain
 -   Requires more skill
     -   Require judgement on what level to specify the software
 
 
-## Audience of test
+### Audience of test
 
 > Customer Acceptance vs Developer
 
-### Customer Test
+#### Customer Test
 
 -   FIT - [http://fit.c2.com/](http://fit.c2.com/)
     -   RubyFIT -
@@ -159,7 +161,7 @@ instance
 -   Better when the customer has a solid understanding of the
     domain.
 
-#### Advantages
+##### Advantages
 
 -   A Customer test suite shows the list of the application's
     features
@@ -169,7 +171,7 @@ instance
     solution
 -   These tests tend to be less affected by refactorings
 
-#### Disadvantages
+##### Disadvantages
 
 -   Requires a substantial framework to set up
 -   More overhead in writing and maintaining tests than developer
@@ -177,29 +179,29 @@ instance
 -   Disconnect between the test code and its implementation (tests
     are a black box)
 
-### Developer Test
+#### Developer Test
 
 -   xUnit
 -   rspec
 -   Is your software doing the right thing correctly?
 
-#### Advantages
+##### Advantages
 
 -   Tests are structured by the software implementation
 -   Provides greater isolation into the workings of your software
 -   Less overhead to use when developing software
 
-#### Disadvantages
+##### Disadvantages
 
 -   Customer cannot "understand" these tests
 -   No unified list of features
 -   More affected by refactorings
 
-## Scope of test
+### Scope of test
 
 > Unit vs Functional vs Integration
 
-### Unit Test
+#### Unit Test
 
 -   "Does the application do things correctly?"
 -   The level of testing is relative. Usually your application's
@@ -213,14 +215,14 @@ instance
     Rails, a unit test typically touches the database. This may not be
     the case in other db patterns, such as the repository pattern.
 
-#### Advantages
+##### Advantages
 
 -   Avoids combinatorial explosion
 -   Superior defect isolation
 -   Encourages decoupling of software
 -   Fast
 
-#### Disadvantages
+##### Disadvantages
 
 -   Does not cover integration of software
 -   Does not protect you from testing the wrong thing
@@ -228,7 +230,7 @@ instance
 
 -   Assumptions must be made to keep the tests fast
 
-### Functional Test
+#### Functional Test
 
 -   Covers public functionality
 -   Ensures that the software is doing the right thing
@@ -236,20 +238,20 @@ instance
 
 -   There should be full functional coverage over your application
 
-#### Advantages
+##### Advantages
 
 -   Covers functionality of the application.
 -   End to end coverage of the public api
 -   If software is simple enough, functional tests may be
     sufficient
 
-#### Disadvantages
+##### Disadvantages
 
 -   Combinatorial explosion
 -   Slower
 -   Not as focused as Unit Tests
 
-### Integration Test
+#### Integration Test
 
 -   Test that exercises multiple layers of the system
     -   Rails Integration tests exercise all levels of the Rails stack
@@ -257,19 +259,19 @@ instance
         logic
 
 
-#### Advantages
+##### Advantages
 
 -   Tests parts and interactions that other tests miss
 
-#### Disadvantages
+##### Disadvantages
 
 -   Slow
 -   Difficult to isolate defects
 -   Combinatorial Explosion
 
-### Examples
+#### Examples
 
-#### Enemy Unit Test
+##### Enemy Unit Test
 
 -   [http://groboutils.sourceforge.net/testing-junit/art\_eut.html](http://groboutils.sourceforge.net/testing-junit/art_eut.html)
 -   Unit level test that verify your library integrates well with
@@ -278,7 +280,7 @@ instance
 
 > > *Consider mentioning "Enemy Unit Tests" ( [http://groboutils.sourceforge.net/testing-junit/art\_eut.html](http://groboutils.sourceforge.net/testing-junit/art_eut.html) ). These are tests to ensure that you understand how an external/third-party API behaves, and that future releases of the API do not change with respect to your expected behavior. There is a related mock/testing pattern (originating from jMock article or tdd mailing list, can't remember) where you create a "proxy" object around third-party API classes. This proxy only exposes the API methods which you actually use. It also provides an isolated place to react to API changes in future releases of the third-party library. For a real-world example of this, see GemInstaller::GemRunnerProxy#create\_gem\_runner ([http://geminstaller.rubyforge.org/svn/trunk/lib/geminstaller/gem\_runner\_proxy.rb](http://geminstaller.rubyforge.org/svn/trunk/lib/geminstaller/gem_runner_proxy.rb)). These approaches can also help with test speed and performance, because you can be more aggressive with mocking third-party API calls, since you know the third party API and proxy are working correctly. The proxy classes also provide an easy and centralized place to do the mocking (although this is less of a concern with the easy of class-method mocking in Ruby vs. Java). - ChadWoolley*
 
-# The structure of a test
+## The structure of a test
 
 -   Setup
 -   Preconditions
@@ -319,7 +321,7 @@ instance
       end
     end
 
-## Preconditions
+### Preconditions
 
 -   Set the context of your test
 -   Communicate the constraints of the test
@@ -328,7 +330,7 @@ instance
     -   Nil expected value
 
 
-## Execution
+### Execution
 
 -   Execute your SUT (System Under Test)
 -   Make it clear where you are executing the SUT
@@ -336,34 +338,34 @@ instance
         postconditions with a new line
 
 
-## Postconditions
+### Postconditions
 
 > Verification that your SUT altered state correctly and/or
 > interacted with its collaborators correctly.
 
-# Code Coverage
+## Code Coverage
 
 -   Do your tests cover all of your features of your app?
 -   [http://www.bullseye.com/coverage.html](http://www.bullseye.com/coverage.html)
 
-## Statement Coverage
+### Statement Coverage
 
 -   What percentage of your code is exercised by your tests?
 -   Rcov -
     [http://eigenclass.org/hiki.rb?rcov](http://eigenclass.org/hiki.rb?rcov)
 
-#### Advantages
+##### Advantages
 
 -   Easy to set up
 -   Clear and easy to understand metric
 
-#### Disadvantages
+##### Disadvantages
 
 -   Does not measure coverage of boolean statements
 -   Does not measure coverage of invalid data
 -   Easy to game the metric
 
-## Logical Coverage
+### Logical Coverage
 
 -   Is your feature fully covered?
 -   Mutation Testing
@@ -371,15 +373,15 @@ instance
         [http://glu.ttono.us/articles/2006/12/19/tormenting-your-tests-with-heckle](http://glu.ttono.us/articles/2006/12/19/tormenting-your-tests-with-heckle)
 
 
-#### Advantages
+##### Advantages
 
 -   Verifies your tests have full logical coverage
 
-#### Disadvantages
+##### Disadvantages
 
 -   Slow
 
-## Happy Path Testing
+### Happy Path Testing
 
 -   Tests the piece of functionality in a "normal" situation.
 
@@ -410,7 +412,7 @@ instance
       end
     end
 
-## Edge Case Testing
+### Edge Case Testing
 
 -   Tests the edge cases of the piece of functionality.
     -   Invalid Data
@@ -440,7 +442,7 @@ instance
       end
     end
 
-# Lifecycle
+## Lifecycle
 
 -   The lifecycle of a test and how testing strategies/refactorings
     change over the life of the test
@@ -450,14 +452,14 @@ instance
     -   Retirement of a Test
 
 
-## TDD
+### TDD
 
 -   These tests drive design
 -   Tests should be refactored
 -   You can manually test drive your design, its just alot slower
     and you dont get to keep the tests
 
-### Goals of TDD
+#### Goals of TDD
 
 -   Specification, not validation
 -   Feedback
@@ -473,7 +475,7 @@ instance
 -   YAGNI
 -   Make a regression test
 
-### Test your tests
+#### Test your tests
 
 -   Red then Green
 -   Its easy to make a test that does not test anything.
@@ -481,7 +483,7 @@ instance
     -   Use Preconditions to set the context of your test
 
 
-### Granularity of tests
+#### Granularity of tests
 
 -   Confidence & familiarity with a particular technology
     determines how granular your unit tests tend to be
@@ -497,14 +499,14 @@ instance
         start with unit tests.
 
 
-## Regression Test
+### Regression Test
 
 -   After the TDD phase, your tests serve to make sure your
     software still works.
 -   Tests live longer than the code (the implementation often
     changes).
 
-### Regression Test Goals
+#### Regression Test Goals
 
 -   Verify your software does not break due to changes in
     implementation or state
@@ -518,7 +520,7 @@ instance
     -   Keep tests predictable
 
 
-### Tests as documentation
+#### Tests as documentation
 
 -   Tests should clearly document your system
     -   Refactor the test if it is not clear
@@ -527,7 +529,7 @@ instance
 
 -   Tests should match the logical layout of your software
 
-### Monitoring your tests
+#### Monitoring your tests
 
 -   Are you getting good coverage?
     -   Rcov
@@ -543,7 +545,7 @@ instance
         and/or CI.
 
 
-## Testing untested software
+### Testing untested software
 
 -   Working Effectively with Legacy Code - Michael Feathers
 -   Seams
@@ -553,7 +555,7 @@ instance
 -   Rails legacy testing tends to be easier than Java legacy
     because there is a natural MVC separation.
 
-### Retroactive TDD
+#### Retroactive TDD
 
 -   Comment out the implementation you want to test
 -   Write the tests
@@ -562,14 +564,14 @@ instance
 -   Watch the tests pass
 -   Refactor
 
-## Retirement of a Test
+### Retirement of a Test
 
 > *[[ESH: I talk about "retiring" tests. Slightly less violent :-) ]]*
 > If the test no longer contributes to logical coverage in its
 > particular level (unit, functional, integration, etc), then retire
 > it.
 
-### Obsolete Tests
+#### Obsolete Tests
 
 -   They add clutter and make your test suite harder to read
     -   They reduce productivity by making it more difficult to reason
@@ -578,19 +580,19 @@ instance
 -   They take time to run
 -   They take space
 
-## Consequences of Refactoring
+### Consequences of Refactoring
 
 > Extract class or module refactoring can be supported by existing
 > tests. You may or may not need to test drive the extracted module.
 > It depends on your situation. If you are unsure, error on the side
 > of writing tests.
 
-### Why Test Drive your refactorings
+#### Why Test Drive your refactorings
 
 -   You can get defect localization
 -   The tests help the design of your extracted module
 
-### Why Not Test Drive your refactorings
+#### Why Not Test Drive your refactorings
 
 -   TDD may disrupt your "refactoring flow"
 -   You may want your refactoring to be a spike to quickly
@@ -598,7 +600,7 @@ instance
 -   You can always retroactively TDD your changes
 -   You already have test coverage
 
-### When finished with the refactoring
+#### When finished with the refactoring
 
 -   Refactor your tests
     -   Move the tests into the correct places
@@ -606,20 +608,20 @@ instance
         functionality is still being covered
 
 
-# Test organization tools
+## Test organization tools
 
-## ExampleGroup organization
+### ExampleGroup organization
 
 -   The description of the ExampleGroup should clearly state the
     preconditions of the Example
 
-### before and after callbacks
+#### before and after callbacks
 
 -   Sets up preconditions and postconditions.
 -   Set up and clean up fixtures
 -   Sets up the contextual situation of the ExampleGroup
 
-### Single level ExampleGroup
+#### Single level ExampleGroup
 
 > One ExampleGroup per implementation class and/or context. Each
 > Example has the pre-conditions and post-conditions in its name.
@@ -652,18 +654,18 @@ instance
 >       end
 >     end
 
-#### Advantages
+##### Advantages
 
 -   Often times the simplest thing that could possibly work.
 -   Easy to add individual Examples.
 -   Easy to find individual Examples.
 
-#### Disadvantages
+##### Disadvantages
 
 -   Not well balanced Example organization when conditions get
     complicated and there is more than one level of edge cases.
 
-### Nested ExampleGroup
+#### Nested ExampleGroup
 
 > Nested ExampleGroup
 > 
@@ -698,21 +700,21 @@ instance
 >       end
 >     end
 
-#### Advantages
+##### Advantages
 
 -   Easily show multiple levels of situational edge cases
 -   DRY
 -   Composable
 
-#### Disadvantages
+##### Disadvantages
 
 -   More complicated than Single level ExampleGroup
 
-### ExampleGroup methods
+#### ExampleGroup methods
 
 > Shoulda uses this technique.
 
-#### Advantages
+##### Advantages
 
 -   DRY.
 -   Concisely creates common Examples.
@@ -720,55 +722,55 @@ instance
     -   More attention is given to more interesting functionality
 
 
-#### Disadvantages
+##### Disadvantages
 
 -   Removed from the implementation of the test
 -   Temptation to overgeneralize
     -   Tests become less malleable
 
 
-### Mulitple preconditions / execution / postconditions
+#### Mulitple preconditions / execution / postconditions
 
 > Mainly used for scenarios and higher level testing
 
-## Example organization within an ExampleGroup
+### Example organization within an ExampleGroup
 
 -   Each Example should be cohesive
 -   The description should simply state the behavior
 -   If the test cannot be stated clearly, then there is a problem
 
-## Bundling assertions in each Example
+### Bundling assertions in each Example
 
 -   The most common way to write Examples
 -   Best when the assertions are grouped logically
 
-#### Advantages
+##### Advantages
 
 -   Easy and low effort to implement
 -   Lower barrier to entry
 -   Easy to start test driving
 
-#### Disadvantages
+##### Disadvantages
 
 -   Examples can lose cohesion and be confusing if too many diverse
     assertions are added.
 -   Its more difficult to manage tests when performing an extract
     functionality refactoring
 
-## One assertion per Example
+### One assertion per Example
 
 -   [http://www.artima.com/weblogs/viewpost.jsp?thread=35578](http://www.artima.com/weblogs/viewpost.jsp?thread=35578)
 -   Extract groups of assertions into an assertion method.
 
-#### Advantages
+##### Advantages
 
 -   Loose coupling and high cohesion of tests
 
-#### Disadvantages
+##### Disadvantages
 
 -   More up front effort required
 
-## One Example, several variables for each set of preconditions
+### One Example, several variables for each set of preconditions
 
 > One Example has the same assertions called on several instance of
 > the SUT, each having different preconditions.
@@ -800,24 +802,24 @@ instance
         end
 
 
-#### Advantages
+##### Advantages
 
 -   Elegant way to avoid combinatorial explosion
 -   Best when describing a scenario or progression of state
     -   The logical unit is the progression in this case
 
 
-#### Disadvantages
+##### Disadvantages
 
 -   Cannot make an individual Example with description for each set
     of preconditions
 -   This can lead to large and unfocused Examples
 
-# Test Fixture
+## Test Fixture
 
 The state of your world.
 
-## Rails Fixtures
+### Rails Fixtures
 
 > Rails fixtures are the state of your database. The default
 > implementation is a global dataset.
@@ -830,34 +832,34 @@ The state of your world.
 -   In your tests, use preconditions. Dont make assumptions about
     your fixture values because fixtures change.
 
-### Transactional fixtures
+#### Transactional fixtures
 
 > > Begins a database transaction when the test begins and rolls back
 > > the tranaction after the test finishes.
 
-#### Advantages
+##### Advantages
 
 -   Fast
 
-#### Disadvantages
+##### Disadvantages
 
 -   Cannot be used to test database transactions
 -   Cannot be used to test code across processes
 
-### Instantiated fixtures
+#### Instantiated fixtures
 
 > > Clears the table(s) and inserts the fixture records.
 
-#### Advantages
+##### Advantages
 
 -   Can be used to test database transactions
 -   Can be used to test code across processes
 
-#### Disadvantages
+##### Disadvantages
 
 -   Slow
 
-## Test Driving your fixtures
+### Test Driving your fixtures
 
 -   Verify your fixtures are in a valid state.
 -   Test drive a change to your DB schema by making a fixture test.
@@ -880,19 +882,19 @@ The state of your world.
         end
 
 
-## Fixture Scenarios
+### Fixture Scenarios
 
 -   Keeps each scenario small and focused.
 
-## Object Mother
+### Object Mother
 
 > Programmatically set up object state.
 
 -   Keeps each scenario small and focused.
 
-# State and Interaction Testing
+## State and Interaction Testing
 
-## State testing
+### State testing
 
 -   The most common form of testing.
 -   More straightforward and easier to understand in state based
@@ -901,7 +903,7 @@ The state of your world.
     involve state.
 -   Can cause large amounts of setup in certain situations.
 
-#### Advantages
+##### Advantages
 
 -   Often times the simplest way to set up state.
 -   If state is difficult to set up, sometimes abstracting setup
@@ -910,14 +912,14 @@ The state of your world.
     interaction testing.
 -   Independent of implemnetation.
 
-#### Disadvantages
+##### Disadvantages
 
 -   Sometimes its more difficult to set up the preconditions.
 -   You cannot unit test logic that communicates with external
     processes with state based tests
 -   When used exclusively, can obfuscate the focus of a test.
 
-## Interaction testing
+### Interaction testing
 
 -   Certain types of tests can only be tested through the SUT's
     interaction.
@@ -928,37 +930,37 @@ The state of your world.
 -   Often more complicated in situations where state is heavily
     used.
 
-#### Advantages
+##### Advantages
 
 -   The only way to unit test certain situations (i.e. external
     processes)
 -   Can be used in conjunction with state based testing to clarify
     focus of the test.
 
-#### Disadvantages
+##### Disadvantages
 
 -   Takes more work to set up that state based tests.
 -   Test code can look exactly like the implementation code.
 
-### Test Double
+#### Test Double
 
 -   [http://www.martinfowler.com/articles/mocksArentStubs.html](http://www.martinfowler.com/articles/mocksArentStubs.html)
 -   [http://xunitpatterns.com/Test%20Double.html](http://xunitpatterns.com/Test%20Double.html)
 -   *Needs work*
 
-#### Mocks
+##### Mocks
 
 > > Objects pre-programmed with expectations which form a specification
 > > of the calls they are expected to receive
 > > *(From Mocks arent Stubs)*
 
-##### Advantages
+###### Advantages
 
 > > > *mock-based testing in conjunction with TDD/BDD can drive a better architecture, with Loose Coupling and High Cohesion ( [http://www.c2.com/cgi/wiki?CouplingAndCohesion](http://www.c2.com/cgi/wiki?CouplingAndCohesion) ). Example: Identify a piece of functionality you want, and start test-driving it in a new Class. When you come to a piece of logic that is UNRELATED to your current class (not cohesive), MOCK it out as a Collaborating Class, and continue implementing the (cohesive) functionality of the Current Class. When you are done with the Current Class, look at how you have used Mock Objects. The functionality and Collaborating Classes you are mocking serves as the blueprint for the actual implementation of the Collaborating Classes. Pick one of the non-existent Collaborating Classes, and start test-driving it into existence to fulfill the API which you discovered via the mocks in the original class. Repeat until your entire app functionality is complete, and create Functional/Integration tests as you evolve cohesive groups of classes/functionality with higher-level APIs or external interfaces. This approach results in High Cohesion (classes do only one thing, and do it well), and Loose Coupling (narrow, well-defined, flexible APIs for public class methods). This approach works better with Green Field, non-web apps; and is less useful on in apps which rely on a well-defined, highly coupled, and pervasive framework/API (such as Rails apps). It also works particularly well with projects that use a Dependency Injection approach, where you can fully realize the benefits of loose coupling ([http://geminstaller.rubyforge.org/svn/trunk/lib/geminstaller/dependency\_injector.rb](http://geminstaller.rubyforge.org/svn/trunk/lib/geminstaller/dependency_injector.rb)) - ChadWoolley*
 
-##### Disadvantages
+###### Disadvantages
 
-##### Some questions to ask
+###### Some questions to ask
 
 -   Do mocks make your test simpler or more complicated?
 -   When are mock the only reliable way to test something?
@@ -966,18 +968,18 @@ The state of your world.
 -   When do they not make more sense to use than state based
     testing?
 
-##### Other usages of mocks
+###### Other usages of mocks
 
 -   Using mocks to clarify the test (even state based tests)
 -   Using the mock proxy pattern to get mock validations while
     calling the real method
 
-#### Example
+##### Example
 
 > > > Show TDD using a mock that causes the test to pass but is a bug
 > > > because the mocked method is not implemented.
 
-#### Stubs
+##### Stubs
 
 > > Provide canned answers to calls made during the test, usually not
 > > responding at all to anything outside what's programmed in for the
@@ -985,19 +987,19 @@ The state of your world.
 > > email gateway stub that remembers the messages it 'sent', or maybe
 > > only how many messages it 'sent' *(From Mocks arent Stubs)*
 
-#### Spies
+##### Spies
 
 > > Message buckets that you can verify. Every message passed to the
 > > object is stored. Useful for testing concurrency (threads &
 > > external processes).
 
-#### Dummies
+##### Dummies
 
 > > Objects that are passed around but never actually used. Usually
 > > they are just used to fill parameter lists
 > > *(From Mocks arent Stubs)*
 
-#### Fakes
+##### Fakes
 
 > > Fake objects actually have working implementations, but usually
 > > take some shortcut which makes them not suitable for production (an
@@ -1006,42 +1008,42 @@ The state of your world.
 > > yourself repeating a mock, refactor to a fake. Fakes provide a
 > > logical object your SUT can interact with.
 
-# Testing Tool Implementations
+## Testing Tool Implementations
 
-## Model Testing
+### Model Testing
 
-## Controller Testing
+### Controller Testing
 
-## View Testing
+### View Testing
 
 -   Test aspects important to the functionality of your site.
 -   Dont overspecify your software.
 -   If changing a \<div> to a \<p> breaks your test, then something
     is wrong.
 
-## Rails Integration Testing
+### Rails Integration Testing
 
-## Webrat Testing, HttpUnit?, WebUnit?
+### Webrat Testing, HttpUnit?, WebUnit?
 
 -   Does not work with javascript.
 -   Faster than total integration testing (Selenium)
 
-## Javascript Testing
+### Javascript Testing
 
 -   Jsunit
+-   Screw Unit
 -   Jsspec
--   Jspec
 -   Js autotesting (Dr. Nic)
 -   Testing rjs
 
-## Client/Server testing
+### Client/Server testing
 
 -   Concurrency Testing
 -   Two mongrel processes
 -   One external state and queue process
 -   Browser object
 
-### Selenium Testing
+#### Selenium Testing
 
 -   An automated human.
 -   Tests take longer. User Scenario based Examples that simulate a
@@ -1052,15 +1054,15 @@ The state of your world.
 -   Exercise and validate as much client/server interaction as
     possible.
 
-#### Polonium
+##### Polonium
 
 -   Make your Selenium tests easy to write and read using a DSL
 -   Using wait\_for to handle Selenium's concurrency
 -   Selenium also uses the Browser object
 
-# Using your tools productively
+## Using your tools productively
 
-## TDD Rhythm
+### TDD Rhythm
 
 -   Red/Green/Refactor
     -   When implementing a feature, run the test. The test should go
@@ -1085,11 +1087,11 @@ The state of your world.
         more clearly.
 
 
-### Tools
+#### Tools
 
 -   Autotest
 
-## Frequent checkins
+### Frequent checkins
 
 -   A good TDD rhythm enables frequent checkins
 -   Frequent checkins leads to better source integration with the
@@ -1105,7 +1107,7 @@ The state of your world.
 
 > > *Small checkins let you be more aggressive. If you go down a rathole, you can always revert everything, and not worry about losing anything you wanted to keep - ChadWoolley*
 
-### Usages and Tips for Frequent Checkins
+#### Usages and Tips for Frequent Checkins
 
 -   I get nervous when not checking in for a while.
     -   Why have I not checked in?
@@ -1117,7 +1119,7 @@ The state of your world.
 
 > *Frequent checkins allow you to rely on Continuous Integration to catch unrelated regressions early, especially ones that are only caught by slow-running Integration Tests that you don't want to run manually - ChadWoolley*
 
-## Better Design leads to more productivity
+### Better Design leads to more productivity
 
 -   Objects and methods should be made so you can see it and
     instantly know what its purpose is.
@@ -1130,23 +1132,23 @@ The state of your world.
 -   Cohesion should happen both in your tests and in your
     implementation.
 
-### Design your software to be testable
+#### Design your software to be testable
 
 -   Often times, easily testable software is better design.
 
-### Sometimes designing software to be testable makes the design worse
+#### Sometimes designing software to be testable makes the design worse
 
 -   Why?
 -   Maybe a functional test is sufficient.
 -   Find a good compromise between implementation and test design.
 -   Maybe its not worth automating the testing in that case.
 
-## Ping pong pairing
+### Ping pong pairing
 
 -   It involves both people in both roles (driver & thinker).
 -   An effective way to get around the laptop distraction.
 
-## Test Execution Time
+### Test Execution Time
 
 -   If tests take a long time to run, they get run less often.
 -   The longer the period between the defect introduction and the
@@ -1158,7 +1160,7 @@ The state of your world.
         run less than 5 seconds.
 
 
-#### Advantages
+##### Advantages
 
 -   Payoff savings in test run time and frequency.
 -   There is also savings from recognizing defects earlier.
@@ -1169,12 +1171,12 @@ The state of your world.
 -   Slow tests are mainly a long term issue that slowly saps
     developer productivity.
 
-#### Disadvantages
+##### Disadvantages
 
 -   Large investment to keep suite fast.
 -   Slow suites do not matter as much for short term projects.
 
-### Test Run Ordering
+#### Test Run Ordering
 
 -   Prefer to run the tests that involve the pieces you are working
     on first.
@@ -1183,7 +1185,7 @@ The state of your world.
     -   Early tests should isolate issues as much as possible.
 
 
-### Tools and techniques that improve execution time
+#### Tools and techniques that improve execution time
 
 -   Removing dead weight
 -   Mocks
@@ -1205,20 +1207,20 @@ The state of your world.
 -   Track and compare suite time runs from month to month.
 -   Discipline to keep the suite short.
 
-### Tools and techniques that relevance
+#### Tools and techniques that relevance
 
 > Move tests that more relevant (fail frequently for good reason)
 > into the pre-checkin suite.
 
-# Testing Examples
+## Testing Examples
 
-## Test consolidation / expansion
+### Test consolidation / expansion
 
-# Special situations
+## Special situations
 
-## Testing already implemented code (legacy apps)
+### Testing already implemented code (legacy apps)
 
-## Client/server testing with Ajax
+### Client/server testing with Ajax
 
 
 
