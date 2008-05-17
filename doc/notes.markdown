@@ -849,12 +849,12 @@ Clears the table(s) and inserts the fixture records.
 -   Discourages your fixtures from getting large
         describe "users.yml" do
           attr_reader :user
-        
+
           describe "bob" do
             before do
               @user = users(:bob)
             end
-        
+
             specify "was in the green and red room" do
               user.rooms.should include(rooms(:green))
               user.rooms.should include(rooms(:red))
@@ -924,6 +924,9 @@ up and are comprible in speed because they are usually simpler.
 -   [http://mocha.rubyforge.org](http://mocha.rubyforge.org)
 -   [http://rspec.info/documentation/mocks](http://rspec.info/documentation/mocks)
 -   [http://onestepback.org/software/flexmock](http://onestepback.org/software/flexmock)
+-   [http://www.mockobjects.com](http://www.mockobjects.com)
+-   [http://www.mockobjects.com/files/endotesting.pdf](http://www.mockobjects.com/files/endotesting.pdf)
+-   [http://www.mockobjects.com/files/mockrolesnotobjects.pdf](http://www.mockobjects.com/files/mockrolesnotobjects.pdf)
 
 ##### Mocks
 
