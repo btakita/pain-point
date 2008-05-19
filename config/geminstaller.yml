@@ -8,6 +8,8 @@ gems:
   version: 2.5.0
 - name: daemons
   version: 1.0.10
+- name: fitnesse-ruby
+  version: 0.1.0
 - name: has_finder
   version: 0.1.5
 - name: hpricot
