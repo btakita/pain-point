@@ -1,8 +1,15 @@
-To get Pain Point running, run
+To get Pain Point running, run:
+  sudo gem install geminstaller
+  sudo geminstaller
   rake db:create:all
   rake db:migrate
   rake spec:db:fixtures:load
   script/server
+
+To run the tests:
+  selenium
+  script/screw_unit_server
+  rake
 
 Some minimum features of pain-point:
 

@@ -2,8 +2,6 @@
 gems:
 - name: rails
   version: 2.0.2
-- name: capistrano
-  version: 2.2.0
 - name: cgi_multipart_eof_fix
   version: 2.5.0
 - name: daemons
@@ -23,10 +21,10 @@ gems:
 - name: rr
   version: 0.4.8
 - name: Selenium
-  version: 1.0.2
+  version: 1.0.4
 - name: sqlite3-ruby
   version: 1.2.1
 - name: thin
   version: 0.8.1
-- name: uuid
-  version: 1.0.4
+- name: webrat
+  version: 0.2.0
