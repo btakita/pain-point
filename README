@@ -1,18 +1,12 @@
+To get Pain Point running, run
+  rake db:create:all
+  rake db:migrate
+  rake spec:db:fixtures:load
+  script/server
+
 Some minimum features of pain-point:
 
 1) allow users to signup
 2) allow users to create pain points
 3) allow users to edit paint points
-4) allow anyone to view pain points by most recent
-5) allow anyone to view pain points by most votes
-6) allow users to vote on a pain point
-7) allow users to mark a pain point as started
-8) allow users to mark an started pain point as complete
-9) allow users to mark an started pain point as abandoned
-10) allow users to list their previously voted on pain points
-11) allow users to list their previously voted on pain points that another user has marked complete
-12) allow users to mark a previously voted on pain point as approved/complete
-13) users get additonal voting points with time
-14) users can cancel their votes on unstarted pain points
-15) once a pain point is started the points for that pain point are locked
-16) a user that completes a pain point gets the allocated points
+4) allow users to vote on a pain point
