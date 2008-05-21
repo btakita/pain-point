@@ -1,0 +1,18 @@
+!| FitCreateUser   |
+| name | results() |
+| amy  | true      |
+
+!| FitCreatePainpoint |
+| the_pain                      | results() |
+| Ive fallen and I can't get up | true      |
+
+
+!| FitVoteStateMachine | amy | Ive fallen and I can't get up |
+| initial_state | vote_type | results() | state() |
+| neutral       | up_vote   | true      | up      |
+| down          | up_vote   | true      | up      |
+| up            | up_vote   | true      | neutral |
+| neutral       | down_vote | true      | down    |
+| down          | down_vote | true      | neutral |
+| up            | down_vote | true      | down    |
+

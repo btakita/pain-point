@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+system "fitnesse -p 8081 -r spec/fitnesse/WikiRoot"

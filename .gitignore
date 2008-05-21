@@ -3,3 +3,6 @@
 *.iws
 .generators
 .rakeTasks
+spec/fitnesse/WikiRoot/ErrorLogs
+spec/fitnesse/WikiRoot/files
+spec/fitnesse/WikiRoot/RecentChanges
