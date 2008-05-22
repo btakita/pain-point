@@ -1,7 +1,7 @@
 --- 
 format: 1
 handler: 
-  commit: fa5228c4213849870231b0da371ddbef39a4982d
+  commit: e1bce2b4517a206dd08313652cf2f0b0cf740d4f
 repository_url: git://github.com/dchelimsky/rspec.git
 lock: false
 repository_class: Piston::Git::Repository

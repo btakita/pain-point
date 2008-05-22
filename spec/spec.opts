@@ -1,6 +1,6 @@
 --colour
 --format
-profile
+indented
 --loadby
 mtime
 --reverse

@@ -1,6 +1,7 @@
 ENV["RAILS_ENV"] = "test"
 dir = File.dirname(__FILE__)
 require File.expand_path("#{dir}/../config/environment")
+#ARGV.concat ["--options", "#{dir}/spec.opts"]
 require 'spec'
 require 'spec/rails'
 require 'hpricot'

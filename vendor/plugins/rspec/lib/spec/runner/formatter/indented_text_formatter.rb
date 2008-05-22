@@ -6,7 +6,7 @@ module Spec
       class IndentedTextFormatter < BaseTextFormatter
         def add_example_group(example_group)
           super
-          if example_group.description_args
+          if example_group.description_args && !example_group.description_args.empty?
             output.puts "#{example_group_indentation(example_group)}#{example_group.description_args}"
             output.flush
           end
@@ -29,7 +29,7 @@ module Spec
           output.flush
         end
 
-        def example_pending(example_group_description, example, message)
+        def example_pending(example, message)
           super
           output.puts yellow("#{example_group_indentation(example.class)}  #{example.description} (PENDING: #{message})")
           output.flush
