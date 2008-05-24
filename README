@@ -17,3 +17,5 @@ Some minimum features of pain-point:
 2) allow users to create pain points
 3) allow users to edit paint points
 4) allow users to vote on a pain point
+
+To use Selenium, you will need to have firefox-bin (firefox 2) on your path and set the environment variable MOZ_NO_REMOTE=1
