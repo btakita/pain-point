@@ -1,6 +1,6 @@
 --colour
 --format
-profile
+nested
 --loadby
 mtime
 --reverse
