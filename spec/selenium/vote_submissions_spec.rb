@@ -14,6 +14,23 @@ describe "A User on the home page" do
   end
 
   describe "clicking the up vote" do
+    describe "when logged in" do
+      attr_reader :user
+      before do
+        @user = users(:quentin)
+        element("link=Login").click
+        element("name=login").type(user.login)
+        element("name=password").type('test')
+        element("name=commit").click
+      end
+
+      it "increments the vote count by 1" do
+        element("css=.score").assert_contains('0')
+        element("css=.up").click
+        element("css=.score").assert_contains('1')
+      end
+    end
+
     describe "when not logged in" do
       it "sends a message to redirect to /login" do
         click "css=.up"
