@@ -10,7 +10,7 @@
 <node TEXT="Who uses Shoulda?"/>
 <node TEXT="Most of my examples will be in Rspec"/>
 </node>
-<node TEXT="Test Types 5:00" POSITION="right">
+<node TEXT="Focus of Tests 5:00" POSITION="right">
 <node TEXT="Method">
 <node TEXT="Automated">
 <node TEXT="xunit"/>
@@ -39,21 +39,11 @@
 <node TEXT="Integration"/>
 </node>
 </node>
+<node TEXT="Granularity of Tests" POSITION="right">
+<node TEXT="Happy Path testing"/>
+<node TEXT="Edge case testing"/>
+</node>
 <node TEXT="Installing rspec 3:00" POSITION="right"/>
-<node TEXT="Restful Authentication Example 10:00" POSITION="right">
-<node TEXT="Install the Restful Authentication plugin"/>
-<node TEXT="Generate the files and tests"/>
-<node TEXT="Refactor the tests">
-<node TEXT="Nested describes">
-<node TEXT="Describe ExampleGroup Subclassing"/>
-<node TEXT="Scope">
-<node TEXT="Class"/>
-<node TEXT="Method"/>
-<node TEXT="Context"/>
-</node>
-</node>
-</node>
-</node>
 <node TEXT="Vote Example 10:00" POSITION="right">
 <node TEXT="Explain the structure of a test">
 <node TEXT="physical structure">
@@ -77,6 +67,77 @@
 <node TEXT=".down"/>
 </node>
 <node TEXT="Fixture specs"/>
+</node>
+<node TEXT="Lifecycle of a Test" POSITION="right">
+<node TEXT="TDD">
+<node TEXT="Red -&gt; Green -&gt; Refactor">
+<node TEXT="Write the tests first, then implement the software"/>
+<node TEXT="These tests drive design"/>
+<node TEXT="Its easy to make a test that does not test anything">
+<node TEXT="For example, testing the elements within an empty collection"/>
+<node TEXT="Use Preconditions to set the context of your test"/>
+</node>
+</node>
+<node TEXT="Tests to drive the design of the software"/>
+<node TEXT="Tests should be refactored"/>
+<node TEXT="You can manually test drive your code, its just slower and you dont get to keep the tests"/>
+<node TEXT="TDD Goals">
+<node TEXT="Specification, not validation"/>
+<node TEXT="Feedback">
+<node TEXT="Developer makes smaller steps"/>
+<node TEXT="Developer knows when the code is finished"/>
+</node>
+<node TEXT="Developer has an example of using the implementation code"/>
+<node TEXT="Developer maintains focus on the objective"/>
+<node TEXT="Fast Iterations"/>
+<node TEXT="Developer rhythm"/>
+<node TEXT="Confidence"/>
+<node TEXT="Simplicity"/>
+<node TEXT="YAGNI"/>
+<node TEXT="Make a regression test"/>
+</node>
+</node>
+<node TEXT="Regression">
+<node TEXT="Tests to ensure that your software still works when you make changes"/>
+<node TEXT="Tests live longer than the code (the implementation often changes)"/>
+<node TEXT="Regression Test Goals">
+<node TEXT="Verify your software does not break due to changes in implementation or state"/>
+<node TEXT="Courage">
+<node TEXT="Support Experimentation &amp; Refactoring"/>
+</node>
+<node TEXT="Documentation">
+<node TEXT="Tests should clearly document your system">
+<node TEXT="Refactor the test if it is not clear or focused"/>
+<node TEXT="Nested ExampleGroups are very helpful in showing contextual logic"/>
+</node>
+<node TEXT="Unit tests should match the logical layout of your software"/>
+</node>
+<node TEXT="Clarity"/>
+<node TEXT="Fail in the right places">
+<node TEXT="Avoid crying wolf due to unnecessary brittleness"/>
+<node TEXT="Keep tests predictable"/>
+</node>
+</node>
+</node>
+<node TEXT="Retirement">
+<node TEXT="Tests that are no longer useful">
+<font NAME="SansSerif" SIZE="12"/>
+</node>
+</node>
+</node>
+<node TEXT="Restful Authentication Example 10:00" POSITION="right">
+<node TEXT="Install the Restful Authentication plugin"/>
+<node TEXT="Generate the files and tests"/>
+<node TEXT="Refactor the tests">
+<node TEXT="Nested describes">
+<node TEXT="Describe ExampleGroup Subclassing"/>
+<node TEXT="Scope">
+<node TEXT="Class"/>
+<node TEXT="Method"/>
+<node TEXT="Context"/>
+</node>
+</node>
+</node>
 </node>
 <node TEXT="VoteSubmissionsController Examples 10:00" POSITION="right">
 <node TEXT="UpVoteSubmissionsController"/>
