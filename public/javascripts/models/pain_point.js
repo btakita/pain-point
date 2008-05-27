@@ -1,4 +1,4 @@
-(function(window) {
+(function() {
   window.PainPoint = function PainPoint(attributes) {
     this.id = attributes.id;
     this.name = attributes.name;
@@ -11,4 +11,4 @@
       this.instances.push(new PainPoint(data[i]));
     }
   };
-})(this);
+})();
