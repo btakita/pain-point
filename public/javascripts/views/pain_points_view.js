@@ -1,9 +1,7 @@
-(function(window) {
-  window.PainPointView = function PainPointView(pain_points) {
-    
+(function() {
+  window.PainPointView = {
+    'create': function() {
+      
+    }
   }
-
-  PainPointView.prototype.render = function() {
-    
-  }
-})(this);
+})();
