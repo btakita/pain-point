@@ -6,6 +6,6 @@ Spec.register(PainPointsViewSpec);
 PainPointsViewSpec['before each'] = function() {
   PainPointsViewSpec.pain_points = [
   ];
-  PainPointsViewSpec.view = new PainPointsViewSpec();
+  PainPointsViewSpec.view = new PainPointsView.create();
 }
 
