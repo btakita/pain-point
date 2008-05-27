@@ -1,5 +1,5 @@
 (function() {
-  window.PainPointView = {
+  window.PainPointsView = {
     'create': function() {
       
     }
