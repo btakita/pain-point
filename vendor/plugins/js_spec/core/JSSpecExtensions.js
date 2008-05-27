@@ -1,17 +1,17 @@
 function Spec() {
 }
 
-Spec.register = function(spec_constructor) {
-  spec_constructor.describe = function(context, definition) {
+Spec.register = function(example_group) {
+  example_group.describe = function(context, definition) {
     var custom_before = definition['before each'];
     if(custom_before) {
       definition['before each'] = function() {
-        if(spec_constructor['before each']) spec_constructor['before each']();
+        if(example_group['before each']) example_group['before each']();
         custom_before();
       }
     } else {
       definition['before each'] = function() {
-        if(spec_constructor['before each']) spec_constructor['before each']();
+        if(example_group['before each']) example_group['before each']();
       };
     }
 
@@ -19,17 +19,16 @@ Spec.register = function(spec_constructor) {
     if(custom_after) {
       definition['after each'] = function() {
         custom_after();
-        if(spec_constructor['after each']) spec_constructor['after each']();
+        if(example_group['after each']) example_group['after each']();
         Spec.reset();
       }
     } else {
       definition['after each'] = function() {
-        if(spec_constructor['after each']) spec_constructor['after each']();
+        if(example_group['after each']) example_group['after each']();
         Spec.reset();
       }
     }
-    new spec_constructor();
-    describe(spec_constructor.name.toString() + context.toString(), definition);
+    describe(example_group.name.toString() + context.toString(), definition);
   }
 }
 
@@ -93,16 +92,19 @@ function parse_url(url) {
 JSSpec.Logger.prototype.onRunnerEndWithoutServerNotification = JSSpec.Logger.prototype.onRunnerEnd;
 JSSpec.Logger.prototype.onRunnerEndWithServerNotification = function() {
   this.onRunnerEndWithoutServerNotification();
-  var xml = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
-  xml.open("POST", '/suites/1/finish', true);
-  xml.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-  var body = [];
-  body.push(encodeURIComponent("guid") + "=" + encodeURIComponent( JSSpec.guid ));
-  body.push(encodeURIComponent("text") + "=" + encodeURIComponent( this.get_error_message_text() ));
-  xml.send(body.join("&"));
+  var suite_id = JSSpec.suite_id();
+  if(suite_id) {
+    var xml = window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : new XMLHttpRequest();
+    xml.open("POST", '/suites/' + suite_id + '/finish', true);
+    xml.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+    xml.send("text=" + encodeURIComponent(this.get_error_message_text()));
+  }
 }
 JSSpec.Logger.prototype.onRunnerEnd = JSSpec.Logger.prototype.onRunnerEndWithServerNotification;
-JSSpec.guid = null;
+
+JSSpec.suite_id = function() {
+  return top.runOptions ? top.runOptions.getSessionId() : 'user';
+}
 
 JSSpec.Logger.prototype.get_error_message_text = function() {
   var error_messages = [];

@@ -1,0 +1,7 @@
+--- 
+format: 1
+handler: 
+  commit: d0805b6752a3d825430df88a18865e49286f8c3c
+repository_url: git://github.com/pivotal/js-spec-server.git
+lock: false
+repository_class: Piston::Git::Repository

@@ -26,7 +26,7 @@ def run_suite
 end
 
 PKG_NAME = "js_spec"
-PKG_VERSION = "0.2.0"
+PKG_VERSION = "0.2.1"
 PKG_FILES = FileList[
   '[A-Z]*',
   '*.rb',
@@ -58,8 +58,7 @@ spec = Gem::Specification.new do |s|
   s.homepage = "http://pivotallabs.com"
   s.rubyforge_project = "pivotalrb"
   s.add_dependency('Selenium')
-  s.add_dependency('thin')
-  s.add_dependency('uuid')
+  s.add_dependency('thin', '=0.8.1')
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|

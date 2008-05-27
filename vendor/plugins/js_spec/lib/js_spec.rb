@@ -1,27 +1,26 @@
 require "rubygems"
-gem "eventmachine", "0.10.0"
-gem "thin", "0.7.1"
-
-require "thin"
-require "fileutils"
-require "tmpdir"
-require "timeout"
-require "cgi"
-require "net/http"
-require "selenium"
-require "optparse"
 
 dir = File.dirname(__FILE__)
-require "#{dir}/js_spec/guid"
-require "#{dir}/js_spec/thin"
-require "#{dir}/js_spec/rack"
+$:.unshift(File.expand_path("#{dir}/../vendor/js-test-core/lib"))
+require "js_test_core"
+JsTestCore::Resources::WebRoot.dispatch_specs
+
 require "#{dir}/js_spec/resources"
 
-require "#{dir}/js_spec/client"
-require "#{dir}/js_spec/server"
-require "#{dir}/js_spec/rails_server"
-
 module JsSpec
-  DEFAULT_HOST = "0.0.0.0"
-  DEFAULT_PORT = 8080  
+  DEFAULT_HOST = JsTestCore::DEFAULT_HOST
+  DEFAULT_PORT = JsTestCore::DEFAULT_PORT
+
+  Server = JsTestCore::Server
+  RailsServer = JsTestCore::RailsServer
+  Client = JsTestCore::Client
+end
+JsTestCore.core_path = File.expand_path("#{dir}/../core")
+
+class JsTestCore::Resources::Specs::SpecFile
+  include JsSpec::Resources::Spec
+end
+
+class JsTestCore::Resources::Specs::SpecDir
+  include JsSpec::Resources::Spec
 end

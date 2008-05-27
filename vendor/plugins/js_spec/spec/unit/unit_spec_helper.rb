@@ -1,11 +1,11 @@
 require "rubygems"
-dir = File.dirname(__FILE__)
-$LOAD_PATH.unshift "#{dir}/../../../plugins/rspec/lib"
 require "spec"
+dir = File.dirname(__FILE__)
 
 $LOAD_PATH.unshift "#{dir}/../../lib"
 require "js_spec"
 require "hpricot"
+require "guid"
 
 Spec::Runner.configure do |config|
   config.mock_with :rr
@@ -43,7 +43,7 @@ module Spec::Example::ExampleMethods
   end
 
   before(:each) do
-    JsSpec::Server.instance = JsSpec::Server.new(spec_root_path, implementation_root_path, public_path)
+    JsTestCore::Server.instance = JsTestCore::Server.new(spec_root_path, implementation_root_path, public_path)
     stub(EventMachine).run do
       raise "You need to mock calls to EventMachine.run or the process will hang"
     end
@@ -53,10 +53,10 @@ module Spec::Example::ExampleMethods
     stub(EventMachine).send_data do
       raise "Calls to EventMachine.send_data must be mocked or stubbed"
     end
-    @connection = Thin::JsSpecConnection.new(Guid.new)
+    @connection = Thin::JsTestCoreConnection.new(Guid.new)
     stub(EventMachine).send_data {raise "EventMachine.send_data must be handled"}
     stub(EventMachine).close_connection {raise "EventMachine.close_connection must be handled"}
-    @server = JsSpec::Server.instance
+    @server = JsTestCore::Server.instance
     Thin::Logging.silent = !self.class.thin_logging
     Thin::Logging.debug = self.class.thin_logging
   end
@@ -83,7 +83,7 @@ module Spec::Example::ExampleMethods
   end
 
   def env_for(method, url, params)
-    Rack::MockRequest.env_for(url, params.merge({:method => method.to_s.upcase, 'js_spec.connection' => connection}))
+    Rack::MockRequest.env_for(url, params.merge({:method => method.to_s.upcase, 'js_test_core.connection' => connection}))
   end
 
   def create_request(method, url, params={})
@@ -93,17 +93,17 @@ module Spec::Example::ExampleMethods
   alias_method :request, :create_request
 
   def core_path
-    JsSpec::Server.core_path
+    JsTestCore::Server.core_path
   end
 
   def spec_file(relative_path)
     absolute_path = spec_root_path + relative_path
-    JsSpec::Resources::File.new(absolute_path, "/specs#{relative_path}")
+    JsTestCore::Resources::File.new(absolute_path, "/specs#{relative_path}")
   end
 
   def spec_dir(relative_path="")
     absolute_path = spec_root_path + relative_path
-    JsSpec::Resources::Dir.new(absolute_path, "/specs#{relative_path}")
+    JsTestCore::Resources::SpecDir.new(absolute_path, "/specs#{relative_path}")
   end
 
   def contain_spec_file_with_correct_paths(path_relative_to_spec_root)

@@ -1,3 +1,12 @@
+- Added JSSpec.session_id method
+- Removed JSSpec.guid property
+- Sending session_id post parameter instead of guid
+- Using Selenium session_id instead of a generated guid to identify the session.
+- ExampleGroups no longer need to be constructors
+- Fixed finalize for nil error when running specs from the browser
+
+0.2.1
+- Using thin 0.8.1
 - Fixed server crashing on exception issue.
 - Add div id=js_spec_content into the body of the runner html.
 - Fixed timeout issues by immediately sending the head of the response.
