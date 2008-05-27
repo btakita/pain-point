@@ -1,0 +1,7 @@
+--- 
+format: 1
+handler: 
+  commit: 08670b640ee8da5bc29a8db751813aa259544036
+repository_url: git://github.com/dchelimsky/rspec-rails.git
+lock: false
+repository_class: Piston::Git::Repository
