@@ -1,0 +1,9 @@
+0.1.1
+- SuiteFinish#post immediately closes the connection
+
+0.1.0
+- Initial Release extracted from JsTestCore.
+- Added JsTestCore::WebRoot.dispatch_specs and .dispatch_strategy
+- Extracted JsTestCore::Resources::Specs::SpecDir
+- Extracted JsTestCore::Resources::Specs::SpecFile
+- No longer depending on Guid. The child libraries are responsible for obtaining the Selenium session_id from the client by using top.runOptions.getSessionId().

@@ -1,0 +1,7 @@
+--- 
+format: 1
+handler: 
+  commit: 76adad3a73b50bdfd422296935a1025d248fddc9
+repository_url: git://github.com/btakita/screw-unit-server.git
+lock: false
+repository_class: Piston::Git::Repository
