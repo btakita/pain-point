@@ -155,9 +155,11 @@
 </node>
 <node TEXT="View Specs Example 10:00" POSITION="right">
 <node TEXT="erb view spec"/>
-<node TEXT="Custom Matcher"/>
 <node TEXT="Introduce Erector"/>
 <node TEXT="Erector view spec"/>
+</node>
+<node TEXT="Custom Matcher" POSITION="right">
+<node TEXT="have_link in hpricot_helpers.rb"/>
 </node>
 <node TEXT="Test Double Example" POSITION="right">
 <node TEXT="Introduce RR"/>

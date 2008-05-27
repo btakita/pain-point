@@ -9,6 +9,8 @@ Dir["#{dir}/spec_helpers/**/*.rb"].each do |file|
   require file
 end
 
+require 'rspec_hpricot_matchers'
+
 Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
@@ -17,6 +19,7 @@ Spec::Runner.configure do |config|
   config.mock_with :rr
 
   config.include AuthenticatedTestHelper
+  config.include(RspecHpricotMatchers)
 end
 
 module Spec::Example::ExampleMethods
