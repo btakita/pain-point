@@ -32,4 +32,89 @@ describe Vote do
       end
     end
   end
+
+  describe "State Transitions" do
+    attr_reader :vote
+    before do
+      @vote = votes(:quentin_slow_tests)
+    end
+
+    it "has an initial state of neutral" do
+      Vote.new.state.should == 'neutral'
+    end
+
+    describe "#up_vote" do
+      describe "when in neutral state" do
+        before do
+          vote.state.should == 'neutral'
+        end
+
+        it "transitions to up state" do
+          vote.up_vote
+          vote.state.should == 'up'
+        end
+      end
+
+      describe "when in down state" do
+        before do
+          vote.state = 'down'
+          vote.save!
+        end
+
+        it "transitions to up state" do
+          vote.up_vote
+          vote.state.should == 'up'
+        end
+      end
+
+      describe "when in up state" do
+        before do
+          vote.state = 'up'
+          vote.save!
+        end
+
+        it "transitions to neutral state" do
+          vote.up_vote
+          vote.state.should == 'neutral'
+        end
+      end
+    end
+
+    describe "#down_vote" do
+      describe "when in neutral state" do
+        before do
+          vote.state.should == 'neutral'
+        end
+
+        it "transitions to down state" do
+          vote.down_vote
+          vote.state.should == 'down'
+        end
+      end
+
+      describe "when in down state" do
+        before do
+          vote.state = 'down'
+          vote.save!
+        end
+
+        it "transitions to neutral state" do
+          vote.down_vote
+          vote.state.should == 'neutral'
+        end
+      end
+
+      describe "when in up state" do
+        before do
+          vote.state = 'up'
+          vote.save!
+        end
+
+        it "transitions to down state" do
+          vote.down_vote
+          vote.state.should == 'down'
+        end
+      end
+    end
+  end
 end
