@@ -19,7 +19,7 @@ Spec::Runner.configure do |config|
   config.mock_with :rr
 
   config.include AuthenticatedTestHelper
-  config.include(RspecHpricotMatchers)
+  config.include RspecHpricotMatchers
 end
 
 module Spec::Example::ExampleMethods
