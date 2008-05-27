@@ -159,7 +159,7 @@
 <node TEXT="Erector view spec"/>
 </node>
 <node TEXT="Custom Matcher" POSITION="right">
-<node TEXT="have_link in hpricot_helpers.rb"/>
+<node TEXT="have_link.rb in rspec_hpricot_matchers plugin"/>
 </node>
 <node TEXT="Test Double Example" POSITION="right">
 <node TEXT="Introduce RR"/>
