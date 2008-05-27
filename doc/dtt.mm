@@ -155,6 +155,7 @@
 </node>
 <node TEXT="View Specs Example 10:00" POSITION="right">
 <node TEXT="erb view spec"/>
+<node TEXT="Custom Matcher"/>
 <node TEXT="Introduce Erector"/>
 <node TEXT="Erector view spec"/>
 </node>
