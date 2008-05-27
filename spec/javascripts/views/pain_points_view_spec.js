@@ -1,11 +1,11 @@
 require("/specs/spec_helper");
 
-function PainPointsViewSpec() {}
-Spec.register(PainPointsViewSpec);
-
-PainPointsViewSpec['before each'] = function() {
-  PainPointsViewSpec.pain_points = [
-  ];
-  PainPointsViewSpec.view = new PainPointsViewSpec();
-}
-
+Screw.Unit(function() {
+  describe("PainPointsView", function() {
+    var pain_points, view;
+    before(function() {
+      pain_points = [];
+      view = new PainPointsViewSpec();
+    });
+  });
+});
