@@ -1,0 +1,13 @@
+<div>Existing Pain Points</div>
+<ul>
+  <% PainPoint.find(:all).each do |pain_point| %>
+    <li><%= pain_point.name %></li>
+  <% end %>
+</ul>
+
+<p>Create a new pain point</p>
+
+<% form_for PainPoint.new, :url => pain_points_path do |f| %>
+  <%= f.text_field :name %>
+  <%= submit_tag 'Create' %>
+<% end %>
