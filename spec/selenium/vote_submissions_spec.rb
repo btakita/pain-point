@@ -37,7 +37,9 @@ describe "A User on the home page" do
         before do
           element("css=.score").assert_contains('0')
           click "css=.up"
-          assert_location_ends_with new_session_path
+          pending "Client side will handle login" do
+            assert_location_ends_with new_session_path
+          end
           @user = users(:quentin)
           element("link=Login").click
           element("name=login").type(user.login)

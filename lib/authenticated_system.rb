@@ -67,7 +67,7 @@ module AuthenticatedSystem
           redirect_to new_session_path
         end
         format.json do
-          render :json => {'type' => 'Redirect', 'attributes' => {'href' => new_session_path}}
+          render :json => {'type' => 'Login'}
         end
         format.any do
           request_http_basic_authentication 'Web Password'

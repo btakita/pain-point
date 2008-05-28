@@ -9,7 +9,7 @@ describe "A User on the home page" do
 
   describe "when not logged in" do
     describe "clicking the up vote" do
-      it "sends a message to redirect to /login" do
+      it "sends a Login" do
         pain_point = pain_points(:slow_tests)
         post(
           pain_point_up_vote_index_path(:pain_point_id => pain_point.to_param),
@@ -20,7 +20,7 @@ describe "A User on the home page" do
           "Cookie" => "bc_test=true; _pain-point_session=#{session_id}"
         )
         status.should == 200
-        JSON.parse(@response.body).should == {'type' => 'Redirect', 'attributes' => {'href' => new_session_path}}
+        JSON.parse(@response.body).should == {'type' => 'Login'}
       end
     end
   end

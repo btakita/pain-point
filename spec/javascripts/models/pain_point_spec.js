@@ -51,6 +51,30 @@ Screw.Unit(function() {
       });
     });
 
+    this["when the server responds with a Login"] = function(method_name) {
+      describe("when the server responds with a Login", function() {
+        describe("when passing in a callback", function() {
+          it("invokes the callback with the Login instance", function() {
+            var callback_object;
+            var callback = function(object) {
+              callback_object = object;
+            }
+            pain_point[method_name](callback);
+
+            ActiveAjaxRequests[0].success({"type": "Login"});
+            expect(callback_object).to(equal, {"type": "Login"})
+          });
+        });
+
+        describe("when not passing in a callback", function() {
+          it("does nothing", function() {
+            pain_point[method_name]();
+            ActiveAjaxRequests[0].success({"type": "Login"});
+          });
+        });
+      });
+    }
+
     describe("#up_vote", function() {
       before(function() {
         window._token = "foobar";
@@ -80,18 +104,7 @@ Screw.Unit(function() {
           expect(pain_point.score).to(equal, 5);
         });
 
-        describe("when the server responds with a Redirect", function() {
-          it("sets the window.href to value of the location", function() {
-            var location = {};
-            pain_point.location = location;
-            pain_point.up_vote();
-
-            ActiveAjaxRequests[0].success(
-              {"type": "Redirect", "attributes": {"href": "/sessions/new"}}
-            );
-            expect(location.href).to(equal, "/sessions/new");
-          });
-        });
+        this["when the server responds with a Login"]('up_vote');
       });
 
     });
@@ -123,18 +136,7 @@ Screw.Unit(function() {
         expect(pain_point.vote_state).to(equal, 'down');
       });
 
-      describe("when the server responds with a Redirect", function() {
-        it("sets the window.href to value of the location", function() {
-          var location = {};
-          pain_point.location = location;
-          pain_point.down_vote();
-
-          ActiveAjaxRequests[0].success(
-            {"type": "Redirect", "attributes": {"href": "/sessions/new"}}
-          );
-          expect(location.href).to(equal, "/sessions/new");
-        });
-      });
+      this["when the server responds with a Login"]('down_vote');
     });
   });
 });

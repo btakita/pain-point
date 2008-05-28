@@ -40,13 +40,11 @@
       contentType: "application/json",
       dataType: "json",
       success: function(data) {
-        if(data.type == "Redirect") {
-          self.location.href = data.attributes.href;
+        if(data.type == "Login") {
+          if(callback) callback(data);
         } else {
           update_attributes.call(self, data.attributes);
-          if(callback) {
-            callback(self);
-          }
+          if(callback) callback(self);
         }
       }
     });
