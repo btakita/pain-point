@@ -162,18 +162,11 @@
 <node TEXT="have_link.rb in rspec_hpricot_matchers plugin"/>
 <node TEXT="using fork on github to introduce features to existing projects"/>
 </node>
-<node TEXT="Test Double Example" POSITION="right">
-<node TEXT="Introduce RR"/>
-<node TEXT="Mocks"/>
-<node TEXT="Stubs"/>
-<node TEXT="Mock Proxy"/>
-<node TEXT="Stub Proxy"/>
-</node>
 <node TEXT="Audience participation 30:00" POSITION="right">
 <node TEXT="Introduce Git"/>
 <node TEXT="Instruct audience to jump to a certain branch"/>
 </node>
-<node TEXT="Extracting up and down links into JS example 15:00" POSITION="right">
+<node TEXT="Extracting up and down links into JS example 20:00" POSITION="right">
 <node TEXT="Client/Server architecture">
 <node TEXT="Advantages"/>
 <node TEXT="Disadvantages"/>
@@ -182,6 +175,13 @@
 <node TEXT="screw unit + server"/>
 </node>
 <node TEXT="Selenium Testing 10:00" POSITION="right"/>
+<node TEXT="Test Double Example" POSITION="right">
+<node TEXT="Introduce RR"/>
+<node TEXT="Mocks"/>
+<node TEXT="Stubs"/>
+<node TEXT="Mock Proxy"/>
+<node TEXT="Stub Proxy"/>
+</node>
 <node TEXT="Audience participation 30:00" POSITION="right"/>
 <node TEXT="send instructions to participants" POSITION="left">
 <node TEXT="notify that this is a preliminary outline, it will change the following week"/>
