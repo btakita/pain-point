@@ -70,6 +70,7 @@ Screw.Unit(function() {
       describe(".up_vote", function() {
         var link;
         before(function() {
+          pain_point.vote_state = 'down';
           view = PainPointView.create(pain_point);
           link = view.up_vote;
         });
@@ -86,7 +87,40 @@ Screw.Unit(function() {
 
             var request = ActiveAjaxRequests.shift();
             expect(request.type).to(equal, "POST");
+            expect(request.data_type).to(equal, "json");
             expect(request.url).to(equal, "/pain_points/1/up_vote");
+          });
+
+          describe('when the response has an vote_state of up', function() {
+            before(function() {
+              link.click();
+              var request = ActiveAjaxRequests.shift();
+              request.success({id: pain_point.id, name: pain_point.name, vote_state: 'up'});
+            });
+
+            it("sets the .up_vote link class to selected", function() {
+              expect(view.up_vote.hasClass('selected')).to(equal, true);
+            });
+
+            it("does not set the .down_vote link class to selected", function() {
+              expect(view.down_vote.hasClass('selected')).to(equal, false);
+            });
+          });
+
+          describe('when the response has an vote_state of neutral', function() {
+            before(function() {
+              link.click();
+              var request = ActiveAjaxRequests.shift();
+              request.success({id: pain_point.id, name: pain_point.name, vote_state: 'neutral'});
+            });
+
+            it("does not set the .up_vote link class to selected", function() {
+              expect(view.up_vote.hasClass('selected')).to(equal, false);
+            });
+
+            it("does not set the .down_vote link class to selected", function() {
+              expect(view.down_vote.hasClass('selected')).to(equal, false);
+            });
           });
         });
       });
@@ -110,7 +144,40 @@ Screw.Unit(function() {
 
             var request = ActiveAjaxRequests.shift();
             expect(request.type).to(equal, "POST");
+            expect(request.data_type).to(equal, "json");
             expect(request.url).to(equal, "/pain_points/1/down_vote");
+          });
+
+          describe('when the response has an vote_state of down', function() {
+            before(function() {
+              link.click();
+              var request = ActiveAjaxRequests.shift();
+              request.success({id: pain_point.id, name: pain_point.name, vote_state: 'down'});
+            });
+
+            it("does not set the .up_vote link class to selected", function() {
+              expect(view.up_vote.hasClass('selected')).to(equal, false);
+            });
+
+            it("sets the .down_vote link class to selected", function() {
+              expect(view.down_vote.hasClass('selected')).to(equal, true);
+            });
+          });
+
+          describe('when the response has an vote_state of neutral', function() {
+            before(function() {
+              link.click();
+              var request = ActiveAjaxRequests.shift();
+              request.success({id: pain_point.id, name: pain_point.name, vote_state: 'neutral'});
+            });
+
+            it("does not set the .up_vote link class to selected", function() {
+              expect(view.up_vote.hasClass('selected')).to(equal, false);
+            });
+
+            it("does not set the .down_vote link class to selected", function() {
+              expect(view.down_vote.hasClass('selected')).to(equal, false);
+            });
           });
         });
       });

@@ -8,6 +8,7 @@ var FakeJQueryRequest = function(params) {
   this.url = this.params.url;
   this.data = this.params.data;
   this.content_type = this.params.contentType;
+  this.data_type = this.params.dataType;
 
   this.success = function(response) {
     if(that.params.beforeSend) {
