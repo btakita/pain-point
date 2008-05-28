@@ -1,6 +1,6 @@
 (function($) {
   window.LoginView = {
-    'create': function() {
+    'create': function(success_callback) {
       var builder = new XmlBuilder({binding: this});
       with(builder) {
         div({'class': "login jqmWindow"}, function() {
@@ -33,6 +33,7 @@
           success: function() {
             view.jqm().jqmHide();
             view.remove();
+            success_callback();
           }
         });
       });

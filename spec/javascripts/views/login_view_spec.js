@@ -3,12 +3,16 @@ require("/specs/spec_helper");
 Screw.Unit(function() {
   describe("LoginView", function() {
     describe('.create', function() {
-      var view;
+      var view, success_callback, success_callback_called;
 
       before(function() {
         expect($('body > .login').length).to(equal, 0);
         expect($('body > .jqmOverlay').length).to(equal, 0);
-        view = LoginView.create();
+        success_callback_called = false
+        success_callback = function() {
+          success_callback_called = true;
+        }
+        view = LoginView.create(success_callback);
       });
 
       it("attaches the login and overlay to the body", function() {
@@ -49,7 +53,13 @@ Screw.Unit(function() {
               ActiveAjaxRequests.shift().success();
               expect($('body > .login').length).to(equal, 0);
               expect($('body > .jqmOverlay').length).to(equal, 0);
-            }); 
+            });
+
+            it("invokes the passed in success callback", function() {
+              view.submit.click();
+              ActiveAjaxRequests.shift().success();
+              expect(success_callback_called).to(equal, true);
+            });
           });
         });
       });

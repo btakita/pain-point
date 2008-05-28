@@ -122,6 +122,18 @@ Screw.Unit(function() {
           expect(view.login.hasClass('login')).to(equal, true);
           expect($('body > .login').length).to(equal, 1);
         });
+
+        describe("when the Login is successful", function() {
+          it("sends another POST to /pain_points/:pain_point_id/up_vote", function() {
+            view.login.submit.click();
+            ActiveAjaxRequests.shift().success();
+
+            expect(ActiveAjaxRequests.length).to(equal, 1);
+            var request = ActiveAjaxRequests.shift();
+            expect(request.type).to(equal, 'POST');
+            expect(request.url).to(equal, '/pain_points/1/up_vote');
+          });
+        });
       });
 
       describe("when the server responds with a PainPoint", function() {
@@ -212,6 +224,18 @@ Screw.Unit(function() {
           expect(view.login).to_not(equal, undefined);
           expect(view.login.hasClass('login')).to(equal, true);
           expect($('body > .login').length).to(equal, 1);
+        });
+
+        describe("when the Login is successful", function() {
+          it("sends another POST to /pain_points/:pain_point_id/down_vote", function() {
+            view.login.submit.click();
+            ActiveAjaxRequests.shift().success();
+
+            expect(ActiveAjaxRequests.length).to(equal, 1);
+            var request = ActiveAjaxRequests.shift();
+            expect(request.type).to(equal, 'POST');
+            expect(request.url).to(equal, '/pain_points/1/down_vote');
+          });
         });
       });
 

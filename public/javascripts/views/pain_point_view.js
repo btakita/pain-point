@@ -48,23 +48,33 @@
     view.refresh(pain_point);
 
     view.find("a.up").click(function() {
-      pain_point.up_vote(function(resource) {
-        if(resource.type == "Login") {
-          view.login = LoginView.create();
-        } else {
-          view.refresh(resource);
-        }
-      });
+      var invoke_up_vote = function() {
+        pain_point.up_vote(function(resource) {
+          if(resource.type == "Login") {
+            view.login = LoginView.create(function() {
+              invoke_up_vote();
+            });
+          } else {
+            view.refresh(resource);
+          }
+        });
+      }
+      invoke_up_vote();
       return false;
     });
     view.find("a.down").click(function() {
-      pain_point.down_vote(function(resource) {
-        if(resource.type == "Login") {
-          view.login = LoginView.create();
-        } else {
-          view.refresh(resource);
-        }
-      });
+      var invoke_down_vote = function() {
+        pain_point.down_vote(function(resource) {
+          if(resource.type == "Login") {
+            view.login = LoginView.create(function() {
+              invoke_down_vote();
+            });
+          } else {
+            view.refresh(resource);
+          }
+        });
+      }
+      invoke_down_vote();
       return false;
     });
     return view;
