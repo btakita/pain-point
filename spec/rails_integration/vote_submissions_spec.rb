@@ -35,7 +35,7 @@ describe "A User on the home page" do
     end
 
     describe "clicking the up vote" do
-      it "sends a message to redirect to /login" do
+      it "sends the PainPoint user data json" do
         pain_point = pain_points(:slow_tests)
         post(
           create_pain_point_up_vote_path(:pain_point_id => pain_point.to_param),
