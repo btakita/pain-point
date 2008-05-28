@@ -158,11 +158,6 @@
 <node TEXT="Introduce Erector"/>
 <node TEXT="Erector view spec"/>
 </node>
-<node TEXT="Audience participation 30:00" POSITION="right">
-<node TEXT="Introduce Git"/>
-<node TEXT="Instruct audience to jump to 04-vote-submissions-controller branch"/>
-<node TEXT="Instruct audience to create DownVoteSubmissionsController"/>
-</node>
 <node TEXT="Custom Matcher" POSITION="right">
 <node TEXT="have_link.rb in rspec_hpricot_matchers plugin"/>
 <node TEXT="using fork on github to introduce features to existing projects"/>
@@ -173,6 +168,11 @@
 <node TEXT="Stubs"/>
 <node TEXT="Mock Proxy"/>
 <node TEXT="Stub Proxy"/>
+</node>
+<node TEXT="Audience participation 30:00" POSITION="right">
+<node TEXT="Introduce Git"/>
+<node TEXT="Instruct audience to jump to 04-vote-submissions-controller-finish branch"/>
+<node TEXT="Instruct audience to create DownVoteSubmissionsController"/>
 </node>
 <node TEXT="Extracting up and down links into JS example 20:00" POSITION="right">
 <node TEXT="Client/Server architecture">
