@@ -6,6 +6,10 @@ gems:
   version: 2.5.0
 - name: daemons
   version: 1.0.10
+<% if RUBY_PLATFORM =~ /[^d]win/ %>
+- name: eventmachine
+  version: 0.8.1
+<% end %>
 - name: fit
   version: 1.1
 - name: fitnesse-ruby
