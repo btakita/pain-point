@@ -5,21 +5,72 @@ Screw.Unit(function() {
     var pain_point, view;
     before(function() {
       pain_point = new PainPoint({id: 1, name: "Tests are slow", vote_state: "up"});
+      view = undefined;
     });
 
     describe(".create", function() {
-      before(function() {
-        view = PainPointView.create(pain_point);
+      this["renders the PainPoint within a ul tag"] = function() {
+        it("renders the PainPoint within a ul tag", function() {
+          expect(view[0].tagName.toUpperCase()).to(match, "LI");
+          expect(view.html()).to(match, pain_point.name);
+        });
+      };
+
+      describe('when pain_point vote_state is up', function() {
+        before(function() {
+          pain_point.vote_state = "up";
+          view = PainPointView.create(pain_point);
+        });
+
+        this["renders the PainPoint within a ul tag"]();
+
+        it("sets the .up_vote link class to selected", function() {
+          expect(view.up_vote.hasClass('selected')).to(equal, true);
+        });
+
+        it("does not set the .down_vote link class to selected", function() {
+          expect(view.down_vote.hasClass('selected')).to(equal, false);
+        });
       });
 
-      it("render the PainPoint within a ul tag", function() {
-        expect(view[0].tagName.toUpperCase()).to(match, "LI");
-        expect(view.html()).to(match, pain_point.name);
+      describe('when pain_point vote_state is down', function() {
+        before(function() {
+          pain_point.vote_state = "down";
+          view = PainPointView.create(pain_point);
+        });
+
+        this["renders the PainPoint within a ul tag"]();
+
+        it("does not set the .up_vote link class to selected", function() {
+          expect(view.up_vote.hasClass('selected')).to(equal, false);
+        });
+
+        it("sets the .down_vote link class to selected", function() {
+          expect(view.down_vote.hasClass('selected')).to(equal, true);
+        });
+      });
+
+      describe('when pain_point vote_state is neutral', function() {
+        before(function() {
+          pain_point.vote_state = "neutral";
+          view = PainPointView.create(pain_point);
+        });
+
+        this["renders the PainPoint within a ul tag"]();
+
+        it("does not set the .up_vote link class to selected", function() {
+          expect(view.up_vote.hasClass('selected')).to(equal, false);
+        });
+
+        it("does not set the .down_vote link class to selected", function() {
+          expect(view.down_vote.hasClass('selected')).to(equal, false);
+        });
       });
 
       describe(".up_vote", function() {
         var link;
         before(function() {
+          view = PainPointView.create(pain_point);
           link = view.up_vote;
         });
 
@@ -43,6 +94,7 @@ Screw.Unit(function() {
       describe(".down_vote", function() {
         var link;
         before(function() {
+          view = PainPointView.create(pain_point);
           link = view.down_vote;
         });
 

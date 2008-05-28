@@ -4,8 +4,8 @@
       var builder = new XmlBuilder({binding: this});
       with(builder) {
         li(function() {
-          a('up', {href: '#'});
-          a('down', {href: '#'});
+          a('up', {href: '#', 'class': (pain_point.vote_state == 'up' ? 'selected' : '')});
+          a('down', {href: '#', 'class': (pain_point.vote_state == 'down' ? 'selected' : '')});
           span(pain_point.name);
         });
       };
