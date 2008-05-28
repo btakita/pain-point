@@ -48,8 +48,7 @@ describe "A User on the home page" do
         it "redirects to PainPoint page and sets the score up by 1" do
           pending "Apply vote when logging in"
           wait_for do
-            uri = URI.parse(get_location)
-            uri.path == '/'
+            URI.parse(get_location).path == '/'
           end
           element("css=.score").assert_contains('1')
         end

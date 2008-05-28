@@ -12,7 +12,7 @@ class Views::Layouts::Application < Erector::Widget
           "views/pain_points_view"
         ]
         javascript_include_tag(*js_files)
-        stylesheet_link_tag 'typography', :cache => true
+        stylesheet_link_tag 'application', :cache => true
       end
 
       body do
