@@ -18,6 +18,15 @@ var FakeJQueryRequest = function(params) {
       that.params.success(response);
     };
   };
+
+  this.error = function(response) {
+    if(that.params.beforeSend) {
+      that.params.beforeSend(that.http_request);
+    }
+    if(that.params.error) {
+      that.params.error(response);
+    };
+  };
 };
 
 var FakeHttpRequest = function() {
