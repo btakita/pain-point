@@ -48,11 +48,23 @@
     view.refresh(pain_point);
 
     view.find("a.up").click(function() {
-      pain_point.up_vote(view.refresh);
+      pain_point.up_vote(function(resource) {
+        if(resource.type == "Login") {
+          view.login = LoginView.create();
+        } else {
+          view.refresh(resource);
+        }
+      });
       return false;
     });
     view.find("a.down").click(function() {
-      pain_point.down_vote(view.refresh);
+      pain_point.down_vote(function(resource) {
+        if(resource.type == "Login") {
+          view.login = LoginView.create();
+        } else {
+          view.refresh(resource);
+        }
+      });
       return false;
     });
     return view;

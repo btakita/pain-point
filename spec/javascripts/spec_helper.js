@@ -10,7 +10,7 @@ require("/specs/fake_jQuery_ajax");
 
 Screw.Unit(function() {
   before(function() {
-    $("body > .overlay").remove();
+    $("body > .login").remove();
     $("#screw_unit_content").html("");
     ActiveAjaxRequests.length = 0;
     PainPoint.instances = [];

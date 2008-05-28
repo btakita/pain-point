@@ -102,7 +102,7 @@ Screw.Unit(function() {
       });
 
       it("sends a POST to /pain_points/:pain_point_id/up_vote", function() {
-        view.find("a.up").click();
+        link.click();
         expect(ActiveAjaxRequests.length).to(equal, 1);
         var request = ActiveAjaxRequests[0];
         expect(request.type).to(equal, 'POST');
@@ -110,8 +110,17 @@ Screw.Unit(function() {
       });
 
       describe("when the server responds with a Login", function() {
-        it("causes login form to show itself", function() {
-          
+        before(function() {
+          expect(view.login).to(equal, undefined);
+          expect($('body > .login').length).to(equal, 0);
+          link.click();
+          ActiveAjaxRequests.shift().success({'type': "Login"});
+        });
+
+        it("creates a LoginView", function() {
+          expect(view.login).to_not(equal, undefined);
+          expect(view.login.hasClass('login')).to(equal, true);
+          expect($('body > .login').length).to(equal, 1);
         });
       });
 
@@ -176,18 +185,34 @@ Screw.Unit(function() {
     })
 
     describe("#down_vote.click", function() {
-      var view;
+      var view, link;
       before(function() {
         pain_point = new PainPoint({id: 1, name: "Pain Point 1", vote_state: "neutral", score: 0});
         view = PainPointView.create(pain_point);
+        link = view.find("a.down");
       });
 
       it("sends a POST to /pain_points/:pain_point_id/down_vote", function() {
-        view.find("a.down").click();
+        link.click();
         expect(ActiveAjaxRequests.length).to(equal, 1);
         var request = ActiveAjaxRequests[0];
         expect(request.type).to(equal, 'POST');
         expect(request.url).to(equal, '/pain_points/1/down_vote');
+      });
+
+      describe("when the server responds with a Login", function() {
+        before(function() {
+          expect(view.login).to(equal, undefined);
+          expect($('body > .login').length).to(equal, 0);
+          link.click();
+          ActiveAjaxRequests.shift().success({'type': "Login"});
+        });
+
+        it("creates a LoginView", function() {
+          expect(view.login).to_not(equal, undefined);
+          expect(view.login.hasClass('login')).to(equal, true);
+          expect($('body > .login').length).to(equal, 1);
+        });
       });
 
       describe("processing the server response", function() {
@@ -197,7 +222,7 @@ Screw.Unit(function() {
               view.find("a.up").addClass('selected');
               expect(view.find("a.up.selected")).to_not(be_empty);
               expect(view.find("a.down.selected")).to(be_empty);
-              view.find("a.down").click();
+              link.click();
               ActiveAjaxRequests[0].success(
                 {'type': "PainPoint", 'attributes': {id: 1, name: "Pain Point 1", vote_state: "down", score: 1}}
               );
@@ -210,10 +235,10 @@ Screw.Unit(function() {
           describe("neutral", function() {
             it("removes the 'selected' down vote and up vote link css class", function() {
               view.find("a.up").addClass("selected");
-              view.find("a.down").addClass("selected");
+              link.addClass("selected");
               expect(view.find("a.up.selected")).to_not(be_empty);
               expect(view.find("a.down.selected")).to_not(be_empty);
-              view.find("a.down").click();
+              link.click();
               ActiveAjaxRequests[0].success(
                 {'type': "PainPoint", 'attributes': {id: 1, name: "Pain Point 1", vote_state: "neutral", score: 3}}
               );
@@ -228,7 +253,7 @@ Screw.Unit(function() {
           it("renders the updated score", function() {
             expect(view.find(".score").html()).to_not(equal, "-5");
 
-            view.find("a.down").click();
+            link.click();
             ActiveAjaxRequests[0].success(
               {
                 'type': "PainPoint",
