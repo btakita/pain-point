@@ -4,3 +4,9 @@ require("/implementations/xmlbuilder");
 require("/implementations/views/pain_point_view");
 require("/implementations/views/pain_points_view");
 // stylesheet('/stylesheets/your_css_file');
+
+Screw.Unit(function() {
+  after(function() {
+    ActiveAjaxRequests.length = 0;
+  });
+});

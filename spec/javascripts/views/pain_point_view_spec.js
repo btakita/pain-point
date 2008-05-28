@@ -14,7 +14,30 @@ Screw.Unit(function() {
 
       it("render the PainPoint within a ul tag", function() {
         expect(view[0].tagName.toUpperCase()).to(match, "LI");
-        expect(view.html()).to(equal, pain_point.name);
+        expect(view.html()).to(match, pain_point.name);
+      });
+
+      describe(".up_vote", function() {
+        var link;
+        before(function() {
+          link = view.up_vote;
+        });
+
+        it("is a link that says 'up' and points to #", function() {
+          expect(link[0].tagName.toLowerCase()).to(equal, "a");
+          expect(link.html()).to(match, "up");
+          expect(link.attr('href')).to(equal, "#");
+        });
+
+        describe(".click", function() {
+          it("sends a POST /pain_points/:pain_point_id/up_vote", function() {
+            link.click();
+
+            var request = ActiveAjaxRequests.shift();
+            expect(request.type).to(equal, "POST");
+            expect(request.url).to(equal, "/pain_points/1/up_vote");
+          });
+        });
       });
     });
   });
