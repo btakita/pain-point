@@ -58,38 +58,38 @@ module VoteSubmissions
           end
 
           describe "and the User has a Vote for the PainPoint" do
-          attr_reader :existing_vote
-          before do
-            stub.proxy(controller).current_user do
-              user
+            attr_reader :existing_vote
+            before do
+              stub.proxy(controller).current_user do
+                user
+              end
+              @pain_point = pain_points(:slow_tests)
+              user.votes.pain_points.should include(pain_point)
+              @existing_vote = user.votes.find_by_pain_point_id(pain_point.id)
+              mock.proxy(user.votes).find_or_create_by_pain_point_id(pain_point.to_param) do
+                existing_vote
+              end
+              existing_vote.state.should == 'neutral'
             end
-            @pain_point = pain_points(:slow_tests)
-            user.votes.pain_points.should include(pain_point)
-            @existing_vote = user.votes.find_by_pain_point_id(pain_point.id)
-            mock.proxy(user.votes).find_or_create_by_pain_point_id(pain_point.to_param) do
-              existing_vote
-            end
-            existing_vote.state.should == 'neutral'
-          end
 
-          it "does not create a new Vote" do
-            lambda do
+            it "does not create a new Vote" do
+              lambda do
+                post :create, :pain_point_id => pain_point.id
+              end.should_not change {Vote.count}
+            end
+
+            it "sends an up_vote event to the existing Vote" do
+              mock.proxy(existing_vote).up_vote
               post :create, :pain_point_id => pain_point.id
-            end.should_not change {Vote.count}
-          end
+              existing_vote.reload.state.should == 'up'
+            end
 
-          it "sends an up_vote event to the existing Vote" do
-            mock.proxy(existing_vote).up_vote
-            post :create, :pain_point_id => pain_point.id
-            existing_vote.reload.state.should == 'up'
+            it "responds with nothing" do
+              post :create, :pain_point_id => pain_point.id
+              response.should be_success
+              response.body.should be_blank
+            end
           end
-
-          it "responds with nothing" do
-            post :create, :pain_point_id => pain_point.id
-            response.should be_success
-            response.body.should be_blank
-          end
-        end
         end
       end
     end
