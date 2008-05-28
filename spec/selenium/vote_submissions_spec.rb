@@ -32,9 +32,27 @@ describe "A User on the home page" do
     end
 
     describe "when not logged in" do
-      it "sends a message to redirect to /login" do
-        click "css=.up"
-        assert_location_ends_with new_session_path
+      describe "then logging in" do
+        attr_reader :user
+        before do
+          element("css=.score").assert_contains('0')
+          click "css=.up"
+          assert_location_ends_with new_session_path
+          @user = users(:quentin)
+          element("link=Login").click
+          element("name=login").type(user.login)
+          element("name=password").type('test')
+          element("name=commit").click
+        end
+
+        it "redirects to PainPoint page and sets the score up by 1" do
+          pending "Apply vote when logging in"
+          wait_for do
+            uri = URI.parse(get_location)
+            uri.path == '/'
+          end
+          element("css=.score").assert_contains('1')
+        end
       end
     end
   end

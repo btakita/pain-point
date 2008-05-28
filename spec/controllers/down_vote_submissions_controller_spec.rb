@@ -8,6 +8,13 @@ module VoteSubmissions
       @user = users(:quentin)
     end
 
+    describe "GET index" do
+      it "redirects to lobby_path" do
+        get :index, :pain_point_id => pain_points(:slow_tests).to_param
+        response.should redirect_to(lobby_path)
+      end
+    end
+
     describe "POST create" do
       attr_reader :pain_point
 

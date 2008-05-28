@@ -1,7 +1,7 @@
 --- 
 format: 1
 handler: 
-  commit: c105a68f1ae84f191912ab875dfd620456602115
-repository_url: git://github.com/btakita/rspec_hpricot_matchers.git
+  commit: 94073fc5cf9d7b7101be05df1dde030c53031b79
+repository_url: git://github.com/pd/rspec_hpricot_matchers.git
 lock: false
 repository_class: Piston::Git::Repository

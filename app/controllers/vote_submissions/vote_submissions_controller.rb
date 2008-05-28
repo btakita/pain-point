@@ -1,6 +1,10 @@
 class VoteSubmissions::VoteSubmissionsController < ApplicationController
   before_filter :login_required, :only => [:create]
 
+  def index
+    redirect_to lobby_path
+  end
+
   protected
   def create_vote
     respond_to do |format|

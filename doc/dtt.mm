@@ -139,6 +139,11 @@
 </node>
 </node>
 </node>
+<node TEXT="View Specs Example 10:00" POSITION="right">
+<node TEXT="erb view spec"/>
+<node TEXT="Introduce Erector"/>
+<node TEXT="Erector view spec"/>
+</node>
 <node TEXT="VoteSubmissionsController Examples 10:00" POSITION="right">
 <node TEXT="UpVoteSubmissionsController"/>
 <node TEXT="DownVoteSubmissionsController"/>
@@ -152,11 +157,6 @@
 <node TEXT="Clarity (Straightforwardness)"/>
 </node>
 <node COLOR="#990000" TEXT="Refactor using Shared Describes"/>
-</node>
-<node TEXT="View Specs Example 10:00" POSITION="right">
-<node TEXT="erb view spec"/>
-<node TEXT="Introduce Erector"/>
-<node TEXT="Erector view spec"/>
 </node>
 <node TEXT="Custom Matcher" POSITION="right">
 <node TEXT="have_link.rb in rspec_hpricot_matchers plugin"/>
@@ -173,6 +173,7 @@
 <node TEXT="Introduce Git"/>
 <node TEXT="Instruct audience to jump to 04-vote-submissions-controller-finish branch"/>
 <node TEXT="Instruct audience to create DownVoteSubmissionsController"/>
+<node TEXT="Add Rails Integration test option"/>
 </node>
 <node TEXT="Extracting up and down links into JS example 20:00" POSITION="right">
 <node TEXT="Client/Server architecture">
@@ -180,9 +181,11 @@
 <node TEXT="Disadvantages"/>
 <node TEXT="Why its more testable"/>
 </node>
+<node TEXT="js spec + server"/>
 <node TEXT="screw unit + server"/>
 </node>
 <node TEXT="Selenium Testing 10:00" POSITION="right"/>
+<node TEXT="Rails Integration Testing" POSITION="right"/>
 <node TEXT="Audience participation 30:00" POSITION="right"/>
 <node TEXT="send instructions to participants" POSITION="left">
 <node TEXT="notify that this is a preliminary outline, it will change the following week"/>
