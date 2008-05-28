@@ -25,9 +25,9 @@ describe SessionsController do
         post :create, :login => 'quentin', :password => 'bad password'
       end
 
-      it 'fails login and does not redirect' do
+      it 'fails login and responds with a 403 [forbidden]' do
         session[:user_id].should be_nil
-        response.should be_success
+        response.response_code.should == 403
       end
 
       it "notifies the user that the login is incorrect" do

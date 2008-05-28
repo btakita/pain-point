@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "Logged in successfully"
     else
       flash[:error] = "The username and password did not match"
-      render :action => 'new'
+      render :action => 'new', :status => 403
     end
   end
 
