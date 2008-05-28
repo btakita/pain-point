@@ -7,12 +7,14 @@ class Views::Layouts::Application < Erector::Widget
           "jquery-1.2.3.js",
           "xmlbuilder",
           "json2",
+          "jqModal",
           "models/pain_point",
+          "views/login_view",
           "views/pain_point_view",
           "views/pain_points_view"
         ]
         javascript_include_tag(*js_files)
-        stylesheet_link_tag 'application', :cache => true
+        stylesheet_link_tag 'application', 'jqModal', :cache => true
       end
 
       body do

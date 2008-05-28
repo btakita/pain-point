@@ -10,3 +10,17 @@ ul {
 .selected {
   font-weight: bold;
 }
+
+div.login {
+  padding-left: 5em;
+}
+
+  div.login label {
+    clear: both;
+  }
+
+  div.login label {
+    display: block;
+    float: left;
+    width: 7em;
+  }
