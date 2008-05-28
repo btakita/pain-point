@@ -8,14 +8,14 @@
           div({'class': 'status'});
           div(function() {
             label("Login", {'for': 'login'});
-            input({'type': 'text', id: 'login', 'class': 'login'});
+            input({'type': 'text', id: 'login', name: 'login', 'class': 'login'});
           });
           div(function() {
             label("Password", {'for': 'password'});
-            input({'type': 'password', id: 'password', 'class': 'password'});
+            input({'type': 'password', id: 'password', name: 'password', 'class': 'password'});
           });
           div(function() {
-            input({'type': 'button', 'class': 'submit', 'value': 'submit'});
+            input({'type': 'button', 'class': 'submit', name: 'commit', 'value': 'submit'});
           });
         });
       };

@@ -37,21 +37,17 @@ describe "A User on the home page" do
         before do
           element("css=.score").assert_contains('0')
           click "css=.up"
-          pending "Client side will handle login" do
-            assert_location_ends_with new_session_path
-          end
+
+          assert_element_present "css=.login"
+
           @user = users(:quentin)
-          element("link=Login").click
-          element("name=login").type(user.login)
-          element("name=password").type('test')
-          element("name=commit").click
+          element("css=.login input.login").type(user.login)
+          element("css=.login input.password").type('test')
+          element("css=.login input.submit").click
         end
 
-        it "redirects to PainPoint page and sets the score up by 1" do
-          pending "Apply vote when logging in"
-          wait_for do
-            URI.parse(get_location).path == '/'
-          end
+        it "increments the vote count by 1" do
+          assert_element_not_present "css=.login"
           element("css=.score").assert_contains('1')
         end
       end
