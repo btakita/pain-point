@@ -1,15 +1,11 @@
 (function() {
   window.PainPointsView = {
     'create': function() {
-      var builder = new XmlBuilder({binding: this});
-      with(builder) {
-        ul(function() {
-          for(var i=0; i < PainPoint.instances.length; ++i) {
-            li(PainPoint.instances[i].name);
-          }
-        });
+      var view = $("<ul>");
+      for(var i=0; i < PainPoint.instances.length; ++i) {
+        view.append(PainPointView.create(PainPoint.instances[i]));
       }
-      return $(builder.toString());
+      return view;
     }
   }
 })();
