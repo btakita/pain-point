@@ -25,7 +25,7 @@ Screw.Unit(function() {
         expect(view.login.attr('type')).to(equal, "text");
 
         expect(view.password[0].tagName.toLowerCase()).to(equal, "input");
-        expect(view.password.attr('type')).to(equal, "text");
+        expect(view.password.attr('type')).to(equal, "password");
 
         expect(view.submit[0].tagName.toLowerCase()).to(equal, "input");
         expect(view.submit.attr('type')).to(equal, "button");
@@ -59,6 +59,15 @@ Screw.Unit(function() {
               view.submit.click();
               ActiveAjaxRequests.shift().success();
               expect(success_callback_called).to(equal, true);
+            });
+          });
+
+          describe("when the server responds with failure", function() {
+            it("renders 'login failed'", function() {
+              expect(view.html()).to_not(match, "Login failed");
+              view.submit.click();
+              ActiveAjaxRequests.shift().error();
+              expect(view.html()).to(match, "Login failed");
             });
           });
         });

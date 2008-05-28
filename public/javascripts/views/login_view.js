@@ -5,13 +5,14 @@
       with(builder) {
         div({'class': "login jqmWindow"}, function() {
           h2("Login");
+          div({'class': 'status'});
           div(function() {
             label("Login", {'for': 'login'});
             input({'type': 'text', id: 'login', 'class': 'login'});
           });
           div(function() {
             label("Password", {'for': 'password'});
-            input({'type': 'text', id: 'password', 'class': 'password'});
+            input({'type': 'password', id: 'password', 'class': 'password'});
           });
           div(function() {
             input({'type': 'button', 'class': 'submit', 'value': 'submit'});
@@ -19,6 +20,7 @@
         });
       };
       var view = $(builder.toString());
+      view.status = view.find('.status');
       view.login = view.find('input.login');
       view.password = view.find('input.password');
       view.submit = view.find('input.submit');
@@ -34,6 +36,9 @@
             view.jqm().jqmHide();
             view.remove();
             success_callback();
+          },
+          error: function() {
+            view.status.html("Login failed");
           }
         });
       });
