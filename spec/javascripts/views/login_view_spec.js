@@ -38,16 +38,20 @@ Screw.Unit(function() {
             view.password.attr("value", "test");
           });
 
-          it('sends a POST to /session with the text in username and password', function() {
-            view.submit.click();
-            expect(ActiveAjaxRequests.length).to(equal, 1);
-            var request = ActiveAjaxRequests.shift();
-            expect(request.url).to(equal, "/session");
-            expect(request.type).to(equal, "POST");
-            expect(request.data).to(equal, {login: "quentin", password: "test"});
-          });
+          this['sends a POST to /session with the text in username and password'] = function() {
+
+            it('sends a POST to /session with the text in username and password', function() {
+              view.submit.click();
+              expect(ActiveAjaxRequests.length).to(equal, 1);
+              var request = ActiveAjaxRequests.shift();
+              expect(request.url).to(equal, "/session");
+              expect(request.type).to(equal, "POST");
+              expect(request.data).to(equal, {login: "quentin", password: "test"});
+            });
+          }
 
           describe("when the server responds with success", function() {
+            this['sends a POST to /session with the text in username and password']();
             it("removes the overlay and login form from the body", function() {
               view.submit.click();
               ActiveAjaxRequests.shift().success();
@@ -70,7 +74,8 @@ Screw.Unit(function() {
               expect(view.html()).to(match, "Login failed");
             });
           });
-        });
+
+          });
       });
     });
   });

@@ -1,0 +1,7 @@
+--- 
+format: 1
+handler: 
+  commit: 7ccf394fd6f177be4a9add01677072c8393fcc3f
+lock: 
+repository_url: git://github.com/pivotal/screw-unit-server.git
+repository_class: Piston::Git::Repository

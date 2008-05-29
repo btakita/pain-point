@@ -45,6 +45,19 @@ class << Spec::Rails::Example::ControllerExampleGroup
     true
   end
 
+  define_method("when not logged in") do
+    describe "when not logged in" do
+      before do
+        controller.send(:current_user=, nil)
+      end
+
+      it "redirects to SessionsController#new" do
+        instance_eval &blk
+        response.should redirect_to(new_session_path)
+      end
+    end
+  end
+
   def should_require_login(&blk)
     describe "when not logged in" do
       before do

@@ -1,7 +1,7 @@
 --- 
 format: 1
 handler: 
-  commit: f046667aa751ba080d351fa31c5f51af73e162b9
-repository_url: git://github.com/btakita/screw-unit-server.git
+  commit: 7ccf394fd6f177be4a9add01677072c8393fcc3f
+repository_url: git://github.com/pivotal/screw-unit-server.git
 lock: false
 repository_class: Piston::Git::Repository
