@@ -157,6 +157,7 @@
 <node TEXT="Clarity (Straightforwardness)"/>
 </node>
 <node COLOR="#990000" TEXT="Refactor using Shared Describes"/>
+<node TEXT="Refactor using class methods"/>
 </node>
 <node TEXT="Custom Matcher" POSITION="right">
 <node TEXT="have_link.rb in rspec_hpricot_matchers plugin"/>
