@@ -15,6 +15,7 @@
 <node TEXT="Automated">
 <node TEXT="xunit"/>
 <node TEXT="rspec"/>
+<node TEXT="story runner"/>
 <node TEXT="fit"/>
 <node TEXT="custom test scripts"/>
 </node>
