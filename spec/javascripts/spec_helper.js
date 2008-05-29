@@ -9,6 +9,7 @@ require("/implementations/views/pain_points_view");
 require("/specs/fake_jQuery_ajax");
 stylesheet('/stylesheets/application');
 stylesheet('/stylesheets/jqModal');
+stylesheet('/specs/less_annoying_overlay');
 
 Screw.Unit(function() {
   after(function() {
