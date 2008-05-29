@@ -15,6 +15,7 @@
 <node TEXT="Automated">
 <node TEXT="xunit"/>
 <node TEXT="rspec"/>
+<node TEXT="story runner"/>
 <node TEXT="fit"/>
 <node TEXT="custom test scripts"/>
 </node>
@@ -39,11 +40,11 @@
 <node TEXT="Integration"/>
 </node>
 </node>
-<node TEXT="Granularity of Tests" POSITION="right">
+<node TEXT="Granularity of Tests 3:00" POSITION="right">
 <node TEXT="Happy Path testing"/>
 <node TEXT="Edge case testing"/>
 </node>
-<node TEXT="Installing rspec 3:00" POSITION="right"/>
+<node TEXT="Installing rspec 2:00" POSITION="right"/>
 <node TEXT="Vote Example 10:00" POSITION="right">
 <node TEXT="Explain the structure of a test">
 <node TEXT="physical structure">
@@ -68,7 +69,7 @@
 </node>
 <node TEXT="Fixture specs"/>
 </node>
-<node TEXT="Lifecycle of a Test" POSITION="right">
+<node TEXT="Lifecycle of a Test 15:00" POSITION="right">
 <node TEXT="TDD">
 <node TEXT="Red -&gt; Green -&gt; Refactor">
 <node TEXT="Write the tests first, then implement the software"/>
@@ -157,12 +158,9 @@
 <node TEXT="Clarity (Straightforwardness)"/>
 </node>
 <node COLOR="#990000" TEXT="Refactor using Shared Describes"/>
+<node TEXT="Refactor using class methods"/>
 </node>
-<node TEXT="Custom Matcher" POSITION="right">
-<node TEXT="have_link.rb in rspec_hpricot_matchers plugin"/>
-<node TEXT="using fork on github to introduce features to existing projects"/>
-</node>
-<node TEXT="Test Double Example" POSITION="right">
+<node TEXT="Test Double Example 5:00" POSITION="right">
 <node TEXT="Introduce RR"/>
 <node TEXT="Mocks"/>
 <node TEXT="Stubs"/>
@@ -175,6 +173,28 @@
 <node TEXT="Instruct audience to create DownVoteSubmissionsController"/>
 <node TEXT="Add Rails Integration test option"/>
 </node>
+<node TEXT="Custom Matcher" POSITION="right">
+<node TEXT="have_link.rb in rspec_hpricot_matchers plugin"/>
+<node TEXT="using fork on github to introduce features to existing projects"/>
+</node>
+<node TEXT="Testing Refactorings" POSITION="right">
+<node TEXT="Why Test Drive Your Refactorings">
+<node TEXT="You can get defect localization"/>
+<node TEXT="The tests help the design of your extracted module"/>
+</node>
+<node TEXT="Why not test drive your Refactorings">
+<node TEXT="TDD may disrupt your &quot;refactoring flow&quot;"/>
+<node TEXT="You may want your refactoring to be a spike to quickly experiment on an idea"/>
+<node TEXT="You can always retroactively TDD your changes"/>
+<node TEXT="You already have test coverage"/>
+</node>
+<node TEXT="When finished with the refactoring">
+<node TEXT="Refactor your tests">
+<node TEXT="Move the tests into the correct places"/>
+<node TEXT="Use abstraction in your tests by verifying that the dependencies are utilized"/>
+</node>
+</node>
+</node>
 <node TEXT="Extracting up and down links into JS example 20:00" POSITION="right">
 <node TEXT="Client/Server architecture">
 <node TEXT="Advantages"/>
@@ -186,7 +206,13 @@
 </node>
 <node TEXT="Selenium Testing 10:00" POSITION="right"/>
 <node TEXT="Rails Integration Testing" POSITION="right"/>
-<node TEXT="Audience participation 30:00" POSITION="right"/>
+<node TEXT="Audience participation 30:00" POSITION="right">
+<node TEXT="Give audience options on what to work on">
+<node TEXT="Login link changes to Logout when user logs in using LoginView"/>
+<node TEXT="Add more selenium tests"/>
+<node TEXT="Implement alternate way to do vote selection after loging in"/>
+</node>
+</node>
 <node TEXT="send instructions to participants" POSITION="left">
 <node TEXT="notify that this is a preliminary outline, it will change the following week"/>
 <node TEXT="git clone pain-point"/>
