@@ -2,6 +2,8 @@
 dir = File.dirname(__FILE__)
 root = File.expand_path("#{dir}/..")
 
-$LOAD_PATH.unshift("#{root}/vendor/plugins/screw_unit/lib")
+require "#{root}/config/boot"
+require "activesupport"
+Rails::Initializer.run(:add_plugin_load_paths)
 require "screw_unit"
 exit ScrewUnit::Client.run_argv(ARGV)
