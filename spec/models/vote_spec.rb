@@ -36,7 +36,7 @@ describe Vote do
       end
     end
   end
-  
+
   describe "Validations" do
     describe "#user_id" do
       it "must not be blank" do
@@ -76,7 +76,8 @@ describe Vote do
     end
 
     it "has an initial state of neutral" do
-      Vote.new.state.should == 'neutral'
+      vote = Vote.create!(:pain_point_id => pain_points(:unclear_domain).id, :user_id => users(:quentin).id)
+      vote.state.should == 'neutral'
     end
 
     describe "#up_vote" do
